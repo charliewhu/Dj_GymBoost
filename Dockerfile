@@ -1,27 +1,24 @@
-# Pull base image
 FROM python:3.10
 
-# update and install curl
-RUN apt-get update && apt-get install -y curl
+ENV PYTHONFAULTHANDLER=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONHASHSEED=random \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    POETRY_VERSION=1.1.15
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# System deps:
+RUN pip install "poetry==$POETRY_VERSION"
 
-# install Poetry
-ENV POETRY_VERSION=1.1.13
-RUN curl -sSL https://install.python-poetry.org | python3 - --version "$POETRY_VERSION"
-
-# add Poetry to PATH
-ENV PATH="/root/.local/bin:$PATH"
-
-# Set work directory
+# Copy only requirements to cache them in docker layer
 WORKDIR /code
-
-# Install dependencies
 COPY poetry.lock pyproject.toml /code/
-RUN poetry config virtualenvs.in-project true --local
-RUN poetry install --no-dev
 
-# Copy project
-COPY . /code/
+# Project initialization:
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi
+
+# Creating folders, and files for a project:
+COPY . /code
