@@ -1,5 +1,6 @@
 #custom 
 docker-compose-prod.yml
+db.sqlite3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
