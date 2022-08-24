@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
+    # 3rd party
+    "behave_django",
     # Local apps
     "accounts",
 ]
