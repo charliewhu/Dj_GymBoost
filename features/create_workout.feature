@@ -9,5 +9,4 @@ Feature: Create Workout
 
         When I click on the Create Workout button
 
-        Then I will create a Workout 
-        And I will see the Workout screen for that Workout
+        Then I will see the Workout screen for that Workout
