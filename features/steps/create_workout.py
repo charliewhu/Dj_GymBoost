@@ -18,5 +18,6 @@ def step_impl(context):
 
 @then("I will see the Workout screen for that Workout")
 def step_impl(context):
-    context.test.assertIn("Workout", get_inner_html(context, "title"))
+    title = context.browser.title
+    context.test.assertIn("Workout", title)
     list = context.browser.find_element(By.ID, "workout_exercise_list")
