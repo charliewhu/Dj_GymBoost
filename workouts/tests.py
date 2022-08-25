@@ -11,9 +11,5 @@ class HomePageTest(TestCase):
         self.assertEqual(found.func, home)
 
     def test_home_page_returns_correct_html(self):
-        request = HttpRequest()
-        reponse = home(request)
-        html = reponse.content.decode("utf8")
-        self.assertTrue(html.startswith("<html>"))
-        self.assertIn("<title>GymBoost Home</title>", html)
-        self.assertTrue(html.endswith("</html>"))
+        response = self.client.get("/")
+        self.assertTemplateUsed(response, "home.html")
