@@ -1,11 +1,9 @@
 from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def before_all(context):
-    context.browser = webdriver.Remote(
-        "http://selenium:4444/wd/hub", DesiredCapabilities.FIREFOX
-    )
+    context.browser = webdriver.Firefox()
+    context.browser.get("http://127.0.0.1:8000/")
 
 
 def after_all(context):
