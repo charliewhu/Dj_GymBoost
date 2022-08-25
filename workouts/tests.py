@@ -16,14 +16,18 @@ class HomePageTest(TestCase):
         self.assertTemplateUsed(response, "home.html")
 
     def test_POST_creates_workout_and_redirects(self):
-        response = self.client.post("/")
+        self.client.post("/")
         self.assertEqual(Workout.objects.count(), 1)
-        workout = Workout.objects.get(id=1)
+
+    def test_redirect_after_post(self):
+        response = self.client.post("/")
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, workout.get_absolute_url())
+        self.assertRegex(response["location"], "workouts/(\d+)/")
 
 
 class WorkoutTest(TestCase):
     def test_get_absolute_url(self):
         workout = Workout.objects.create()
         self.assertEqual(workout.get_absolute_url(), f"/workouts/{workout.id}/")
+
+    # def test_url_resolves_to_view(self):
