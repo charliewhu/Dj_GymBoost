@@ -6,5 +6,8 @@
 
 
 {% block content %}
-    <button id="create_workout_btn">Create Workout</button>
+    <form action="/" method="POST">
+        {% csrf_token %}
+        <button id="create_workout_btn">Create Workout</button>
+    </form>
 {% endblock content %}

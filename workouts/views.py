@@ -14,4 +14,4 @@ def home(request):
 
 
 def workout(request, pk):
-    pass
+    return render(request, "workouts/workout.html")
