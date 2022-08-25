@@ -13,3 +13,8 @@ class HomePageTest(TestCase):
     def test_home_page_returns_correct_html(self):
         response = self.client.get("/")
         self.assertTemplateUsed(response, "home.html")
+
+    def test_POST_creates_workout_and_redirects(self):
+        response = self.client.post("/")
+        self.assertEqual(Workout.objects.count(), 1)
+        self.assertTemplateUsed(response, "workout.html")

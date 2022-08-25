@@ -12,9 +12,6 @@ def step_impl(context):
 
 @when("I click on the Create Workout button")
 def step_impl(context):
-    context.test.assertIn(
-        "Create Workout", get_inner_html(context, "create_workout_btn")
-    )
     create_workout_btn = context.browser.find_element(By.ID, "create_workout_btn")
     create_workout_btn.click()
 
