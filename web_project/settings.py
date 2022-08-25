@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "behave_django",
     # Local apps
     "accounts",
+    "workouts",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
@@ -70,7 +71,7 @@ ROOT_URLCONF = "web_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
