@@ -3,6 +3,7 @@ from django.urls import resolve
 from django.http import HttpRequest
 
 from .views import home
+from .models import Workout
 
 # Create your tests here.
 class HomePageTest(TestCase):

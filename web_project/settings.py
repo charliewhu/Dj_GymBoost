@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "behave_django",
     # Local apps
     "accounts",
+    "workouts",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
