@@ -45,15 +45,13 @@ def add_exercise_to_workout(context):
     add_exercise_to_workout_btns[0].click()
 
 
-@then("it will add the exercise to my Workout")
+@then("it will show the exercise on my Workout")
 def step_impl(context):
     context.test.assertIn("Workout", context.browser.title)
     context.workout_exercise_list_item = context.browser.find_elements(
         By.ID, "workout_exercise_list_item"
     )
     context.test.assertEqual(len(context.workout_exercise_list_item), 1)
-
-
-@then("show the exercise on my Workout screen")
-def step_impl(context):
-    assert context.workout_exercise_list_item[0] in context.exercise_list_items[0]
+    context.test.assertIn(
+        context.workout_exercise_list_item[0], context.exercise_list_items[0]
+    )

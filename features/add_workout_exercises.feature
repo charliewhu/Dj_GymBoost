@@ -15,5 +15,4 @@ Feature: Add Workout Exercises
         
         When I click Add on an Exercise
 
-        Then it will add the exercise to my Workout
-        And show the exercise on my Workout screen
+        Then it will show the exercise on my Workout
