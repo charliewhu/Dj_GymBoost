@@ -1,8 +1,6 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
 
-from features.helpers import get_inner_html
-
 
 @given("I am on the homepage")
 def step_impl(context):
