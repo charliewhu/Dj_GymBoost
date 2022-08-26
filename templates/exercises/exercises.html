@@ -8,7 +8,14 @@
 {% block content %}
     <table id="exercise_list">
         {% for exercise in exercises %}
-            <tr id="exercise_list_item">{{ exercise.name }}</tr>
+            <tr>
+                <td id="exercise_list_item">{{ exercise.name }}</td>
+                <td>
+                    <button id="add_exercise_to_workout_btn">
+                        Add Exercise
+                    </button>
+                </td>
+            </tr>
         {% endfor %}
     </table>
 {% endblock content %}

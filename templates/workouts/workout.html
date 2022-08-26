@@ -6,8 +6,8 @@
 
 
 {% block content %}
-    <a href="{% url 'exercises' %}">
+    <form method="GET" action="{% url 'exercises' %}">
         <button id="add_workout_exercise_btn">Add Exercise</button>
-    </a>
+    </form>
     <table id="workout_exercise_list"></table>
 {% endblock content %}
