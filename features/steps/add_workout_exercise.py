@@ -1,15 +1,13 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
 
+from features.steps.create_workout import confirm_workout_page, create_a_workout
+
 
 @given("I have created a Workout")
 def step_impl(context):
-    raise NotImplementedError("STEP: Given I have created a Workout")
-
-
-@given("I am on the page for that Workout")
-def step_impl(context):
-    raise NotImplementedError("STEP: Given I am on the page for that Workout")
+    create_a_workout(context)
+    confirm_workout_page(context)
 
 
 @when("I click on the Add Exercise button")

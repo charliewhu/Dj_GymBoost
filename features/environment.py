@@ -11,4 +11,4 @@ def after_all(context):
 
 
 def before_feature(context, feature):
-    pass
+    context.browser.get("http://127.0.0.1:8000/")
