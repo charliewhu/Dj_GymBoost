@@ -9,7 +9,7 @@ def step_impl(context):
 
 
 @when("I click on the Create Workout button")
-def create_a_workout(context):
+def click_create_workout_btn(context):
     create_workout_btn = context.browser.find_element(By.ID, "create_workout_btn")
     create_workout_btn.click()
 
