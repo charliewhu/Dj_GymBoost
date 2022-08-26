@@ -29,5 +29,3 @@ class WorkoutTest(TestCase):
     def test_get_absolute_url(self):
         workout = Workout.objects.create()
         self.assertEqual(workout.get_absolute_url(), f"/workouts/{workout.id}/")
-
-    # def test_url_resolves_to_view(self):

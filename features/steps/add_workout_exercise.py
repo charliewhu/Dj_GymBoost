@@ -10,6 +10,11 @@ def create_workout(context):
     confirm_workout_page(context)
 
 
+@given("Exercises exist")
+def step_impl(context):
+    Exercise.objects.create()
+
+
 @when("I click on the Add Exercise button")
 def click_add_workout_exercise_btn(context):
     add_workout_exercise_btn = context.browser.find_element(
@@ -18,11 +23,17 @@ def click_add_workout_exercise_btn(context):
     add_workout_exercise_btn.click()
 
 
+@then("I will be on the Exercises page")
+def step_impl(context):
+    context.test.assertEqual(context.browser.title, "Exercises")
+
+
 @then("I will see the Exercises listed")
 def step_impl(context):
-    exercise_list_items = context.browser.find_elements(By.ID, "exercise_list_item")
-    assert exercise_list_items.length() > 0
-    context.exercise_list_items = exercise_list_items
+    context.exercise_list_items = context.browser.find_elements(
+        By.ID, "exercise_list_item"
+    )
+    context.test.assertNotEqual(len(context.exercise_list_items), 0)
 
 
 @when("I click Add on an Exercise")
@@ -39,7 +50,7 @@ def step_impl(context):
     context.workout_exercise_list_item = context.browser.find_elements(
         By.ID, "workout_exercise_list_item"
     )
-    assert context.workout_exercise_list_item.length() > 0
+    context.test.assertNotEqual(len(context.workout_exercise_list_item), 0)
 
 
 @then("show the exercise on my Workout screen")
