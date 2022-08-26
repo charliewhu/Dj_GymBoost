@@ -2,6 +2,7 @@ from behave import given, when, then
 from selenium.webdriver.common.by import By
 
 from features.steps.create_workout import confirm_workout_page, click_create_workout_btn
+from exercises.models import Exercise
 
 
 @given("I have created a Workout")
