@@ -13,7 +13,7 @@ def create_workout(context):
 
 @given("Exercises exist")
 def step_impl(context):
-    Exercise.objects.create()
+    context.exercise = Exercise.objects.create(name="Test Exercise")
 
 
 @when("I click on the Add Exercise button")
