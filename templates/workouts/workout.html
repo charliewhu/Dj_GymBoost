@@ -7,6 +7,7 @@
 
 {% block content %}
     <form method="GET" action="{% url 'exercises' %}">
+        <input type="hidden" name="workout_id" value="{{ workout.id }}">
         <button id="add_workout_exercise_btn">Add Exercise</button>
     </form>
     <table id="workout_exercise_list"></table>

@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.urls import resolve
+from django.urls import resolve, reverse
 from django.http import HttpRequest
 
 from .views import home
@@ -29,3 +29,8 @@ class WorkoutTest(TestCase):
     def test_get_absolute_url(self):
         workout = Workout.objects.create()
         self.assertEqual(workout.get_absolute_url(), f"/workouts/{workout.id}/")
+
+    def test_workout_in_context(self):
+        workout = Workout.objects.create()
+        response = self.client.get(workout.get_absolute_url())
+        self.assertIsInstance(response.context["workout"], Workout)

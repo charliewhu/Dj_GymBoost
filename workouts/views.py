@@ -14,4 +14,5 @@ def home(request):
 
 
 def workout(request, pk):
-    return render(request, "workouts/workout.html")
+    context = {"workout": Workout.objects.get(id=pk)}
+    return render(request, "workouts/workout.html", context)

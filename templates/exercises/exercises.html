@@ -11,9 +11,13 @@
             <tr>
                 <td id="exercise_list_item">{{ exercise.name }}</td>
                 <td>
-                    <button id="add_exercise_to_workout_btn">
-                        Add Exercise
-                    </button>
+                    {% if workout_id %}
+                    <a href="{% url 'workout' workout_id %}">
+                    {% endif %}
+                        <button id="add_exercise_to_workout_btn">
+                            Add Exercise
+                        </button>
+                    </a>
                 </td>
             </tr>
         {% endfor %}
