@@ -34,7 +34,7 @@ def step_impl(context):
     context.exercise_list_items = context.browser.find_elements(
         By.ID, "exercise_list_item"
     )
-    context.test.assertNotEqual(len(context.exercise_list_items), 0)
+    context.test.assertEqual(len(context.exercise_list_items), 1)
 
 
 @when("I click Add on an Exercise")
@@ -51,7 +51,7 @@ def step_impl(context):
     context.workout_exercise_list_item = context.browser.find_elements(
         By.ID, "workout_exercise_list_item"
     )
-    context.test.assertNotEqual(len(context.workout_exercise_list_item), 0)
+    context.test.assertEqual(len(context.workout_exercise_list_item), 1)
 
 
 @then("show the exercise on my Workout screen")
