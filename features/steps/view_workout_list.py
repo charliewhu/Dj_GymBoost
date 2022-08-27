@@ -1,27 +1,34 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
 
+from features.steps.create_workout import confirm_homepage
+
+from workouts.models import Workout
+
 
 @given("Workouts exist")
 def step_impl(context):
-    raise NotImplementedError("STEP: Given Workouts exist")
+    Workout.objects.create()
+    Workout.objects.create()
 
 
 @when("I am on the Home page")
 def step_impl(context):
-    raise NotImplementedError("STEP: When I am on the Home page")
+    confirm_homepage(context)
 
 
 @then("I can see Workouts listed")
 def step_impl(context):
-    raise NotImplementedError("STEP: Then I can see Workouts listed")
+    context.browser.find_element(By.ID, "workout_list")
+    list_item = context.browser.find_element(By.ID, "workout_list_item")
+    context.test.assertIn("Workout on", list_item)
 
 
 @when("I click on a Workout")
 def step_impl(context):
-    raise NotImplementedError("STEP: When I click on a Workout")
+    context.browser.find_element(By.ID, "workout_list_item").click()
 
 
 @then("I am taken to that Workout page")
 def step_impl(context):
-    raise NotImplementedError("STEP: Then I am taken to that Workout page")
+    context.test.assertIn("Workout", context.browser.title)

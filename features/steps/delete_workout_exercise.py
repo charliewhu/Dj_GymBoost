@@ -6,13 +6,14 @@ from features.steps.add_workout_exercise import (
     click_add_exercise_to_workout,
     click_add_workout_exercise_btn,
     confirm_exercises_page,
-    create_workout,
 )
+
+from workouts.models import Workout
 
 
 @given("I am on the Workout page")
 def step_impl(context):
-    create_workout(context)
+    Workout.objects.create()
 
 
 @given("the Workout has WorkoutExercises")

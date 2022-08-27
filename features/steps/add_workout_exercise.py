@@ -3,12 +3,12 @@ from selenium.webdriver.common.by import By
 
 from features.steps.create_workout import confirm_workout_page, click_create_workout_btn
 from exercises.models import Exercise
+from workouts.models import Workout
 
 
 @given("I have created a Workout")
 def create_workout(context):
-    click_create_workout_btn(context)
-    confirm_workout_page(context)
+    Workout.objects.create()
 
 
 @given("Exercises exist")

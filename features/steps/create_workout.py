@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 
 @given("I am on the homepage")
-def step_impl(context):
+def confirm_homepage(context):
     title = context.browser.title
     context.test.assertIn("GymBoost Home", title)
 
