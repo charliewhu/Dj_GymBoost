@@ -25,7 +25,7 @@ def click_add_workout_exercise_btn(context):
 
 
 @then("I will be on the Exercises page")
-def step_impl(context):
+def confirm_exercises_page(context):
     context.test.assertEqual(context.browser.title, "Exercises")
 
 
@@ -38,7 +38,7 @@ def step_impl(context):
 
 
 @when("I click Add on an Exercise")
-def add_exercise_to_workout(context):
+def click_add_exercise_to_workout(context):
     add_exercise_to_workout_btns = context.browser.find_elements(
         By.ID, "add_exercise_to_workout_btn"
     )
@@ -46,7 +46,7 @@ def add_exercise_to_workout(context):
 
 
 @then("it will show the exercise on my Workout")
-def step_impl(context):
+def confirm_exercise_in_workout(context):
     context.test.assertIn("Workout", context.browser.title)
     workout_exercise_list_item = context.browser.find_element(
         By.ID, "workout_exercise_list_item"
