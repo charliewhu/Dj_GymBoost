@@ -11,4 +11,3 @@ Feature: Delete Workout Exercises
         When I click on the "Delete Exercise" button
 
         Then the WorkoutExercise will not show on the Workout page
-        And the WorkoutExercise will be deleted from the database

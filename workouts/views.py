@@ -31,3 +31,11 @@ def workout_exercises(request):
         exercise = Exercise.objects.get(id=exercise_id)
         WorkoutExercise.objects.create(workout=workout, exercise=exercise)
         return redirect(workout)
+
+
+def delete_workout_exercise(request, pk):
+    workout_exercise = WorkoutExercise.objects.get(id=pk)
+    workout = workout_exercise.workout
+    if request.method == "POST":
+        workout_exercise.delete()
+        return redirect(workout)

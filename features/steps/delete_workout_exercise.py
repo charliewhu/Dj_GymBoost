@@ -25,18 +25,12 @@ def add_exercise_to_workout(context):
 
 @when('I click on the "Delete Exercise" button')
 def step_impl(context):
-    raise NotImplementedError('STEP: When I click on the "Delete Exercise" button')
+    context.browser.find_element(By.ID, "delete_workout_exercise_btn").click()
 
 
 @then("the WorkoutExercise will not show on the Workout page")
 def step_impl(context):
-    raise NotImplementedError(
-        "STEP: Then the WorkoutExercise will not show on the Workout page"
+    workout_exercise_list_items = context.browser.find_elements(
+        By.ID, "workout_exercise_list_item"
     )
-
-
-@then("the WorkoutExercise will be deleted from the database")
-def step_impl(context):
-    raise NotImplementedError(
-        "STEP: Then the WorkoutExercise will be deleted from the database"
-    )
+    context.test.assertEqual(workout_exercise_list_items, [])
