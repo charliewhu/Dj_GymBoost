@@ -13,7 +13,7 @@ def create_workout(context):
 
 @given("Exercises exist")
 def step_impl(context):
-    context.exercise = Exercise.objects.create(name="Test Exercise")
+    context.exercise = Exercise.objects.create(name="test exercise")
 
 
 @when("I click on the Add Exercise button")
@@ -48,10 +48,9 @@ def add_exercise_to_workout(context):
 @then("it will show the exercise on my Workout")
 def step_impl(context):
     context.test.assertIn("Workout", context.browser.title)
-    context.workout_exercise_list_item = context.browser.find_elements(
+    workout_exercise_list_item = context.browser.find_element(
         By.ID, "workout_exercise_list_item"
     )
-    context.test.assertEqual(len(context.workout_exercise_list_item), 1)
     context.test.assertIn(
-        context.workout_exercise_list_item[0], context.exercise_list_items[0]
+        context.exercise.name, workout_exercise_list_item.get_attribute("innerHTML")
     )

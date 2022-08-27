@@ -9,5 +9,7 @@ class Workout(models.Model):
 
 
 class WorkoutExercise(models.Model):
-    workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
+    workout = models.ForeignKey(
+        Workout, related_name="exercises", on_delete=models.CASCADE
+    )
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)

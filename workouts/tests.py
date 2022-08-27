@@ -36,6 +36,17 @@ class WorkoutTest(TestCase):
         response = self.client.get(workout.get_absolute_url())
         self.assertIsInstance(response.context["workout"], Workout)
 
+    def test_workout_exercises_in_context(self):
+        workout = Workout.objects.create()
+        exercise = Exercise.objects.create(name="testex")
+        workout_exercise = WorkoutExercise.objects.create(
+            workout=workout,
+            exercise=exercise,
+        )
+
+        response = self.client.get(workout.get_absolute_url())
+        self.assertEqual(response.context["workout_exercises"][0], workout_exercise)
+
 
 class WorkoutExerciseTest(TestCase):
     def test_POST_redirects_to_workout(self):
