@@ -29,5 +29,4 @@ RUN poetry config virtualenvs.create false \
 COPY . /code
 
 RUN python manage.py migrate \
-    && $POETRY_VERSION \
-    && gunicorn --b=0.0.0.0:$PORT web_project.wsgi 
+    && gunicorn "--b=0.0.0.0:$PORT" web_project.wsgi 
