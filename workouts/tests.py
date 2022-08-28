@@ -6,6 +6,7 @@ from .views import home
 from .models import Workout, WorkoutExercise
 from exercises.models import Exercise
 
+
 # Create your tests here.
 class HomePageTest(TestCase):
     def test_root_url_resolves_to_home_view(self):
