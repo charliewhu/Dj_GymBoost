@@ -28,4 +28,4 @@ RUN poetry config virtualenvs.create false \
 COPY . /code
 
 RUN python manage.py migrate \
-    && gunicorn web_project.wsgi
+    && gunicorn web_project.wsgi 0.0.0.0:${PORT}
