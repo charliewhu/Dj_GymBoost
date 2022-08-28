@@ -1,3 +1,5 @@
+ARG EnvironmentVariable
+
 FROM python:3.10
 
 ENV PYTHONFAULTHANDLER=1 \
@@ -8,8 +10,6 @@ ENV PYTHONFAULTHANDLER=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
     POETRY_VERSION=1.1.15
-
-ARG EnvironmentVariable
 
 # System deps:
 RUN pip install "poetry==$POETRY_VERSION"
