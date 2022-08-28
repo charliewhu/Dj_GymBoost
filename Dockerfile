@@ -29,4 +29,4 @@ RUN poetry config virtualenvs.create false \
 COPY . /code
 
 RUN python manage.py migrate \
-    && gunicorn web_project.wsgi 
+    && gunicorn --timeout 600 web_project.wsgi 
