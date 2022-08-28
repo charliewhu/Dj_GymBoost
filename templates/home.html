@@ -1,13 +1,17 @@
-{% extends "base.html" %} 
-
-{% block title %}
-    GymBoost Home
-{% endblock title %}
-
-
+{% extends "base.html" %} {% block title %} GymBoost Home {% endblock title %}
 {% block content %}
-    <form action="/" method="POST">
-        {% csrf_token %}
-        <button id="create_workout_btn">Create Workout</button>
-    </form>
+<form action="/" method="POST">
+  {% csrf_token %}
+  <button id="create_workout_btn">Create Workout</button>
+</form>
+
+<table id="workout_list">
+  {% for workout in workouts %}
+  <tr>
+    <td id="workout_list_item">
+      <a href="{% url 'workout' workout.id %}">Workout on</a>
+    </td>
+  </tr>
+  {% endfor workout %}
+</table>
 {% endblock content %}

@@ -21,7 +21,8 @@ def step_impl(context):
 def step_impl(context):
     context.browser.find_element(By.ID, "workout_list")
     list_item = context.browser.find_element(By.ID, "workout_list_item")
-    context.test.assertIn("Workout on", list_item)
+    print(list_item.get_attribute("innerHTML"))
+    context.test.assertIn("Workout on", list_item.get_attribute("innerHTML"))
 
 
 @when("I click on a Workout")
