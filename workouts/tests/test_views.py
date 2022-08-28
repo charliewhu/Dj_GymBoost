@@ -1,13 +1,11 @@
 from django.test import TestCase
-from django.urls import resolve, reverse
-from django.http import HttpRequest
+from django.urls import resolve
 
-from .views import home
-from .models import Workout, WorkoutExercise
+from ..views import home
+from ..models import Workout, WorkoutExercise
 from exercises.models import Exercise
 
 
-# Create your tests here.
 class HomePageTest(TestCase):
     def test_root_url_resolves_to_home_view(self):
         found = resolve("/")
@@ -28,10 +26,6 @@ class HomePageTest(TestCase):
 
 
 class WorkoutTest(TestCase):
-    def test_get_absolute_url(self):
-        workout = Workout.objects.create()
-        self.assertEqual(workout.get_absolute_url(), f"/workouts/{workout.id}/")
-
     def test_workout_in_context(self):
         workout = Workout.objects.create()
         response = self.client.get(workout.get_absolute_url())
@@ -68,17 +62,6 @@ class WorkoutExerciseTest(TestCase):
         )
 
         self.assertEqual(WorkoutExercise.objects.count(), 1)
-
-    def test_saving_workout_exercise(self):
-        workout_exercise = WorkoutExercise()
-        workout_exercise.workout = self.workout
-        workout_exercise.exercise = self.exercise
-        workout_exercise.save()
-
-        workout_exercise = WorkoutExercise.objects.first()
-
-        self.assertEqual(workout_exercise.workout, self.workout)
-        self.assertEqual(workout_exercise.exercise, self.exercise)
 
     def test_POST_delete_workout_exercise_url_redirects_to_workout(self):
         WorkoutExercise.objects.create(workout=self.workout, exercise=self.exercise)
