@@ -1,6 +1,6 @@
-ARG EnvironmentVariable
-
 FROM python:3.10
+
+ARG EnvironmentVariable
 
 ENV PYTHONFAULTHANDLER=1 \
     PYTHONUNBUFFERED=1 \
