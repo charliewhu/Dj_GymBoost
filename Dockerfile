@@ -27,5 +27,5 @@ RUN poetry config virtualenvs.create false \
 # Creating folders, and files for a project:
 COPY . /code
 
-RUN poetry shell && python manage.py migrate \
+RUN python manage.py migrate \
     && gunicorn web_project.wsgi
