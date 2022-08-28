@@ -9,6 +9,8 @@ ENV PYTHONFAULTHANDLER=1 \
     PIP_DEFAULT_TIMEOUT=100 \
     POETRY_VERSION=1.1.15
 
+ARG EnvironmentVariable
+
 # System deps:
 RUN pip install "poetry==$POETRY_VERSION"
 
