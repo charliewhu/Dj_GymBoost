@@ -32,4 +32,4 @@ def step_impl(context):
 
 @then("I am taken to that Workout page")
 def step_impl(context):
-    pass
+    context.browser.find_element(By.ID, "workout_exercise_list")
