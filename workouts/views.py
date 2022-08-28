@@ -10,7 +10,12 @@ def home(request):
     if request.method == "POST":
         workout = Workout.objects.create()
         return redirect(workout)
-    return render(request, "home.html")
+
+    workouts = Workout.objects.all()
+    context = {
+        "workouts": workouts,
+    }
+    return render(request, "home.html", context)
 
 
 def workout(request, pk):

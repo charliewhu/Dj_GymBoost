@@ -3,12 +3,12 @@ from selenium.webdriver.common.by import By
 
 from features.steps.create_workout import confirm_workout_page, click_create_workout_btn
 from exercises.models import Exercise
+from workouts.models import Workout
 
 
 @given("I have created a Workout")
 def create_workout(context):
-    click_create_workout_btn(context)
-    confirm_workout_page(context)
+    Workout.objects.create()
 
 
 @given("Exercises exist")
@@ -18,6 +18,7 @@ def step_impl(context):
 
 @when("I click on the Add Exercise button")
 def click_add_workout_exercise_btn(context):
+    context.browser.get(context.get_url("/workouts/1/"))
     add_workout_exercise_btn = context.browser.find_element(
         By.ID, "add_workout_exercise_btn"
     )

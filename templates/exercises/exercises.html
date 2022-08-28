@@ -1,28 +1,26 @@
 {% extends "base.html" %} 
 
-{% block title %}
-    Exercises
-{% endblock title %}
+{% block title %} 
+  Exercises
+{% endblock title %} 
 
 
 {% block content %}
-    <table id="exercise_list">
-        {% for exercise in exercises %}
-            <tr>
-                <td id="exercise_list_item">{{ exercise.name }}</td>
-                <td>
-                    {% if workout_id %}
-                        <form method="POST" action="{% url 'workout_exercises' %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="workout_id" value="{{workout_id}}">
-                            <input type="hidden" name="exercise_id" value="{{exercise.id}}">
-                            <button id="add_exercise_to_workout_btn">
-                                Add Exercise
-                            </button>
-                        </form>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+  <table id="exercise_list">
+    {% for exercise in exercises %}
+      <tr>
+        <td id="exercise_list_item">{{ exercise.name }}</td>
+        <td>
+          {% if workout_id %}
+            <form method="POST" action="{% url 'workout_exercises' %}">
+              {% csrf_token %}
+              <input type="hidden" name="workout_id" value="{{workout_id}}" />
+              <input type="hidden" name="exercise_id" value="{{exercise.id}}" />
+              <button id="add_exercise_to_workout_btn">Add Exercise</button>
+            </form>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
 {% endblock content %}
