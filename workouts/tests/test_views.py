@@ -24,6 +24,15 @@ class HomePageTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRegex(response["location"], "workouts/(\d+)/")
 
+    def test_workouts_in_context(self):
+        Workout.objects.create()
+        Workout.objects.create()
+        workouts = Workout.objects.all()
+
+        response = self.client.get("/")
+
+        self.assertEqual(response.context["workouts"], Workout)
+
 
 class WorkoutTest(TestCase):
     def test_workout_in_context(self):

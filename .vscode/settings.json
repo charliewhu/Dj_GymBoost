@@ -1,6 +1,7 @@
 {
     "python.formatting.provider": "black",
     "[html]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.formatOnSave": false
     }
 }
