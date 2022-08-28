@@ -31,7 +31,7 @@ class HomePageTest(TestCase):
 
         response = self.client.get("/")
 
-        self.assertEqual(response.context["workouts"], Workout)
+        self.assertQuerysetEqual(response.context["workouts"], workouts, ordered=False)
 
 
 class WorkoutTest(TestCase):

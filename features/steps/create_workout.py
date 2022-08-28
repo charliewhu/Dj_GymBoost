@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 
 @given("I am on the homepage")
 def confirm_homepage(context):
+    context.browser.get(context.get_url("/"))
     title = context.browser.title
     context.test.assertIn("GymBoost Home", title)
 
