@@ -5,7 +5,7 @@ Feature: Create Workout
 
     Scenario: Create a Workout and redirect to the Workout
 
-        Given I am on the homepage
+        Given I am on the Home page
 
         When I click on the Create Workout button
 

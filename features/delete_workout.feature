@@ -6,7 +6,7 @@ Feature: Delete Workouts
     Scenario: Delete Workouts remove them from the screen
 
         Given there is a workout
-        And I am on the home page
+        And I am on the Home page
 
         When I click on the "Delete Workout" button
 

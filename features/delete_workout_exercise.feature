@@ -6,6 +6,7 @@ Feature: Delete Workout Exercises
     Scenario: Delete WorkoutExercises from a Workout and remove them from the screen
 
         Given there is a workout
+        And there is an Exercise
         And the Workout has WorkoutExercises
         And I am on the Workout page
 
