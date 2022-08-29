@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block content %}
-  <form action="/" method="POST">
+  <form action="{% url 'workouts' %}" method="POST">
     {% csrf_token %}
     <button id="create_workout_btn">Create Workout</button>
   </form>

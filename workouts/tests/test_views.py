@@ -15,15 +15,6 @@ class HomePageTest(TestCase):
         response = self.client.get("/")
         self.assertTemplateUsed(response, "home.html")
 
-    def test_POST_creates_workout(self):
-        self.client.post("/")
-        self.assertEqual(Workout.objects.count(), 1)
-
-    def test_POST_causes_redirect(self):
-        response = self.client.post("/")
-        self.assertEqual(response.status_code, 302)
-        self.assertRegex(response["location"], "workouts/(\d+)/")
-
     def test_workouts_in_context(self):
         Workout.objects.create()
         Workout.objects.create()
@@ -51,6 +42,15 @@ class WorkoutTest(TestCase):
 
         response = self.client.get(self.workout.get_absolute_url())
         self.assertEqual(response.context["workout_exercises"][0], workout_exercise)
+
+    def test_POST_creates_workout(self):
+        self.client.post("/workouts/")
+        self.assertEqual(Workout.objects.count(), 2)
+
+    def test_POST_causes_redirect(self):
+        response = self.client.post("/workouts/")
+        self.assertEqual(response.status_code, 302)
+        self.assertRegex(response["location"], "workouts/(\d+)/")
 
     def test_POST_delete_workout_url_redirects_to_home(self):
         response = self.client.post("/workouts/1/delete/")

@@ -7,9 +7,6 @@ from exercises.models import Exercise
 
 # Create your views here.
 def home(request):
-    if request.method == "POST":
-        workout = Workout.objects.create()
-        return redirect(workout)
 
     workouts = Workout.objects.all()
     context = {
@@ -18,7 +15,14 @@ def home(request):
     return render(request, "home.html", context)
 
 
+def workouts(request):
+    if request.method == "POST":
+        workout = Workout.objects.create()
+        return redirect(workout)
+
+
 def workout(request, pk):
+
     workout = Workout.objects.get(id=pk)
     workout_exercises = workout.exercises.all()
     context = {
