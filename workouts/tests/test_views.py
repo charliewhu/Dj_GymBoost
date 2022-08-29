@@ -51,6 +51,12 @@ class WorkoutTest(TestCase):
         response = self.client.get(workout.get_absolute_url())
         self.assertEqual(response.context["workout_exercises"][0], workout_exercise)
 
+    def test_POST_delete_workout_url_redirects_to_home(self):
+        Workout.objects.create()
+        response = self.client.post("/workouts/1/delete/")
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response["location"], "/")
+
 
 class WorkoutExerciseTest(TestCase):
     def setUp(self):

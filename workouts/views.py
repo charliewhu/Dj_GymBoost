@@ -28,6 +28,10 @@ def workout(request, pk):
     return render(request, "workouts/workout.html", context)
 
 
+def workout_delete(request, pk):
+    pass
+
+
 def workout_exercises(request):
     if request.method == "POST":
         workout_id = request.POST["workout_id"]
