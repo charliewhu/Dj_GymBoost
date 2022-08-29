@@ -19,7 +19,7 @@
         <td>
           <form
             method="POST"
-            action="{% url 'delete_workout' workout.id %}"
+            action="{% url 'workout_delete' workout.id %}"
           >
             {% csrf_token %}
           <button id="delete_workout_btn">Delete Workout</button>

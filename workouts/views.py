@@ -29,7 +29,9 @@ def workout(request, pk):
 
 
 def workout_delete(request, pk):
-    pass
+    if request.method == "POST":
+        Workout.objects.get(id=pk).delete()
+        return redirect(home)
 
 
 def workout_exercises(request):
