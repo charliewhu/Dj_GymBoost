@@ -3,6 +3,7 @@ from django.urls import resolve
 
 from ..models import Exercise
 from ..views import exercises
+from ..forms import ExerciseForm
 
 
 class ExercisePageTest(TestCase):
@@ -19,3 +20,6 @@ class ExercisePageTest(TestCase):
 
     def test_exercises_page_lists_exercises(self):
         self.assertIn(self.ex.name, self.response.content.decode())
+
+    def test_renders_form(self):
+        self.assertIsInstance(self.response.context["form"], ExerciseForm)
