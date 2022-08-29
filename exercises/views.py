@@ -9,15 +9,21 @@ def exercises(request):
 
     context = {
         "exercises": Exercise.objects.all(),
+        "workout_id": request.GET.get("workout_id"),
     }
+
+    return render(request, "exercises/exercises.html", context)
+
+
+def exercise_create(request):
+
+    form = ExerciseForm()
 
     if request.method == "POST":
         form = ExerciseForm(request.POST)
         if form.is_valid():
             form.save()
-            reverse("exercises")
+            return redirect(reverse("exercises"))
 
-    context["form"] = ExerciseForm()
-    context["workout_id"] = request.GET.get("workout_id")
-
-    return render(request, "exercises/exercises.html", context)
+    context = {"form": form}
+    return render(request, "exercises/create.html", context)
