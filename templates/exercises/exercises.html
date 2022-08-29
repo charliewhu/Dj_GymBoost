@@ -6,6 +6,13 @@
 
 
 {% block content %}
+
+  <form method="POST" action="{% url 'exercises' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button id="exercise_submit_btn">Create Exercise</button>
+  </form>
+
   <table id="exercise_list">
     {% for exercise in exercises %}
       <tr>
