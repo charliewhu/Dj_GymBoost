@@ -5,8 +5,9 @@ Feature: Add Workout Exercises
 
     Scenario: Add Exercises to a Workout and display them on the Workout screen
 
-        Given I have created a Workout
-        And Exercises exist
+        Given there is a Workout
+        And there is an Exercise
+        And I am on the Workout page
 
         When I click on the Add Exercise button
 

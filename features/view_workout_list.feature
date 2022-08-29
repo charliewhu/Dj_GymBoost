@@ -5,9 +5,9 @@ Feature: View list of Workouts
 
     Scenario: View list of Workouts from the Home page
 
-        Given Workouts exist
+        Given there is a Workout
 
-        When I am on the Home page
+        And I am on the Home page
 
         Then I can see Workouts listed
 

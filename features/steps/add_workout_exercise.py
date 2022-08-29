@@ -6,19 +6,24 @@ from exercises.models import Exercise
 from workouts.models import Workout
 
 
-@given("I have created a Workout")
+@given("there is a Workout")
 def create_workout(context):
-    Workout.objects.create()
+    context.workout = Workout.objects.create()
 
 
-@given("Exercises exist")
+@given("there is an Exercise")
 def step_impl(context):
     context.exercise = Exercise.objects.create(name="test exercise")
 
 
+@given("I am on the Workout page")
+def step_impl(context):
+    context.browser.get(context.get_url(context.workout))
+
+
 @when("I click on the Add Exercise button")
 def click_add_workout_exercise_btn(context):
-    context.browser.get(context.get_url("/workouts/1/"))
+
     add_workout_exercise_btn = context.browser.find_element(
         By.ID, "add_workout_exercise_btn"
     )

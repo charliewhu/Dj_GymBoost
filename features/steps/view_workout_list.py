@@ -6,16 +6,9 @@ from features.steps.create_workout import confirm_homepage
 from workouts.models import Workout
 
 
-@given("Workouts exist")
-def step_impl(context):
-    Workout.objects.create()
-    Workout.objects.create()
+## Given there is a Workout
 
-
-@when("I am on the Home page")
-def step_impl(context):
-    context.browser.get(context.get_url("/"))
-    confirm_homepage(context)
+## And I am on the Home page
 
 
 @then("I can see Workouts listed")
