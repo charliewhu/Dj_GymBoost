@@ -5,15 +5,19 @@ Feature: Create Exercise
 
     Scenario: Create an Exercise
 
-        Given I am on the Exercise page
+        Given I am on the Create Exercise page
 
         When I fill the form with "My New Exercise"
-        And click "Create Exercise"
+        And I click "Create Exercise"
 
-        Then "My New Exercise" will show on the list
+        Then I will be redirected to the Exercise page 
+        And "My New Exercise" will show on the list
+
+        Given I am on the Create Exercise page
 
         When I do not fill the form
-        And click "Create Exercise"
+        And I click "Create Exercise"
 
-        Then no items are added to the list
+        Then I am still on the Create Exercise page
+        And no Exercise items are added to the list
         
