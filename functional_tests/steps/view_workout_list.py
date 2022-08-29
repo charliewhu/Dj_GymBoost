@@ -1,7 +1,6 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
 
-from features.steps.create_workout import confirm_homepage
 
 from workouts.models import Workout
 
