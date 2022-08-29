@@ -6,6 +6,15 @@
 
 
 {% block content %}
+
+  <form method="POST" action="{% url 'exercises' %}">
+    {% csrf_token %}
+    {% for field in form %}
+      {{ field.text }}
+    {% endfor %}
+    <button id="exercise_submit_btn">Create Exercise</button>
+  </form>
+
   <table id="exercise_list">
     {% for exercise in exercises %}
       <tr>
