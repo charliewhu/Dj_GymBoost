@@ -16,6 +16,15 @@
         <td id="workout_list_item">
           <a href="{% url 'workout' workout.id %}">Workout on</a>
         </td>
+        <td>
+          <form
+            method="POST"
+            action="{% url 'workout_delete' workout.id %}"
+          >
+            {% csrf_token %}
+          <button id="delete_workout_btn">Delete Workout</button>
+        </form>
+        </td>
       </tr>
     {% endfor workout %}
   </table>

@@ -35,21 +35,31 @@ class HomePageTest(TestCase):
 
 
 class WorkoutTest(TestCase):
+    def setUp(self):
+        self.workout = Workout.objects.create()
+
     def test_workout_in_context(self):
-        workout = Workout.objects.create()
-        response = self.client.get(workout.get_absolute_url())
+        response = self.client.get(self.workout.get_absolute_url())
         self.assertIsInstance(response.context["workout"], Workout)
 
     def test_workout_exercises_in_context(self):
-        workout = Workout.objects.create()
         exercise = Exercise.objects.create(name="testex")
         workout_exercise = WorkoutExercise.objects.create(
-            workout=workout,
+            workout=self.workout,
             exercise=exercise,
         )
 
-        response = self.client.get(workout.get_absolute_url())
+        response = self.client.get(self.workout.get_absolute_url())
         self.assertEqual(response.context["workout_exercises"][0], workout_exercise)
+
+    def test_POST_delete_workout_url_redirects_to_home(self):
+        response = self.client.post("/workouts/1/delete/")
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response["location"], "/")
+
+    def test_POST_delete_workout_url_deletes_object(self):
+        self.client.post("/workouts/1/delete/")
+        self.assertEqual(Workout.objects.count(), 0)
 
 
 class WorkoutExerciseTest(TestCase):
