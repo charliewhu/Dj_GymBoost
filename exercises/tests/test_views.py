@@ -23,3 +23,12 @@ class ExercisePageTest(TestCase):
 
     def test_renders_form(self):
         self.assertIsInstance(self.response.context["form"], ExerciseForm)
+
+    def test_invalid_POST_doesnt_create_object(self):
+        response = self.client.post("/exercises/", data={"name": ""})
+        self.assertEqual(Exercise.objects.count(), 1)
+
+    def test_POST_creates_object(self):
+        response = self.client.post("/exercises/", data={"name": "new item"})
+        self.assertEqual(Exercise.objects.count(), 2)
+        self.assertEqual(Exercise.objects.get(id=2).name, "new item")

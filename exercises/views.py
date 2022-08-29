@@ -1,14 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
+
 from .forms import ExerciseForm
 from .models import Exercise
 
 # Create your views here.
 def exercises(request):
-    workout_id = request.GET.get("workout_id")
-    form = ExerciseForm()
+
     context = {
         "exercises": Exercise.objects.all(),
-        "workout_id": workout_id,
-        "form": form,
     }
+
+    if request.method == "POST":
+        form = ExerciseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            reverse("exercises")
+
+    context["form"] = ExerciseForm()
+    context["workout_id"] = request.GET.get("workout_id")
+
     return render(request, "exercises/exercises.html", context)

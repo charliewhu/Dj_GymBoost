@@ -11,4 +11,9 @@ Feature: Create Exercise
         And click "Create Exercise"
 
         Then "My New Exercise" will show on the list
+
+        When I do not fill the form
+        And click "Create Exercise"
+
+        Then no items are added to the list
         
