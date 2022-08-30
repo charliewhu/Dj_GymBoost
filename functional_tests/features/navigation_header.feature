@@ -9,3 +9,6 @@ Feature: Navigation Header
         When I click "Exercises" in the Header
         Then I will be on the "Exercises" page
 
+        Given I am on the Exercises page
+        When I click "Home" in the Header
+        Then I will be on "Home" page
