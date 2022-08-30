@@ -7,6 +7,10 @@
 
 {% block content %}
 
+  <form action="{% url 'exercise_create' %}">
+    <button id="url_exercise_create">Create New Exercise</button>
+  </form>
+
   <table id="exercise_list">
     {% for exercise in exercises %}
       <tr>
