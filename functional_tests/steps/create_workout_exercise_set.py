@@ -21,7 +21,7 @@ def step_impl(context):
     context.browser.get(
         context.get_url("workout_exercise", context.workout_exercise.id)
     )
-    context.test.assertEqual("Sets")
+    context.test.assertEqual(context.browser.title, "Sets")
 
 
 @when("I fill in the Weight and Reps fields")
