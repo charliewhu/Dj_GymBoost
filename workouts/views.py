@@ -38,10 +38,6 @@ def workout_delete(request, pk):
         return redirect(home)
 
 
-def workout_exercise(request, pk):
-    return render(request, "workouts/workout_exercise.html")
-
-
 def workout_exercise_create(request):
     if request.method == "POST":
         workout_id = request.POST["workout_id"]
@@ -58,3 +54,11 @@ def delete_workout_exercise(request, pk):
     if request.method == "POST":
         workout_exercise.delete()
         return redirect(workout)
+
+
+def workout_exercise(request, pk):
+    return render(request, "workouts/workout_exercise.html")
+
+
+def workout_exercise_set_create(request):
+    pass

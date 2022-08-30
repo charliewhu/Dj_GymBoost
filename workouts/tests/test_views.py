@@ -69,7 +69,7 @@ class WorkoutExerciseCreateDeleteTest(TestCase):
 
     def test_POST_redirects_to_workout(self):
         response = self.client.post(
-            "/workouts/exercises/create/", data={"workout_id": 1, "exercise_id": 1}
+            "/workout_exercises/create/", data={"workout_id": 1, "exercise_id": 1}
         )
 
         self.assertEqual(response.status_code, 302)
@@ -77,7 +77,7 @@ class WorkoutExerciseCreateDeleteTest(TestCase):
 
     def test_POST_creates_workout_exercise(self):
         self.client.post(
-            "/workouts/exercises/create/", data={"workout_id": 1, "exercise_id": 1}
+            "/workout_exercises/create/", data={"workout_id": 1, "exercise_id": 1}
         )
 
         self.assertEqual(WorkoutExercise.objects.count(), 1)
@@ -105,6 +105,6 @@ class WorkoutExerciseTest(TestCase):
         found = resolve(self.url)
         self.assertEqual(found.func, views.workout_exercise)
 
-    def test_home_page_returns_correct_html(self):
+    def test_returns_correct_html(self):
         response = self.client.get(self.url)
         self.assertTemplateUsed(response, "workouts/workout_exercise.html")
