@@ -69,7 +69,7 @@ class WorkoutExerciseTest(TestCase):
 
     def test_POST_redirects_to_workout(self):
         response = self.client.post(
-            "/workout_exercises/", data={"workout_id": 1, "exercise_id": 1}
+            "/workouts/exercises/create/", data={"workout_id": 1, "exercise_id": 1}
         )
 
         self.assertEqual(response.status_code, 302)
@@ -77,7 +77,7 @@ class WorkoutExerciseTest(TestCase):
 
     def test_POST_creates_workout_exercise(self):
         self.client.post(
-            "/workout_exercises/", data={"workout_id": 1, "exercise_id": 1}
+            "/workouts/exercises/create/", data={"workout_id": 1, "exercise_id": 1}
         )
 
         self.assertEqual(WorkoutExercise.objects.count(), 1)

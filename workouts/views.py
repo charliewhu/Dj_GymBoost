@@ -38,7 +38,11 @@ def workout_delete(request, pk):
         return redirect(home)
 
 
-def workout_exercises(request):
+def workout_exercises(request, pk):
+    pass
+
+
+def workout_exercise_create(request):
     if request.method == "POST":
         workout_id = request.POST["workout_id"]
         exercise_id = request.POST["exercise_id"]
