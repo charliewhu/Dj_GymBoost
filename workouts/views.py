@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.urls import reverse
 
 from workouts.models import Workout, WorkoutExercise
 from exercises.models import Exercise
@@ -57,8 +58,14 @@ def delete_workout_exercise(request, pk):
 
 
 def workout_exercise(request, pk):
-    return render(request, "workouts/workout_exercise.html")
+    workout_exercise = WorkoutExercise.objects.get(id=pk)
+    context = {
+        "workout_exercise": workout_exercise,
+    }
+    return render(request, "workouts/workout_exercise.html", context)
 
 
 def workout_exercise_set_create(request):
-    pass
+    if request.method == "POST":
+        workout_exercise_id = request.POST["workout_exercise_id"]
+        return redirect(reverse("workout_exercise", args=[workout_exercise_id]))

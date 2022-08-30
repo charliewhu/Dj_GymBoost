@@ -16,11 +16,16 @@ def step_impl(context):
     )
 
 
-@given("I am on the WorkoutExercise page")
+## And I am on the Workout page
+
+
+@when("I click on the WorkoutExercise")
 def step_impl(context):
-    context.browser.get(
-        context.get_url("workout_exercise", context.workout_exercise.id)
-    )
+    context.browser.find_element(By.ID, "workout_exercise_list_item").click()
+
+
+@then("I get to the WorkoutExercise page")
+def step_impl(context):
     context.test.assertEqual(context.browser.title, "Sets")
 
 

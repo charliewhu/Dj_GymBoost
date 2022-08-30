@@ -25,3 +25,12 @@ class WorkoutExerciseTest(TestCase):
 
         self.assertEqual(workout_exercise.workout, self.workout)
         self.assertEqual(workout_exercise.exercise, self.exercise)
+
+    def test_get_absolute_url(self):
+        workout_exercise = WorkoutExercise.objects.create(
+            workout=self.workout, exercise=self.exercise
+        )
+        self.assertEqual(
+            workout_exercise.get_absolute_url(),
+            f"/workout_exercise/{workout_exercise.id}/sets/",
+        )

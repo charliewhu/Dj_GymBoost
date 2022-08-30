@@ -14,7 +14,9 @@
     {% for workout_exercise in workout_exercises %}
       <tr>
         <td id="workout_exercise_list_item">
-          <h1>{{ workout_exercise.exercise.name }}</h1>
+          <a href="{{ workout_exercise.get_absolute_url }}">
+            <h1>{{ workout_exercise.exercise.name }}</h1>
+          </a>
         </td>
         <td>
           <form

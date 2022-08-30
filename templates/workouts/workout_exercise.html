@@ -6,7 +6,9 @@
 
 
 {% block content %}
-  <form action="{% url 'workout_exercise_set_create' %}">
+  <form method="POST" action="{% url 'workout_exercise_set_create' %}">
+    {% csrf_token %}
+    <input type="hidden" name="workout_exercise_id" value="{{ workout_exercise.id }}">
     <input type="text" id="weight_input">
     <input type="text" id="reps_input">
     <button id="set_submit_btn">Submit</button>

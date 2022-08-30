@@ -7,7 +7,10 @@ Feature: Add Workout Exercise Set
 
         Given there is a Workout
         And the Workout has a WorkoutExercise
-        And I am on the WorkoutExercise page
+        And I am on the Workout page
+        
+        When I click on the WorkoutExercise
+        Then I get to the WorkoutExercise page
 
         When I fill in the Weight and Reps fields
         And I click on the "Add Set" button

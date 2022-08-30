@@ -106,5 +106,18 @@ class WorkoutExerciseTest(TestCase):
         self.assertEqual(found.func, views.workout_exercise)
 
     def test_returns_correct_html(self):
+        WorkoutExercise.objects.create(workout=self.workout, exercise=self.exercise)
         response = self.client.get(self.url)
         self.assertTemplateUsed(response, "workouts/workout_exercise.html")
+
+    def test_context(self):
+        WorkoutExercise.objects.create(workout=self.workout, exercise=self.exercise)
+        response = self.client.get(self.url)
+        self.assertIsInstance(response.context["workout_exercise"], WorkoutExercise)
+
+    def test_POST_redirects(self):
+        response = self.client.post(
+            "/workout_exercise_sets/create/", data={"workout_exercise_id": 1}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response["location"], self.url)
