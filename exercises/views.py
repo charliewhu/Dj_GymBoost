@@ -31,4 +31,5 @@ def exercise_create(request):
 
 def exercise_delete(request, pk):
     if request.method == "POST":
+        Exercise.objects.get(id=pk).delete()
         return redirect(reverse("exercises"))
