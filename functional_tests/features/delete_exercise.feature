@@ -10,4 +10,5 @@ Feature: Delete Exercises
 
         When I click "Delete Exercise"
 
-        Then the Exercise will not show in the list
+        Then I will be on the Exercises page
+        And the Exercise will not show in the list

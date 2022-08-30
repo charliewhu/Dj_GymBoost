@@ -30,4 +30,5 @@ def exercise_create(request):
 
 
 def exercise_delete(request, pk):
-    pass
+    if request.method == "POST":
+        return redirect(reverse("exercises"))

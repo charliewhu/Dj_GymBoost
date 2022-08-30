@@ -27,6 +27,7 @@
         </td>
         <td>
           <form method="POST" action="{% url 'exercise_delete' exercise.id %}">
+            {% csrf_token %}
             <button id="exercise_delete_btn">Delete Exercise</button>
           </form>
         </td>
