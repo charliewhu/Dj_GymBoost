@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from exercises.models import Exercise
-from ..models import Workout, WorkoutExercise
+from ..models import Workout, WorkoutExercise, WorkoutExerciseSet
 
 
 class WorkoutTest(TestCase):
@@ -34,3 +34,20 @@ class WorkoutExerciseTest(TestCase):
             workout_exercise.get_absolute_url(),
             f"/workout_exercise/{workout_exercise.id}/sets/",
         )
+
+
+class WorkoutExerciseSetTest(TestCase):
+    def setUp(self):
+        self.workout = Workout.objects.create()
+        self.exercise = Exercise.objects.create(name="testex")
+        self.workout_exercise = WorkoutExercise.objects.create(
+            workout=self.workout, exercise=self.exercise
+        )
+
+    def test_saving_workout_exercise_set(self):
+        workout_exercise_set = WorkoutExerciseSet()
+        workout_exercise_set.workout_exercise = self.workout_exercise
+        workout_exercise_set.save()
+
+        self.assertEqual(workout_exercise_set.workout_exercise, self.workout_exercise)
+        self.assertIsInstance(workout_exercise_set, WorkoutExerciseSet)

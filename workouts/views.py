@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse
 
-from workouts.models import Workout, WorkoutExercise
+from workouts.models import Workout, WorkoutExercise, WorkoutExerciseSet
 from exercises.models import Exercise
 
 # Create your views here.
@@ -68,4 +68,6 @@ def workout_exercise(request, pk):
 def workout_exercise_set_create(request):
     if request.method == "POST":
         workout_exercise_id = request.POST["workout_exercise_id"]
-        return redirect(reverse("workout_exercise", args=[workout_exercise_id]))
+        workout_exercise = WorkoutExercise.objects.get(id=workout_exercise_id)
+        WorkoutExerciseSet.objects.create(workout_exercise=workout_exercise)
+        return redirect(reverse("workout_exercise", args=[workout_exercise.id]))

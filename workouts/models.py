@@ -16,3 +16,9 @@ class WorkoutExercise(models.Model):
 
     def get_absolute_url(self):
         return reverse("workout_exercise", kwargs={"pk": self.pk})
+
+
+class WorkoutExerciseSet(models.Model):
+    workout_exercise = models.ForeignKey(
+        WorkoutExercise, related_name="sets", on_delete=models.CASCADE
+    )

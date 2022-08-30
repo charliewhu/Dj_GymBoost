@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import resolve
 
 from .. import views
-from ..models import Workout, WorkoutExercise
+from ..models import Workout, WorkoutExercise, WorkoutExerciseSet
 from exercises.models import Exercise
 
 
@@ -99,19 +99,17 @@ class WorkoutExerciseTest(TestCase):
         self.url = "/workout_exercise/1/sets/"
         self.workout = Workout.objects.create()
         self.exercise = Exercise.objects.create(name="testex")
+        WorkoutExercise.objects.create(workout=self.workout, exercise=self.exercise)
 
     def test_url_resolves_to_correct_view(self):
-        WorkoutExercise.objects.create(workout=self.workout, exercise=self.exercise)
         found = resolve(self.url)
         self.assertEqual(found.func, views.workout_exercise)
 
     def test_returns_correct_html(self):
-        WorkoutExercise.objects.create(workout=self.workout, exercise=self.exercise)
         response = self.client.get(self.url)
         self.assertTemplateUsed(response, "workouts/workout_exercise.html")
 
     def test_context(self):
-        WorkoutExercise.objects.create(workout=self.workout, exercise=self.exercise)
         response = self.client.get(self.url)
         self.assertIsInstance(response.context["workout_exercise"], WorkoutExercise)
 
@@ -121,3 +119,9 @@ class WorkoutExerciseTest(TestCase):
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["location"], self.url)
+
+    def test_POST_creates_object(self):
+        self.client.post(
+            "/workout_exercise_sets/create/", data={"workout_exercise_id": 1}
+        )
+        self.assertEqual(WorkoutExerciseSet.objects.count(), 1)
