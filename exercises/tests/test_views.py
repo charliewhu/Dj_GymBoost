@@ -49,3 +49,16 @@ class ExerciseCreateTest(TestCase):
         self.client.post("/exercises/create/", data={"name": "new item"})
         self.assertEqual(Exercise.objects.count(), 1)
         self.assertEqual(Exercise.objects.get(id=1).name, "new item")
+
+
+class ExerciseDeleteTest(TestCase):
+    def setUp(self):
+        Exercise.objects.create(name="test")
+        self.response = self.client.post("/exercises/1/delete/")
+
+    def test_POST_redirects(self):
+        self.assertEqual(self.response.status_code, 302)
+        self.assertEqual(self.response["location"], "/exercises/")
+
+    def test_POST_deletes_object(self):
+        self.assertEqual(Exercise.objects.count(), 0)

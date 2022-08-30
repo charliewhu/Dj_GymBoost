@@ -27,3 +27,9 @@ def exercise_create(request):
 
     context = {"form": form}
     return render(request, "exercises/create.html", context)
+
+
+def exercise_delete(request, pk):
+    if request.method == "POST":
+        Exercise.objects.get(id=pk).delete()
+        return redirect(reverse("exercises"))
