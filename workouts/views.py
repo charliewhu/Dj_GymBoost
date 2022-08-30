@@ -38,8 +38,8 @@ def workout_delete(request, pk):
         return redirect(home)
 
 
-def workout_exercises(request, pk):
-    pass
+def workout_exercise(request, pk):
+    return render(request, "workouts/workout_exercise.html")
 
 
 def workout_exercise_create(request):

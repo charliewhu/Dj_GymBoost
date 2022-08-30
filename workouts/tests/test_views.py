@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import resolve
 
-from ..views import home
+from .. import views
 from ..models import Workout, WorkoutExercise
 from exercises.models import Exercise
 
@@ -9,7 +9,7 @@ from exercises.models import Exercise
 class HomePageTest(TestCase):
     def test_root_url_resolves_to_home_view(self):
         found = resolve("/")
-        self.assertEqual(found.func, home)
+        self.assertEqual(found.func, views.home)
 
     def test_home_page_returns_correct_html(self):
         response = self.client.get("/")
@@ -62,7 +62,7 @@ class WorkoutTest(TestCase):
         self.assertEqual(Workout.objects.count(), 0)
 
 
-class WorkoutExerciseTest(TestCase):
+class WorkoutExerciseCreateDeleteTest(TestCase):
     def setUp(self):
         self.workout = Workout.objects.create()
         self.exercise = Exercise.objects.create(name="testex")
@@ -92,3 +92,19 @@ class WorkoutExerciseTest(TestCase):
         WorkoutExercise.objects.create(workout=self.workout, exercise=self.exercise)
         self.client.post("/workout_exercises/1/delete/")
         self.assertEqual(WorkoutExercise.objects.count(), 0)
+
+
+class WorkoutExerciseTest(TestCase):
+    def setUp(self):
+        self.url = "/workout_exercise/1/sets/"
+        self.workout = Workout.objects.create()
+        self.exercise = Exercise.objects.create(name="testex")
+
+    def test_url_resolves_to_correct_view(self):
+        WorkoutExercise.objects.create(workout=self.workout, exercise=self.exercise)
+        found = resolve(self.url)
+        self.assertEqual(found.func, views.workout_exercise)
+
+    def test_home_page_returns_correct_html(self):
+        response = self.client.get(self.url)
+        self.assertTemplateUsed(response, "workouts/workout_exercise.html")
