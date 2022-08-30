@@ -1,10 +1,7 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
 
-from exercises.models import Exercise
-
-
-from workouts.models import Workout, WorkoutExercise
+from workouts.models import WorkoutExercise
 
 
 ## Given there is a Workout

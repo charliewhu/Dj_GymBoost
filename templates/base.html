@@ -8,6 +8,11 @@
     <title>{% block title %}{% endblock title %}</title>
   </head>
   <body>
+
+    <nav id="navbar">
+      <a href="{% url 'home' %}" id="nav_home">Home</a>
+      <a href="{% url 'exercises' %}" id="nav_exercises">Exercises</a>
+    </nav>
     
     {% block content %}{% endblock content %}
 
