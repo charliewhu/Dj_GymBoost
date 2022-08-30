@@ -14,7 +14,7 @@ def step_impl(context):
 
 @when('I click "Delete Exercise"')
 def step_impl(context):
-    context.browser.find_element(By.ID, "delete_exercise_btn").click()
+    context.browser.find_element(By.ID, "exercise_delete_btn").click()
 
 
 @then("the Exercise will not show in the list")

@@ -27,3 +27,7 @@ def exercise_create(request):
 
     context = {"form": form}
     return render(request, "exercises/create.html", context)
+
+
+def exercise_delete(request, pk):
+    pass

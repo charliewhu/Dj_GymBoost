@@ -25,6 +25,11 @@
             </form>
           {% endif %}
         </td>
+        <td>
+          <form method="POST" action="{% url 'exercise_delete' exercise.id %}">
+            <button id="exercise_delete_btn">Delete Exercise</button>
+          </form>
+        </td>
       </tr>
     {% endfor %}
   </table>
