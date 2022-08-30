@@ -117,16 +117,21 @@ class WorkoutExerciseTest(TestCase):
 
     def test_POST_redirects(self):
         response = self.client.post(
-            "/workout_exercise_sets/create/", data={"workout_exercise_id": 1}
+            "/workout_exercise_sets/create/",
+            data={"workout_exercise_id": 1, "weight": 20, "reps": 10},
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["location"], self.url)
 
     def test_POST_creates_object(self):
         self.client.post(
-            "/workout_exercise_sets/create/", data={"workout_exercise_id": 1}
+            "/workout_exercise_sets/create/",
+            data={"workout_exercise_id": 1, "weight": 20, "reps": 10},
         )
         self.assertEqual(WorkoutExerciseSet.objects.count(), 1)
+        set_ = WorkoutExerciseSet.objects.first()
+        self.assertEqual(set_.weight, 20)
+        self.assertEqual(set_.reps, 10)
 
     def test_weight_reps_in_context(self):
         WorkoutExerciseSet.objects.create(

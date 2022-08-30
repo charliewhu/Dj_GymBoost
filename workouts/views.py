@@ -70,6 +70,10 @@ def workout_exercise(request, pk):
 def workout_exercise_set_create(request):
     if request.method == "POST":
         workout_exercise_id = request.POST["workout_exercise_id"]
+        weight = request.POST["weight"]
+        reps = request.POST["reps"]
         workout_exercise = WorkoutExercise.objects.get(id=workout_exercise_id)
-        WorkoutExerciseSet.objects.create(workout_exercise=workout_exercise)
+        WorkoutExerciseSet.objects.create(
+            workout_exercise=workout_exercise, weight=weight, reps=reps
+        )
         return redirect(reverse("workout_exercise", args=[workout_exercise.id]))
