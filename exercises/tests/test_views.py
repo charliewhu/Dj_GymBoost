@@ -52,8 +52,13 @@ class ExerciseCreateTest(TestCase):
 
 
 class ExerciseDeleteTest(TestCase):
-    def test_POST_redirects(self):
+    def setUp(self):
         Exercise.objects.create(name="test")
-        response = self.client.post("/exercises/1/delete/")
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], "/exercises/")
+        self.response = self.client.post("/exercises/1/delete/")
+
+    def test_POST_redirects(self):
+        self.assertEqual(self.response.status_code, 302)
+        self.assertEqual(self.response["location"], "/exercises/")
+
+    def test_POST_deletes_object(self):
+        self.assertEqual(Exercise.objects.count(), 0)
