@@ -13,4 +13,13 @@
     <input type="text" id="reps_input">
     <button id="set_submit_btn">Submit</button>
   </form>
+
+  <table>
+    {% for set in sets %}
+      <tr>
+        <td id="weight_list_item">{{ set.weight }}</td>
+        <td id="reps_list_item">{{ set.reps }}</td>
+      </tr>
+    {% endfor %}
+  </table>
 {% endblock content %}

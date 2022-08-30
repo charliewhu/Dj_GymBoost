@@ -42,8 +42,8 @@ def step_impl(context):
 
 @then("I will see the Set listed")
 def step_impl(context):
-    weight_item = context.browser.find_element(By.ID, "weight_item")
-    reps_item = context.browser.find_element(By.ID, "reps_item")
+    weight_item = context.browser.find_element(By.ID, "weight_list_item")
+    reps_item = context.browser.find_element(By.ID, "reps_list_item")
     context.test.assertEqual(weight_item.get_attribute("innerHTML"), 100)
     context.test.assertEqual(reps_item.get_attribute("innerHTML"), 10)
 

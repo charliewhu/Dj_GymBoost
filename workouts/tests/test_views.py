@@ -99,7 +99,9 @@ class WorkoutExerciseTest(TestCase):
         self.url = "/workout_exercise/1/sets/"
         self.workout = Workout.objects.create()
         self.exercise = Exercise.objects.create(name="testex")
-        WorkoutExercise.objects.create(workout=self.workout, exercise=self.exercise)
+        self.workout_exercise = WorkoutExercise.objects.create(
+            workout=self.workout, exercise=self.exercise
+        )
 
     def test_url_resolves_to_correct_view(self):
         found = resolve(self.url)
@@ -109,7 +111,7 @@ class WorkoutExerciseTest(TestCase):
         response = self.client.get(self.url)
         self.assertTemplateUsed(response, "workouts/workout_exercise.html")
 
-    def test_context(self):
+    def test_exercise_context(self):
         response = self.client.get(self.url)
         self.assertIsInstance(response.context["workout_exercise"], WorkoutExercise)
 
@@ -125,3 +127,12 @@ class WorkoutExerciseTest(TestCase):
             "/workout_exercise_sets/create/", data={"workout_exercise_id": 1}
         )
         self.assertEqual(WorkoutExerciseSet.objects.count(), 1)
+
+    def test_weight_reps_in_context(self):
+        WorkoutExerciseSet.objects.create(
+            workout_exercise=self.workout_exercise, weight=100, reps=10
+        )
+        response = self.client.get(self.url)
+        self.assertQuerysetEqual(
+            response.context["sets"], WorkoutExerciseSet.objects.all(), ordered=False
+        )

@@ -47,7 +47,14 @@ class WorkoutExerciseSetTest(TestCase):
     def test_saving_workout_exercise_set(self):
         workout_exercise_set = WorkoutExerciseSet()
         workout_exercise_set.workout_exercise = self.workout_exercise
+        workout_exercise_set.weight = 100
+        workout_exercise_set.reps = 10
         workout_exercise_set.save()
 
         self.assertEqual(workout_exercise_set.workout_exercise, self.workout_exercise)
         self.assertIsInstance(workout_exercise_set, WorkoutExerciseSet)
+
+        set_ = WorkoutExerciseSet.objects.first()
+        self.assertEqual(set_.workout_exercise, self.workout_exercise)
+        self.assertEqual(set_.weight, 100)
+        self.assertEqual(set_.reps, 10)

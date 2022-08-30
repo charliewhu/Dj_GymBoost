@@ -59,8 +59,10 @@ def delete_workout_exercise(request, pk):
 
 def workout_exercise(request, pk):
     workout_exercise = WorkoutExercise.objects.get(id=pk)
+    sets = workout_exercise.sets.all()
     context = {
         "workout_exercise": workout_exercise,
+        "sets": sets,
     }
     return render(request, "workouts/workout_exercise.html", context)
 
