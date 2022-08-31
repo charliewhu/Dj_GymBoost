@@ -26,8 +26,8 @@ def step_impl(context):
 def step_impl(context):
     weight_item = context.browser.find_element(By.ID, "weight_list_item")
     reps_item = context.browser.find_element(By.ID, "reps_list_item")
-    context.test.assertEqual(weight_item.get_attribute("innerHTML"), "100.0")
-    context.test.assertEqual(reps_item.get_attribute("innerHTML"), "10")
+    context.test.assertEqual(weight_item.get_attribute("innerHTML"), "90")
+    context.test.assertEqual(reps_item.get_attribute("innerHTML"), "8")
 
 
 @then("I will not see any additional Set listed")
@@ -104,3 +104,17 @@ def step_impl(context):
     context.browser.find_element(By.ID, "workout_list")
     list_item = context.browser.find_element(By.ID, "workout_list_item")
     context.test.assertIn("Workout on", list_item.get_attribute("innerHTML"))
+
+
+@then("the form will fill with the WorkoutExerciseSet info")
+def step_impl(context):
+    raise NotImplementedError(
+        "STEP: Then the form will fill with the WorkoutExerciseSet info"
+    )
+
+
+@then("the new WorkoutExerciseSet info will be displayed")
+def step_impl(context):
+    raise NotImplementedError(
+        "STEP: Then the new WorkoutExerciseSet info will be displayed"
+    )

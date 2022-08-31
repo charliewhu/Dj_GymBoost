@@ -3,6 +3,8 @@ from behave import given
 from workouts.models import Workout, WorkoutExercise, WorkoutExerciseSet
 from exercises.models import Exercise
 
+from workouts.tests.factory import WorkoutExerciseSetFactory
+
 
 ## Object creation
 
@@ -30,6 +32,11 @@ def step_impl(context):
     WorkoutExerciseSet.objects.create(
         workout_exercise=workout_exercise, weight=100, reps=10
     )
+
+
+@given("there is a WorkoutExerciseSet")
+def step_impl(context):
+    WorkoutExerciseSetFactory()
 
 
 ## Page navigation

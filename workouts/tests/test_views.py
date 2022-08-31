@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import resolve, reverse
 
-from workouts.tests.factory import WorkoutExerciseSetFactory
+from workouts.tests.factory import WorkoutExerciseFactory, WorkoutExerciseSetFactory
 
 from .. import views
 from ..models import Workout, WorkoutExercise, WorkoutExerciseSet
@@ -100,54 +100,60 @@ class WorkoutExerciseCreateDeleteTest(TestCase):
 class WorkoutExerciseTest(TestCase):
     def setUp(self):
         self.url = "/workout_exercise/1/sets/"
-        self.workout = Workout.objects.create()
-        self.exercise = Exercise.objects.create(name="testex")
-        self.workout_exercise = WorkoutExercise.objects.create(
-            workout=self.workout, exercise=self.exercise
-        )
+        self.workout_exercise = WorkoutExerciseSetFactory()
+        self.response = self.client.get(self.url)
 
     def test_url_resolves_to_correct_view(self):
         found = resolve(self.url)
         self.assertEqual(found.func, views.workout_exercise)
 
     def test_returns_correct_html(self):
-        response = self.client.get(self.url)
-        self.assertTemplateUsed(response, "workouts/workout_exercise.html")
+        self.assertTemplateUsed(self.response, "workouts/workout_exercise.html")
 
     def test_exercise_context(self):
-        response = self.client.get(self.url)
-        self.assertIsInstance(response.context["workout_exercise"], WorkoutExercise)
+        self.assertIsInstance(
+            self.response.context["workout_exercise"], WorkoutExercise
+        )
+
+    def test_weight_reps_in_context(self):
+
+        self.assertQuerysetEqual(
+            self.response.context["sets"],
+            WorkoutExerciseSet.objects.all(),
+            ordered=False,
+        )
+
+    def test_renders_form(self):
+        self.assertIsInstance(self.response.context["form"], WorkoutExerciseSetForm)
+
+    def test_renders_prefilled_form(self):
+        response = self.client.get(self.url, data={"weight": 100, "reps": 10})
+        self.assertIn(response.content.decode(), "100")
+        self.assertIn(response.content.decode(), "10")
+
+
+class WorkoutExerciseSetCreateTest(TestCase):
+    def setUp(self):
+        self.url = "/workout_exercise_sets/create/"
+        self.workout_exercise = WorkoutExerciseFactory()
 
     def test_POST_redirects(self):
         response = self.client.post(
-            "/workout_exercise_sets/create/",
+            self.url,
             data={"workout_exercise_id": 1, "weight": 20, "reps": 10},
         )
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], self.url)
+        self.assertEqual(response["location"], "/workout_exercise/1/sets/")
 
     def test_POST_creates_object(self):
         self.client.post(
-            "/workout_exercise_sets/create/",
+            self.url,
             data={"workout_exercise_id": 1, "weight": 20, "reps": 10},
         )
         self.assertEqual(WorkoutExerciseSet.objects.count(), 1)
         set_ = WorkoutExerciseSet.objects.first()
         self.assertEqual(set_.weight, 20)
         self.assertEqual(set_.reps, 10)
-
-    def test_weight_reps_in_context(self):
-        WorkoutExerciseSet.objects.create(
-            workout_exercise=self.workout_exercise, weight=100, reps=10
-        )
-        response = self.client.get(self.url)
-        self.assertQuerysetEqual(
-            response.context["sets"], WorkoutExerciseSet.objects.all(), ordered=False
-        )
-
-    def test_renders_form(self):
-        response = self.client.get(self.url)
-        self.assertIsInstance(response.context["form"], WorkoutExerciseSetForm)
 
 
 class WorkoutExerciseSetDeleteTest(TestCase):

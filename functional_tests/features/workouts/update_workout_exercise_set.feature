@@ -13,7 +13,7 @@ Feature: Update WorkoutExerciseSet
         Then the form will fill with the WorkoutExerciseSet info
 
 
-        When I change the WorkoutExerciseSet form fields
-        And click button with id "workout_exercise_set_submit_btn"
+        When I fill in the Weight and Reps fields
+        And I click button with id "workout_exercise_set_submit_btn"
 
-        Then the new WorkoutExerciseSet info will be displayed
+        Then I will see the set listed

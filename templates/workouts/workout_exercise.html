@@ -23,9 +23,20 @@
         <td id="weight_list_item">{{ set.weight }}</td>
         <td id="reps_list_item">{{ set.reps }}</td>
         <td>
+          <form action="">
+            <input type="hidden" name="weight" value="{{ set.weight }}">
+            <input type="hidden" name="reps" value="{{ set.reps }}">
+            <button id="workout_exercise_set_update_btn">
+              Update
+            </button>
+          </form>
+        </td>
+        <td>
           <form method="POST" action="{% url 'workout_exercise_set_delete' set.id %}">
             {% csrf_token %}
-            <button id="delete_workout_exercise_set_btn">Delete</button>
+            <button id="delete_workout_exercise_set_btn">
+              Delete
+            </button>
           </form>
         </td>
       </tr>
