@@ -7,7 +7,7 @@ Feature: Delete Workout Exercise Sets
 
         Given there is a Workout
         And there is an Exercise
-        And the Workout has WorkoutExercises
+        And the Workout has a WorkoutExercise
         And the WorkoutExercise has a WorkoutExerciseSet
         And I am on the WorkoutExercise page
 

@@ -6,6 +6,7 @@ Feature: Add Workout Exercise Set
     Scenario: Add Sets to a WorkoutExercise and display them on the WorkoutExercise screen
 
         Given there is a Workout
+        And there is an Exercise
         And the Workout has a WorkoutExercise
         And I am on the Workout page
         

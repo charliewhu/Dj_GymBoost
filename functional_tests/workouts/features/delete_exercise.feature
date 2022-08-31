@@ -5,7 +5,7 @@ Feature: Delete Exercises
 
     Scenario: Delete Exercises and do not show them in the list
 
-        Given there are Exercises
+        Given there is an Exercise
         And I am on the Exercises page
 
         When I click "Delete Exercise"
