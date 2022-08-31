@@ -3,6 +3,7 @@ from django.urls import resolve
 
 from .. import views
 from ..models import Workout, WorkoutExercise, WorkoutExerciseSet
+from ..forms import WorkoutExerciseSetForm
 from exercises.models import Exercise
 
 
@@ -141,3 +142,7 @@ class WorkoutExerciseTest(TestCase):
         self.assertQuerysetEqual(
             response.context["sets"], WorkoutExerciseSet.objects.all(), ordered=False
         )
+
+    def test_renders_form(self):
+        response = self.client.get(self.url)
+        self.assertIsInstance(response["form"], WorkoutExerciseSetForm)

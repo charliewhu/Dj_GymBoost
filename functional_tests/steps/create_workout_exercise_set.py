@@ -31,8 +31,8 @@ def step_impl(context):
 
 @when("I fill in the Weight and Reps fields")
 def step_impl(context):
-    context.browser.find_element(By.ID, "weight_input").send_keys("100")
-    context.browser.find_element(By.ID, "reps_input").send_keys("10")
+    context.browser.find_element(By.ID, "id_weight").send_keys("100")
+    context.browser.find_element(By.ID, "id_reps").send_keys("10")
 
 
 @when('I click on the "Add Set" button')

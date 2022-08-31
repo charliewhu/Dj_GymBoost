@@ -9,8 +9,7 @@
   <form method="POST" action="{% url 'workout_exercise_set_create' %}">
     {% csrf_token %}
     <input type="hidden" name="workout_exercise_id" value="{{ workout_exercise.id }}">
-    <input type="number" id="weight_input" name="weight">
-    <input type="number" id="reps_input" name="reps">
+    {{ form.as_p }}
     <button id="set_submit_btn">Submit</button>
   </form>
 
