@@ -14,10 +14,10 @@ Feature: Add Workout Exercise Set
         Then I will be on the "Workout Exercise" page
 
         When I fill in the Weight and Reps fields
-        And I click button with id "set_submit_btn"
+        And I click button with id "workout_exercise_set_submit_btn"
 
         Then I will see the Set listed
         
         When I do not fill in the Weight and Reps fields
-        And I click button with id "set_submit_btn"
+        And I click button with id "workout_exercise_set_submit_btn"
         Then I will not see any additional Set listed
