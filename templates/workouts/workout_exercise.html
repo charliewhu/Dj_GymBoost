@@ -1,7 +1,7 @@
 {% extends "base.html" %} 
 
 {% block title %} 
-  Sets 
+  Workout Exercise 
 {% endblock title %} 
 
 
@@ -24,7 +24,8 @@
         <td id="reps_list_item">{{ set.reps }}</td>
         <td>
           <form method="POST" action="{% url 'workout_exercise_set_delete' set.id %}">
-            <button id="delete_workout_exercise_set_btn"></button>
+            {% csrf_token %}
+            <button id="delete_workout_exercise_set_btn">Delete</button>
           </form>
         </td>
       </tr>

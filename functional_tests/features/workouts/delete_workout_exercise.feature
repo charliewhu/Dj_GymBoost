@@ -10,6 +10,6 @@ Feature: Delete Workout Exercises
         And the Workout has a WorkoutExercise
         And I am on the Workout page
 
-        When I click on the "Delete Exercise" button
+        When I click button with id "delete_workout_exercise_btn"
 
         Then the WorkoutExercise will not show on the Workout page

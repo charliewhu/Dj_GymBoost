@@ -8,6 +8,6 @@ Feature: Delete Workouts
         Given there is a workout
         And I am on the Home page
 
-        When I click on the "Delete Workout" button
+        When I click button with id "delete_workout_btn"
 
         Then the Workout will not show on the page

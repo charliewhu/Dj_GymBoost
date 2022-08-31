@@ -8,7 +8,7 @@ Feature: Delete Exercises
         Given there is an Exercise
         And I am on the Exercises page
 
-        When I click "Delete Exercise"
+        When I click button with id "exercise_delete_btn"
 
-        Then I will be on the Exercises page
+        Then I will be on the "Exercises" page
         And the Exercise will not show in the list

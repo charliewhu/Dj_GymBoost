@@ -7,6 +7,6 @@ Feature: Create Workout
 
         Given I am on the Home page
 
-        When I click on the Create Workout button
+        When I click button with id "create_workout_btn"
 
         Then I will see the Workout screen for that Workout
