@@ -23,6 +23,6 @@ Feature: Create Exercise
         When I do not fill the form
         And I click "Submit"
 
-        Then I am still on the Create Exercise page
+        Then I am on the Create Exercise page
         And no Exercise items are added to the list
         

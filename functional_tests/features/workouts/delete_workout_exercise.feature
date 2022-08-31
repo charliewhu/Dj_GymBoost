@@ -7,7 +7,7 @@ Feature: Delete Workout Exercises
 
         Given there is a workout
         And there is an Exercise
-        And the Workout has WorkoutExercises
+        And the Workout has a WorkoutExercise
         And I am on the Workout page
 
         When I click on the "Delete Exercise" button
