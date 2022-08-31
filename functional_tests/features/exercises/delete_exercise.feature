@@ -10,5 +10,5 @@ Feature: Delete Exercises
 
         When I click button with id "exercise_delete_btn"
 
-        Then I will be on the Exercises page
+        Then I will be on the "Exercises" page
         And the Exercise will not show in the list

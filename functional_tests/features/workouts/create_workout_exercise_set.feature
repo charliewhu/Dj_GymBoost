@@ -11,7 +11,7 @@ Feature: Add Workout Exercise Set
         And I am on the Workout page
         
         When I click url with id "workout_exercise_list_item"
-        Then I get to the WorkoutExercise page
+        Then I will be on the "Workout Exercise" page
 
         When I fill in the Weight and Reps fields
         And I click button with id "set_submit_btn"

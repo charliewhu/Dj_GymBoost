@@ -13,4 +13,4 @@ Feature: View list of Workouts
 
         When I click url with id "workout_list_item"
 
-        Then I am taken to that Workout page
+        Then I will be on the "Workout" page

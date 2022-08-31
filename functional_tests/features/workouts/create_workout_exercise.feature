@@ -11,7 +11,7 @@ Feature: Add Workout Exercises
 
         When I click button with id "add_workout_exercise_btn"
 
-        Then I will be on the Exercises page
+        Then I will be on the "Exercises" page
         And I will see the Exercises listed
         
         When I click button with id "add_exercise_to_workout_btn"

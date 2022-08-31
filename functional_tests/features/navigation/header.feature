@@ -11,4 +11,4 @@ Feature: Navigation Header
 
         Given I am on the Exercises page
         When I click url with id "nav_home"
-        Then I will be on "Home" page
+        Then I will be on the "GymBoost Home" page

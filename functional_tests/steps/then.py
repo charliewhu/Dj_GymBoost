@@ -4,25 +4,15 @@ from selenium.webdriver.common.by import By
 from exercises.models import Exercise
 
 
-@then('I am redirected to the "Create Exercise" page')
-def step_impl(context):
-    context.test.assertEqual("Create Exercise", context.browser.title)
-
-
-@then("I will be redirected to the Exercise page")
-def step_impl(context):
-    context.test.assertEqual("Exercises", context.browser.title)
-
-
 @then('"{new_exercise}" will show on the list')
 def step_impl(context, new_exercise):
     exercise = context.browser.find_element(By.ID, "exercise_list_item")
     context.test.assertEqual(exercise.get_attribute("innerHTML"), new_exercise)
 
 
-@then("I am on the Create Exercise page")
-def step_impl(context):
-    context.test.assertEqual("Create Exercise", context.browser.title)
+@then('I will be on the "{page_title}" page')
+def step_impl(context, page_title):
+    context.test.assertEqual(page_title, context.browser.title)
 
 
 @then("no Exercise items are added to the list")
@@ -30,11 +20,6 @@ def step_impl(context):
     context.browser.get(context.get_url("exercises"))
     list_items = context.browser.find_elements(By.ID, "exercise_list_item")
     context.test.assertEqual(len(list_items), 1)
-
-
-@then("I get to the WorkoutExercise page")
-def step_impl(context):
-    context.test.assertEqual(context.browser.title, "Sets")
 
 
 @then("I will see the Set listed")
@@ -57,11 +42,6 @@ def step_impl(context):
         len(reps_list_item),
         1,
     )
-
-
-@then("I will be on the Exercises page")
-def confirm_exercises_page(context):
-    context.test.assertEqual(context.browser.title, "Exercises")
 
 
 @then("I will see the Exercises listed")
@@ -119,28 +99,8 @@ def step_impl(context):
     context.test.assertEqual(workout_list_items, [])
 
 
-@then('I will be on the "Exercises" page')
-def step_impl(context):
-    context.test.assertEqual(context.browser.title, "Exercises")
-
-
-@then('I will be on "Home" page')
-def step_impl(context):
-    context.test.assertEqual(context.browser.title, "GymBoost Home")
-
-
 @then("I can see Workouts listed")
 def step_impl(context):
     context.browser.find_element(By.ID, "workout_list")
     list_item = context.browser.find_element(By.ID, "workout_list_item")
     context.test.assertIn("Workout on", list_item.get_attribute("innerHTML"))
-
-
-@then("I am taken to that Workout page")
-def step_impl(context):
-    context.browser.find_element(By.ID, "workout_exercise_list")
-
-
-@then("I will be on the WorkoutExercise page")
-def step_impl(context):
-    context.test.assertEqual(context.browser.title, "Sets")
