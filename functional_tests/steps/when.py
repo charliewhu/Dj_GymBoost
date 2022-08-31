@@ -1,10 +1,17 @@
 from behave import when
 from selenium.webdriver.common.by import By
 
+## Exercises
+
 
 @when('I click "Create New Exercise"')
 def step_impl(context):
     context.browser.find_element(By.ID, "url_exercise_create").click()
+
+
+@when('I fill the form with "{new_exercise}"')
+def step_impl(context, new_exercise):
+    context.browser.find_element(By.ID, "id_name").send_keys(new_exercise)
 
 
 @when('I click "Submit"')
@@ -12,9 +19,9 @@ def step_impl(context):
     context.browser.find_element(By.ID, "exercise_submit_btn").click()
 
 
-@when('I fill the form with "{new_exercise}"')
-def step_impl(context, new_exercise):
-    context.browser.find_element(By.ID, "id_name").send_keys(new_exercise)
+@when('I click "Delete Exercise"')
+def step_impl(context):
+    context.browser.find_element(By.ID, "exercise_delete_btn").click()
 
 
 @when("I do not fill the form")
@@ -64,11 +71,6 @@ def click_add_exercise_to_workout(context):
 def click_create_workout_btn(context):
     create_workout_btn = context.browser.find_element(By.ID, "create_workout_btn")
     create_workout_btn.click()
-
-
-@when('I click "Delete Exercise"')
-def step_impl(context):
-    context.browser.find_element(By.ID, "exercise_delete_btn").click()
 
 
 @when('I click on the "Delete Set" button')

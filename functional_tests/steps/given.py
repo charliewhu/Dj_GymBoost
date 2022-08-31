@@ -7,13 +7,6 @@ from exercises.models import Exercise
 ## Object creation
 
 
-@given("I am on the Home page")
-def confirm_homepage(context):
-    context.browser.get(context.get_url("/"))
-    title = context.browser.title
-    context.test.assertIn("GymBoost Home", title)
-
-
 @given("there is an Exercise")
 def step_impl(context):
     Exercise.objects.create(name="test exercise")
@@ -28,9 +21,6 @@ def create_workout(context):
 def step_impl(context):
     workout = Workout.objects.first()
     exercise = Exercise.objects.first()
-    print("workout: ", Workout.objects.first())
-    print("exercise: ", Exercise.objects.first())
-    print("w_exercises: ", WorkoutExercise.objects.all())
     WorkoutExercise.objects.create(workout=workout, exercise=exercise)
 
 
@@ -43,6 +33,13 @@ def step_impl(context):
 
 
 ## Page navigation
+
+
+@given("I am on the Home page")
+def confirm_homepage(context):
+    context.browser.get(context.get_url("/"))
+    title = context.browser.title
+    context.test.assertIn("GymBoost Home", title)
 
 
 @given("I am on the Exercises page")
