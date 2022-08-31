@@ -139,3 +139,8 @@ def step_impl(context):
 @then("I am taken to that Workout page")
 def step_impl(context):
     context.browser.find_element(By.ID, "workout_exercise_list")
+
+
+@then("I will be on the WorkoutExercise page")
+def step_impl(context):
+    context.test.assertEqual(context.browser.title, "Sets")

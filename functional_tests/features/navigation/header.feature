@@ -6,9 +6,9 @@ Feature: Navigation Header
     Scenario: Navigate from all pages
 
         Given I am on the Home page
-        When I click "Exercises" in the Header
+        When I click url with id "nav_exercises"
         Then I will be on the "Exercises" page
 
         Given I am on the Exercises page
-        When I click "Home" in the Header
+        When I click url with id "nav_home"
         Then I will be on "Home" page

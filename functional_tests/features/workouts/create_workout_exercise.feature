@@ -9,11 +9,11 @@ Feature: Add Workout Exercises
         And there is an Exercise
         And I am on the Workout page
 
-        When I click on the Add Exercise button
+        When I click button with id "add_workout_exercise_btn"
 
         Then I will be on the Exercises page
         And I will see the Exercises listed
         
-        When I click Add on an Exercise
+        When I click button with id "add_exercise_to_workout_btn"
 
         Then it will show the exercise on my Workout
