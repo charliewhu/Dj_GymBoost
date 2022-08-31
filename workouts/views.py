@@ -95,6 +95,15 @@ def workout_exercise_set_create(request):
             return redirect(reverse("workout_exercise", args=[workout_exercise_id]))
 
 
+def workout_exercise_set_update(request, pk):
+    workout_exercise_set = WorkoutExerciseSet.objects.get(id=pk)
+    if request.method == "POST":
+        form = WorkoutExerciseSetForm(request.POST, instance=workout_exercise_set)
+        if form.is_valid():
+            form.save()
+            return redirect(workout_exercise_set.workout_exercise)
+
+
 def workout_exercise_set_delete(request, pk):
     if request.method == "POST":
         workout_exercise_set = WorkoutExerciseSet.objects.get(id=pk)

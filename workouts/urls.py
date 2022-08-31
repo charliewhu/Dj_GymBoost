@@ -27,6 +27,11 @@ urlpatterns = [
         name="workout_exercise_set_create",
     ),
     path(
+        "workout_exercise_sets/<int:pk>/update/",
+        views.workout_exercise_set_update,
+        name="workout_exercise_set_update",
+    ),
+    path(
         "workout_exercise_sets/<int:pk>/delete/",
         views.workout_exercise_set_delete,
         name="workout_exercise_set_delete",

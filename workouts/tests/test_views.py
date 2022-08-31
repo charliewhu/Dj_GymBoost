@@ -160,7 +160,23 @@ class WorkoutExerciseSetCreateTest(TestCase):
 
 
 class WorkoutExerciseSetUpdateTest(TestCase):
-    pass
+    def setUp(self):
+        self.wes = WorkoutExerciseSetFactory()
+        self.response = self.client.post(
+            reverse("workout_exercise_set_update", args=[self.wes.id]),
+            data={"weight": 20, "reps": 10},
+        )
+
+    def test_POST_redirects_to_WorkoutExercise(self):
+        self.assertEqual(self.response.status_code, 302)
+        self.assertEqual(
+            self.response["location"], self.wes.workout_exercise.get_absolute_url()
+        )
+
+    def test_POST_updates_object(self):
+        wes = WorkoutExerciseSet.objects.first()
+        self.assertEqual(wes.weight, 20.0)
+        self.assertEqual(wes.reps, 10)
 
 
 class WorkoutExerciseSetDeleteTest(TestCase):

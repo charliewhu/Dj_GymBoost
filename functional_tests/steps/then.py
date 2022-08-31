@@ -27,7 +27,7 @@ def step_impl(context):
 def step_impl(context):
     weight_item = context.browser.find_element(By.ID, "weight_list_item")
     reps_item = context.browser.find_element(By.ID, "reps_list_item")
-    context.test.assertEqual(weight_item.get_attribute("innerHTML"), "90")
+    context.test.assertEqual(weight_item.get_attribute("innerHTML"), "90.0")
     context.test.assertEqual(reps_item.get_attribute("innerHTML"), "8")
 
 
