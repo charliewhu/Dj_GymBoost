@@ -1,5 +1,7 @@
 from django.test import TestCase
-from django.urls import resolve
+from django.urls import resolve, reverse
+
+from workouts.tests.factory import WorkoutExerciseSetFactory
 
 from .. import views
 from ..models import Workout, WorkoutExercise, WorkoutExerciseSet
@@ -150,3 +152,17 @@ class WorkoutExerciseTest(TestCase):
     def test_invalid_POST_doesnt_create_object(self):
         response = self.client.post("/exercises/create/", data={})
         self.assertEqual(WorkoutExerciseSet.objects.count(), 0)
+
+
+class WorkoutExerciseSetDeleteTest(TestCase):
+    def setUp(self):
+        self.wes = WorkoutExerciseSetFactory()
+        self.response = self.client.post(
+            reverse("workout_exercise_set_delete", args=[self.wes.id])
+        )
+
+    def test_POST_redirects_to_WorkoutExercise(self):
+        self.assertEqual(self.response.status_code, 302)
+        self.assertEqual(
+            self.response["location"], self.wes.workout_exercise.get_absolute_url()
+        )

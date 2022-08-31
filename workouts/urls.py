@@ -26,4 +26,9 @@ urlpatterns = [
         views.workout_exercise_set_create,
         name="workout_exercise_set_create",
     ),
+    path(
+        "workout_exercise_sets/<int:pk>/delete/",
+        views.workout_exercise_set_delete,
+        name="workout_exercise_set_delete",
+    ),
 ]
