@@ -2,6 +2,7 @@ from behave import then
 from selenium.webdriver.common.by import By
 
 from exercises.models import Exercise
+from workouts.tests.factory import WorkoutExerciseSetFactory
 
 
 @then('"{new_exercise}" will show on the list')
@@ -108,13 +109,34 @@ def step_impl(context):
 
 @then("the form will fill with the WorkoutExerciseSet info")
 def step_impl(context):
-    raise NotImplementedError(
-        "STEP: Then the form will fill with the WorkoutExerciseSet info"
+    context.test.assertIn(
+        str(WorkoutExerciseSetFactory().weight),
+        context.browser.find_element(By.ID, "id_weight").get_attribute("value"),
+    )
+    context.test.assertIn(
+        str(WorkoutExerciseSetFactory().reps),
+        context.browser.find_element(By.ID, "id_reps").get_attribute("value"),
     )
 
 
-@then("the new WorkoutExerciseSet info will be displayed")
+@then("I will still only see 1 WorkoutExerciseSet listed")
 def step_impl(context):
-    raise NotImplementedError(
-        "STEP: Then the new WorkoutExerciseSet info will be displayed"
+    context.test.assertEqual(
+        len(context.browser.find_elements(By.ID, "weight_list_item")), 1
+    )
+
+
+@then("I will see the updated WorkoutExerciseSet listed")
+def step_impl(context):
+    context.test.assertIn(
+        "90.0",
+        context.browser.find_element(By.ID, "weight_list_item").get_attribute(
+            "innerHTML"
+        ),
+    )
+    context.test.assertIn(
+        "8",
+        context.browser.find_element(By.ID, "reps_list_item").get_attribute(
+            "innerHTML"
+        ),
     )

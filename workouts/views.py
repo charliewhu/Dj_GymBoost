@@ -60,10 +60,20 @@ def delete_workout_exercise(request, pk):
 
 def workout_exercise(request, pk):
     workout_exercise = WorkoutExercise.objects.get(id=pk)
-    sets = workout_exercise.sets.all()
-    form = WorkoutExerciseSetForm()
+    sets = WorkoutExerciseSet.objects.filter(workout_exercise=workout_exercise)
+
+    id = request.GET.get("id")
+
+    if id:
+        set_ = WorkoutExerciseSet.objects.get(id=id)
+        form = WorkoutExerciseSetForm(instance=set_)
+    else:
+        set_ = None
+        form = WorkoutExerciseSetForm()
+
     context = {
         "workout_exercise": workout_exercise,
+        "workout_exercise_set": set_ or None,
         "sets": sets,
         "form": form,
     }

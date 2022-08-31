@@ -110,13 +110,10 @@ class WorkoutExerciseTest(TestCase):
     def test_returns_correct_html(self):
         self.assertTemplateUsed(self.response, "workouts/workout_exercise.html")
 
-    def test_exercise_context(self):
+    def test_context(self):
         self.assertIsInstance(
             self.response.context["workout_exercise"], WorkoutExercise
         )
-
-    def test_weight_reps_in_context(self):
-
         self.assertQuerysetEqual(
             self.response.context["sets"],
             WorkoutExerciseSet.objects.all(),
@@ -127,9 +124,15 @@ class WorkoutExerciseTest(TestCase):
         self.assertIsInstance(self.response.context["form"], WorkoutExerciseSetForm)
 
     def test_renders_prefilled_form(self):
-        response = self.client.get(self.url, data={"weight": 100, "reps": 10})
-        self.assertIn(response.content.decode(), "100")
-        self.assertIn(response.content.decode(), "10")
+        response = self.client.get(self.url, data={"id": 1, "weight": 100, "reps": 10})
+        self.assertIn("100", response.content.decode())
+        self.assertIn("10", response.content.decode())
+
+    def test_workout_exercise_set_in_context_if_id_in_GET(self):
+        response = self.client.get(self.url, data={"id": 1, "weight": 100, "reps": 10})
+        self.assertIsInstance(
+            response.context["workout_exercise_set"], WorkoutExerciseSet
+        )
 
 
 class WorkoutExerciseSetCreateTest(TestCase):
@@ -154,6 +157,10 @@ class WorkoutExerciseSetCreateTest(TestCase):
         set_ = WorkoutExerciseSet.objects.first()
         self.assertEqual(set_.weight, 20)
         self.assertEqual(set_.reps, 10)
+
+
+class WorkoutExerciseSetUpdateTest(TestCase):
+    pass
 
 
 class WorkoutExerciseSetDeleteTest(TestCase):

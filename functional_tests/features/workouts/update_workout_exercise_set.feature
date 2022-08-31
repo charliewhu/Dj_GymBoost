@@ -16,4 +16,5 @@ Feature: Update WorkoutExerciseSet
         When I fill in the Weight and Reps fields
         And I click button with id "workout_exercise_set_submit_btn"
 
-        Then I will see the set listed
+        Then I will still only see 1 WorkoutExerciseSet listed
+        And I will see the updated WorkoutExerciseSet listed
