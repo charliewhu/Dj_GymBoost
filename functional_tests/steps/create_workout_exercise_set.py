@@ -58,8 +58,13 @@ def step_impl(context):
 
 @then("I will not see any additional Set listed")
 def step_impl(context):
-    weight_items = context.browser.find_elements(By.ID, "weight_item")
+    weight_list_item = context.browser.find_elements(By.ID, "weight_list_item")
+    reps_list_item = context.browser.find_elements(By.ID, "reps_list_item")
     context.test.assertEqual(
-        len(weight_items),
+        len(weight_list_item),
+        1,
+    )
+    context.test.assertEqual(
+        len(reps_list_item),
         1,
     )

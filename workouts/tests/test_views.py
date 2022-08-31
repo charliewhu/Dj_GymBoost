@@ -145,4 +145,8 @@ class WorkoutExerciseTest(TestCase):
 
     def test_renders_form(self):
         response = self.client.get(self.url)
-        self.assertIsInstance(response["form"], WorkoutExerciseSetForm)
+        self.assertIsInstance(response.context["form"], WorkoutExerciseSetForm)
+
+    def test_invalid_POST_doesnt_create_object(self):
+        response = self.client.post("/exercises/create/", data={})
+        self.assertEqual(WorkoutExerciseSet.objects.count(), 0)
