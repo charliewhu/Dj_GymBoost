@@ -149,10 +149,6 @@ class WorkoutExerciseTest(TestCase):
         response = self.client.get(self.url)
         self.assertIsInstance(response.context["form"], WorkoutExerciseSetForm)
 
-    def test_invalid_POST_doesnt_create_object(self):
-        response = self.client.post("/exercises/create/", data={})
-        self.assertEqual(WorkoutExerciseSet.objects.count(), 0)
-
 
 class WorkoutExerciseSetDeleteTest(TestCase):
     def setUp(self):
@@ -166,3 +162,6 @@ class WorkoutExerciseSetDeleteTest(TestCase):
         self.assertEqual(
             self.response["location"], self.wes.workout_exercise.get_absolute_url()
         )
+
+    def test_POST_deletes_object(self):
+        self.assertEqual(WorkoutExerciseSet.objects.count(), 0)

@@ -53,10 +53,9 @@ def workout_exercise_create(request):
 
 def delete_workout_exercise(request, pk):
     workout_exercise = WorkoutExercise.objects.get(id=pk)
-    workout = workout_exercise.workout
     if request.method == "POST":
         workout_exercise.delete()
-        return redirect(workout)
+        return redirect(workout_exercise.workout)
 
 
 def workout_exercise(request, pk):
@@ -75,13 +74,19 @@ def workout_exercise_set_create(request):
 
     if request.method == "POST":
 
-        workout_exercise_id = request.POST["workout_exercise_id"]
-        workout_exercise = WorkoutExercise.objects.get(id=workout_exercise_id)
-
         form = WorkoutExerciseSetForm(request.POST)
         if form.is_valid():
+            workout_exercise_id = request.POST["workout_exercise_id"]
+            workout_exercise = WorkoutExercise.objects.get(id=workout_exercise_id)
             obj = form.save(commit=False)
             obj.workout_exercise = workout_exercise
             obj.save()
 
             return redirect(reverse("workout_exercise", args=[workout_exercise_id]))
+
+
+def workout_exercise_set_delete(request, pk):
+    if request.method == "POST":
+        workout_exercise_set = WorkoutExerciseSet.objects.get(id=pk)
+        workout_exercise_set.delete()
+        return redirect(workout_exercise_set.workout_exercise)
