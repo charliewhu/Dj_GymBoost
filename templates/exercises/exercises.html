@@ -17,7 +17,7 @@
         <td id="exercise_list_item">{{ exercise.name }}</td>
         <td>
           {% if workout_id %}
-            <form method="POST" action="{% url 'workout_exercises' %}">
+            <form method="POST" action="{% url 'workout_exercise_create' %}">
               {% csrf_token %}
               <input type="hidden" name="workout_id" value="{{workout_id}}" />
               <input type="hidden" name="exercise_id" value="{{exercise.id}}" />

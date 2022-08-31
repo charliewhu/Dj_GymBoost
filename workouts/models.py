@@ -13,3 +13,14 @@ class WorkoutExercise(models.Model):
         Workout, related_name="exercises", on_delete=models.CASCADE
     )
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse("workout_exercise", kwargs={"pk": self.pk})
+
+
+class WorkoutExerciseSet(models.Model):
+    workout_exercise = models.ForeignKey(
+        WorkoutExercise, related_name="sets", on_delete=models.CASCADE
+    )
+    weight = models.FloatField()
+    reps = models.IntegerField()

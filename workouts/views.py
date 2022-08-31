@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.urls import reverse
 
-from workouts.models import Workout, WorkoutExercise
+from .forms import WorkoutExerciseSetForm
+from .models import Workout, WorkoutExercise, WorkoutExerciseSet
+
 from exercises.models import Exercise
 
 # Create your views here.
@@ -38,7 +41,7 @@ def workout_delete(request, pk):
         return redirect(home)
 
 
-def workout_exercises(request):
+def workout_exercise_create(request):
     if request.method == "POST":
         workout_id = request.POST["workout_id"]
         exercise_id = request.POST["exercise_id"]
@@ -54,3 +57,31 @@ def delete_workout_exercise(request, pk):
     if request.method == "POST":
         workout_exercise.delete()
         return redirect(workout)
+
+
+def workout_exercise(request, pk):
+    workout_exercise = WorkoutExercise.objects.get(id=pk)
+    sets = workout_exercise.sets.all()
+    form = WorkoutExerciseSetForm()
+    context = {
+        "workout_exercise": workout_exercise,
+        "sets": sets,
+        "form": form,
+    }
+    return render(request, "workouts/workout_exercise.html", context)
+
+
+def workout_exercise_set_create(request):
+
+    if request.method == "POST":
+
+        workout_exercise_id = request.POST["workout_exercise_id"]
+        workout_exercise = WorkoutExercise.objects.get(id=workout_exercise_id)
+
+        form = WorkoutExerciseSetForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.workout_exercise = workout_exercise
+            obj.save()
+
+            return redirect(reverse("workout_exercise", args=[workout_exercise_id]))
