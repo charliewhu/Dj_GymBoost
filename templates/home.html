@@ -1,9 +1,5 @@
 {% extends "base.html" %} 
 
-{% block title %} 
-  GymBoost Home 
-{% endblock title %}
-
 {% block content %}
   <form action="{% url 'workouts' %}" method="POST" class="d-flex justify-content-center mb-3">
     {% csrf_token %}
@@ -12,10 +8,10 @@
 
   <h1>Workouts</h1>
 
-  <table id="workout_list" class="table">
+  <table id="workout_list" class="table table-borderless">
     {% for workout in workouts %}
-      <tr>
-        <td >
+      <tr class="d-flex justify-content-between">
+        <td>
           <a id="workout_list_item" href="{{ workout.get_absolute_url }}">Workout on</a>
         </td>
         <td>
@@ -24,8 +20,8 @@
             action="{% url 'workout_delete' workout.id %}"
           >
             {% csrf_token %}
-          <button id="delete_workout_btn" class="btn btn-danger">Delete Workout</button>
-        </form>
+            <button id="delete_workout_btn" class="btn btn-danger">Delete Workout</button>
+          </form>
         </td>
       </tr>
     {% endfor workout %}
