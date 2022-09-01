@@ -18,3 +18,8 @@ class WorkoutExerciseSetFormTest(TestCase):
 
         form = WorkoutExerciseSetForm(data={"weight": "", "reps": "10"})
         self.assertFalse(form.is_valid())
+
+    def test_form_field_type_is_tel(self):
+        form = WorkoutExerciseSetForm()
+        self.assertEqual(form.fields["weight"].widget.input_type, "tel")
+        self.assertEqual(form.fields["reps"].widget.input_type, "tel")
