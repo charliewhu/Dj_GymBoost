@@ -8,6 +8,10 @@ Feature: Navigation Header
         Given I am on the Home page
         When I click url with id "nav_exercises"
         Then I will be on the "Exercises" page
+        
+        Given I am on the Home page
+        When I click url with id "nav_workouts"
+        Then I will be on the "Workouts" page
 
         Given I am on the Exercises page
         When I click url with id "nav_home"

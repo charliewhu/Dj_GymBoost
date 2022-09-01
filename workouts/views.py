@@ -24,6 +24,14 @@ def workouts(request):
         workout = Workout.objects.create()
         return redirect(workout)
 
+    workouts = Workout.objects.all()
+    context = {
+        "title": "Workouts",
+        "workouts": workouts,
+    }
+
+    return render(request, "workouts/workouts.html", context)
+
 
 def workout(request, pk):
 
