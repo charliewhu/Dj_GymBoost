@@ -28,6 +28,30 @@ class HomePageTest(TestCase):
         self.assertQuerysetEqual(response.context["workouts"], workouts, ordered=False)
 
 
+class WorkoutsTest(TestCase):
+    def setUp(self):
+        self.workout = Workout.objects.create()
+        self.response = self.client.get("/workouts/")
+
+    def test_GET_renders_template(self):
+        self.assertTemplateUsed(self.response, "workouts/workouts.html")
+
+    def test_GET_has_workouts_in_context(self):
+        workouts = Workout.objects.all()
+        self.assertQuerysetEqual(
+            self.response.context["workouts"], workouts, ordered=False
+        )
+
+    def test_POST_creates_workout(self):
+        self.client.post("/workouts/")
+        self.assertEqual(Workout.objects.count(), 2)
+
+    def test_POST_causes_redirect(self):
+        response = self.client.post("/workouts/")
+        self.assertEqual(response.status_code, 302)
+        self.assertRegex(response["location"], "workouts/(\d+)/")
+
+
 class WorkoutTest(TestCase):
     def setUp(self):
         self.workout = Workout.objects.create()
@@ -46,19 +70,15 @@ class WorkoutTest(TestCase):
         response = self.client.get(self.workout.get_absolute_url())
         self.assertEqual(response.context["workout_exercises"][0], workout_exercise)
 
-    def test_POST_creates_workout(self):
-        self.client.post("/workouts/")
-        self.assertEqual(Workout.objects.count(), 2)
 
-    def test_POST_causes_redirect(self):
-        response = self.client.post("/workouts/")
-        self.assertEqual(response.status_code, 302)
-        self.assertRegex(response["location"], "workouts/(\d+)/")
+class WorkoutDeleteTest(TestCase):
+    def setUp(self):
+        self.workout = Workout.objects.create()
 
-    def test_POST_delete_workout_url_redirects_to_home(self):
+    def test_POST_delete_workout_url_redirects_to_workouts(self):
         response = self.client.post("/workouts/1/delete/")
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], "/")
+        self.assertEqual(response["location"], "/workouts/")
 
     def test_POST_delete_workout_url_deletes_object(self):
         self.client.post("/workouts/1/delete/")

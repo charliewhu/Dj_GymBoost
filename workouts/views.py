@@ -24,9 +24,16 @@ def workouts(request):
         workout = Workout.objects.create()
         return redirect(workout)
 
+    workouts = Workout.objects.all()
+    context = {
+        "title": "Workouts",
+        "workouts": workouts,
+    }
+
+    return render(request, "workouts/workouts.html", context)
+
 
 def workout(request, pk):
-
     workout = Workout.objects.get(id=pk)
     workout_exercises = workout.exercises.all()
     context = {
@@ -40,7 +47,7 @@ def workout(request, pk):
 def workout_delete(request, pk):
     if request.method == "POST":
         Workout.objects.get(id=pk).delete()
-        return redirect(home)
+        return redirect(workouts)
 
 
 def workout_exercise_create(request):

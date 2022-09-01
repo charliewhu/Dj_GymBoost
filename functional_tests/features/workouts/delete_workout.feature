@@ -6,8 +6,9 @@ Feature: Delete Workouts
     Scenario: Delete Workouts remove them from the screen
 
         Given there is a workout
-        And I am on the Home page
+        And I am on the Workouts page
 
         When I click button with id "delete_workout_btn"
 
-        Then the Workout will not show on the page
+        Then I will be on the "Workouts" page
+        And the Workout will not show on the page
