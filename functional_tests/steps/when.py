@@ -26,8 +26,11 @@ def step_impl(context):
 
 @when("I fill in the Weight and Reps fields")
 def step_impl(context):
-    context.browser.find_element(By.ID, "id_weight").send_keys("100")
-    context.browser.find_element(By.ID, "id_reps").send_keys("10")
+    context.browser.find_element(By.ID, "id_weight").clear()
+    context.browser.find_element(By.ID, "id_reps").clear()
+
+    context.browser.find_element(By.ID, "id_weight").send_keys("90")
+    context.browser.find_element(By.ID, "id_reps").send_keys("8")
 
 
 @when("I do not fill in the Weight and Reps fields")

@@ -60,11 +60,14 @@ def delete_workout_exercise(request, pk):
 
 def workout_exercise(request, pk):
     workout_exercise = WorkoutExercise.objects.get(id=pk)
-    sets = workout_exercise.sets.all()
-    form = WorkoutExerciseSetForm()
+    sets = WorkoutExerciseSet.objects.filter(workout_exercise=workout_exercise)
+    set_ = WorkoutExerciseSet.objects.filter(id=request.GET.get("id")).first() or None
+    form = WorkoutExerciseSetForm(instance=set_)
+
     context = {
         "workout_exercise": workout_exercise,
         "sets": sets,
+        "workout_exercise_set": set_,
         "form": form,
     }
     return render(request, "workouts/workout_exercise.html", context)
@@ -83,6 +86,15 @@ def workout_exercise_set_create(request):
             obj.save()
 
             return redirect(reverse("workout_exercise", args=[workout_exercise_id]))
+
+
+def workout_exercise_set_update(request, pk):
+    workout_exercise_set = WorkoutExerciseSet.objects.get(id=pk)
+    if request.method == "POST":
+        form = WorkoutExerciseSetForm(request.POST, instance=workout_exercise_set)
+        if form.is_valid():
+            form.save()
+            return redirect(workout_exercise_set.workout_exercise)
 
 
 def workout_exercise_set_delete(request, pk):
