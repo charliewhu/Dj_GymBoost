@@ -8,19 +8,15 @@
 {% block content %}
   {% if workout_exercise_set  %}
     <form method="POST" action="{% url 'workout_exercise_set_update' workout_exercise_set.id %}">
-      {% csrf_token %}
-      <input type="hidden" name="workout_exercise_id" value="{{ workout_exercise.id }}">
-      {{ form.as_p }}
-      <button id="workout_exercise_set_submit_btn">Submit</button>
-    </form>
   {% else %}
     <form method="POST" action="{% url 'workout_exercise_set_create' %}">
-      {% csrf_token %}
-      <input type="hidden" name="workout_exercise_id" value="{{ workout_exercise.id }}">
-      {{ form.as_p }}
-      <button id="workout_exercise_set_submit_btn">Submit</button>
-    </form>
   {% endif %}
+
+    {% csrf_token %}
+    <input type="hidden" name="workout_exercise_id" value="{{ workout_exercise.id }}">
+    {{ form.as_p }}
+    <button id="workout_exercise_set_submit_btn">Submit</button>
+  </form>
 
   <table>
     <tr>
@@ -34,8 +30,6 @@
         <td>
           <form action="">
             <input type="hidden" name="id" value="{{ set.id }}">
-            <input type="hidden" name="weight" value="{{ set.weight }}">
-            <input type="hidden" name="reps" value="{{ set.reps }}">
             <button id="workout_exercise_set_update_btn">
               Update
             </button>
