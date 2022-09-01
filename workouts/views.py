@@ -13,6 +13,7 @@ def home(request):
 
     workouts = Workout.objects.all()
     context = {
+        "title": "GymBoost Home",
         "workouts": workouts,
     }
     return render(request, "home.html", context)
@@ -29,6 +30,7 @@ def workout(request, pk):
     workout = Workout.objects.get(id=pk)
     workout_exercises = workout.exercises.all()
     context = {
+        "title": "Workout",
         "workout": workout,
         "workout_exercises": workout_exercises,
     }
@@ -65,6 +67,7 @@ def workout_exercise(request, pk):
     form = WorkoutExerciseSetForm(instance=set_)
 
     context = {
+        "title": "Workout Exercise",
         "workout_exercise": workout_exercise,
         "sets": sets,
         "workout_exercise_set": set_,

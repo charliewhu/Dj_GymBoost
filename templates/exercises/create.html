@@ -1,16 +1,12 @@
-{% extends "base.html" %} 
-
-{% block title %} 
-  Create Exercise
-{% endblock title %} 
-
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
   <form method="POST" action="{% url 'exercise_create' %}">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button id="exercise_submit_btn">Create Exercise</button>
+    {{ form|crispy }}
+    <button id="exercise_submit_btn" class="btn btn-primary mt-2">Create Exercise</button>
   </form>
 
 {% endblock content %}

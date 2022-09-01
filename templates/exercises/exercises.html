@@ -7,13 +7,13 @@
 
 {% block content %}
 
-  <form action="{% url 'exercise_create' %}">
-    <button id="url_exercise_create">Create New Exercise</button>
+  <form action="{% url 'exercise_create' %}" class="d-flex justify-content-center mb-2">
+    <button id="url_exercise_create" class="btn btn-primary">Create New Exercise</button>
   </form>
 
-  <table id="exercise_list">
+  <table id="exercise_list" class="table table-borderless">
     {% for exercise in exercises %}
-      <tr>
+      <tr class="d-flex justify-content-between align-items-center">
         <td id="exercise_list_item">{{ exercise.name }}</td>
         <td>
           {% if workout_id %}
@@ -21,14 +21,14 @@
               {% csrf_token %}
               <input type="hidden" name="workout_id" value="{{workout_id}}" />
               <input type="hidden" name="exercise_id" value="{{exercise.id}}" />
-              <button id="add_exercise_to_workout_btn">Add Exercise</button>
+              <button id="add_exercise_to_workout_btn" class="btn btn-primary">Add Exercise</button>
             </form>
           {% endif %}
         </td>
         <td>
           <form method="POST" action="{% url 'exercise_delete' exercise.id %}">
             {% csrf_token %}
-            <button id="exercise_delete_btn">Delete Exercise</button>
+            <button id="exercise_delete_btn" class="btn btn-danger">Delete Exercise</button>
           </form>
         </td>
       </tr>

@@ -8,6 +8,7 @@ from .models import Exercise
 def exercises(request):
 
     context = {
+        "title": "Exercises",
         "exercises": Exercise.objects.all(),
         "workout_id": request.GET.get("workout_id"),
     }
@@ -25,7 +26,10 @@ def exercise_create(request):
             form.save()
             return redirect(reverse("exercises"))
 
-    context = {"form": form}
+    context = {
+        "title": "Create Exercise",
+        "form": form,
+    }
     return render(request, "exercises/create.html", context)
 
 

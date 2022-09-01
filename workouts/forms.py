@@ -1,5 +1,7 @@
 from django import forms
 
+from crispy_forms.helper import FormHelper
+
 from .models import WorkoutExerciseSet
 
 
@@ -26,3 +28,8 @@ class WorkoutExerciseSetForm(forms.ModelForm):
                 }
             ),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_show_labels = False
