@@ -5,16 +5,18 @@
 {% endblock title %}
 
 {% block content %}
-  <form action="{% url 'workouts' %}" method="POST">
+  <form action="{% url 'workouts' %}" method="POST" class="d-flex justify-content-center mb-3">
     {% csrf_token %}
-    <button id="create_workout_btn">Create Workout</button>
+    <button id="create_workout_btn" class="btn btn-primary">Create Workout</button>
   </form>
 
-  <table id="workout_list">
+  <h1>Workouts</h1>
+
+  <table id="workout_list" class="table">
     {% for workout in workouts %}
       <tr>
-        <td id="workout_list_item">
-          <a href="{{ workout.get_absolute_url }}">Workout on</a>
+        <td >
+          <a id="workout_list_item" href="{{ workout.get_absolute_url }}">Workout on</a>
         </td>
         <td>
           <form
@@ -22,7 +24,7 @@
             action="{% url 'workout_delete' workout.id %}"
           >
             {% csrf_token %}
-          <button id="delete_workout_btn">Delete Workout</button>
+          <button id="delete_workout_btn" class="btn btn-danger">Delete Workout</button>
         </form>
         </td>
       </tr>
