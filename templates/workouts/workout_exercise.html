@@ -1,19 +1,25 @@
 {% extends "base.html" %} 
+{% load crispy_forms_tags %}
 
 {% block content %}
-  {% if workout_exercise_set  %}
-    <form method="POST" action="{% url 'workout_exercise_set_update' workout_exercise_set.id %}" class="">
-  {% else %}
-    <form method="POST" action="{% url 'workout_exercise_set_create' %}">
-  {% endif %}
-
-    {% csrf_token %}
-    <input type="hidden" name="workout_exercise_id" value="{{ workout_exercise.id }}">
-    {% for field in form %}
-      <div class="mb-2">{{ field }}</div>
-    {% endfor %}
-    <button id="workout_exercise_set_submit_btn" class="btn btn-primary">Submit</button>
-  </form>
+  <div class="container">
+    {% if workout_exercise_set  %}
+      <form method="POST" action="{% url 'workout_exercise_set_update' workout_exercise_set.id %}">
+    {% else %}
+      <form method="POST" action="{% url 'workout_exercise_set_create' %}">
+    {% endif %}
+      {% csrf_token %}
+      <input type="hidden" name="workout_exercise_id" value="{{ workout_exercise.id }}">
+      <div class="row justify-content-evenly h-100">
+        {% for field in form %}
+          <div class="mx-3">{{ field|as_crispy_field }}</div>
+        {% endfor %}
+        <button id="workout_exercise_set_submit_btn" class="btn btn-primary">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
 
   {% if sets %}
   <table class="table table-borderless mt-2">
