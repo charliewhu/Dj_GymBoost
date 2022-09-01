@@ -3,6 +3,10 @@ from django import forms
 from .models import WorkoutExerciseSet
 
 
+class PhoneInput(forms.fields.TextInput):
+    input_type = "tel"
+
+
 class WorkoutExerciseSetForm(forms.ModelForm):
     class Meta:
         model = WorkoutExerciseSet
@@ -11,12 +15,12 @@ class WorkoutExerciseSetForm(forms.ModelForm):
             "reps",
         )
         widgets = {
-            "weight": forms.fields.NumberInput(
+            "weight": PhoneInput(
                 attrs={
                     "placeholder": "Weight",
                 }
             ),
-            "reps": forms.fields.NumberInput(
+            "reps": PhoneInput(
                 attrs={
                     "placeholder": "Reps",
                 }
