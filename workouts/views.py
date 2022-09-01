@@ -10,11 +10,8 @@ from exercises.models import Exercise
 
 # Create your views here.
 def home(request):
-
-    workouts = Workout.objects.all()
     context = {
         "title": "GymBoost Home",
-        "workouts": workouts,
     }
     return render(request, "home.html", context)
 

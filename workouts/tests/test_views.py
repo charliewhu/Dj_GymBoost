@@ -18,15 +18,6 @@ class HomePageTest(TestCase):
         response = self.client.get("/")
         self.assertTemplateUsed(response, "home.html")
 
-    def test_workouts_in_context(self):
-        Workout.objects.create()
-        Workout.objects.create()
-        workouts = Workout.objects.all()
-
-        response = self.client.get("/")
-
-        self.assertQuerysetEqual(response.context["workouts"], workouts, ordered=False)
-
 
 class WorkoutsTest(TestCase):
     def setUp(self):
