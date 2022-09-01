@@ -7,7 +7,7 @@ Feature: View list of Workouts
 
         Given there is a Workout
 
-        And I am on the Home page
+        And I am on the Workouts page
 
         Then I can see Workouts listed
 

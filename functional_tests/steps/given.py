@@ -55,6 +55,12 @@ def step_impl(context):
     context.test.assertEqual(context.browser.title, "Exercises")
 
 
+@given("I am on the Workouts page")
+def step_impl(context):
+    context.browser.get(context.get_url("workouts"))
+    context.test.assertEqual(context.browser.title, "Workouts")
+
+
 @given("I am on the Workout page")
 def step_impl(context):
     workout = Workout.objects.first()
