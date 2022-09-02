@@ -4,6 +4,8 @@ from exercises.models import Exercise
 
 # Create your models here.
 class Workout(models.Model):
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
+
     def get_absolute_url(self):
         return reverse("workout", kwargs={"pk": self.pk})
 

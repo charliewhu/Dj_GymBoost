@@ -4,6 +4,7 @@ from behave import then
 from selenium.webdriver.common.by import By
 
 from exercises.models import Exercise
+from functional_tests.helpers import get_by_text
 from workouts.tests.factory import WorkoutExerciseSetFactory
 
 
@@ -148,4 +149,4 @@ def step_impl(context):
 def step_impl(context):
     workout_date = date.today().strftime("%d-%b-%y")
     text = f"Workout on {workout_date}"
-    context.browser.find_element(By.XPATH, f"//*[contains(text(), '{text}')]")
+    get_by_text(context, text)
