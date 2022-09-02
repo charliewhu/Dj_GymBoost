@@ -10,6 +10,7 @@ Feature: View list of Workouts
         And I am on the Workouts page
 
         Then I can see Workouts listed
+        And I will see "Workout on" todays date
 
         When I click url with id "workout_list_item"
 

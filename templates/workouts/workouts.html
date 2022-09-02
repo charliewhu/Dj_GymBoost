@@ -6,7 +6,7 @@
     {% for workout in workouts %}
       <tr class="d-flex justify-content-between">
         <td>
-          <a id="workout_list_item" href="{{ workout.get_absolute_url }}">Workout on</a>
+          <a id="workout_list_item" href="{{ workout.get_absolute_url }}">Workout on {{ workout.created_on|date:"d-b-y"|title }}</a>
         </td>
         <td>
           <form

@@ -1,7 +1,10 @@
+from datetime import date
+
 from behave import then
 from selenium.webdriver.common.by import By
 
 from exercises.models import Exercise
+from functional_tests.helpers import get_by_text
 from workouts.tests.factory import WorkoutExerciseSetFactory
 
 
@@ -140,3 +143,10 @@ def step_impl(context):
             "innerHTML"
         ),
     )
+
+
+@then('I will see "Workout on" todays date')
+def step_impl(context):
+    workout_date = date.today().strftime("%d-%b-%y")
+    text = f"Workout on {workout_date}"
+    get_by_text(context, text)
