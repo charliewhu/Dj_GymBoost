@@ -12,10 +12,7 @@ class PhoneInput(forms.fields.TextInput):
 class WorkoutExerciseSetForm(forms.ModelForm):
     class Meta:
         model = WorkoutExerciseSet
-        fields = (
-            "weight",
-            "reps",
-        )
+        fields = ("weight", "reps", "rir")
         widgets = {
             "weight": PhoneInput(
                 attrs={
@@ -25,6 +22,11 @@ class WorkoutExerciseSetForm(forms.ModelForm):
             "reps": PhoneInput(
                 attrs={
                     "placeholder": "Reps",
+                }
+            ),
+            "rir": PhoneInput(
+                attrs={
+                    "placeholder": "RIR",
                 }
             ),
         }

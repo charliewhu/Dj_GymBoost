@@ -26,25 +26,18 @@ def step_impl(context):
     context.test.assertEqual(len(list_items), 1)
 
 
-@then("I will see the Set listed")
-def step_impl(context):
-    weight_item = context.browser.find_element(By.ID, "weight_list_item")
-    reps_item = context.browser.find_element(By.ID, "reps_list_item")
-    context.test.assertEqual(weight_item.get_attribute("innerHTML"), "90.0")
-    context.test.assertEqual(reps_item.get_attribute("innerHTML"), "8")
+@then('"{item_id}" has value "{item_value}"')
+def step_impl(context, item_id, item_value):
+    item = context.browser.find_element(By.ID, item_id)
+    context.test.assertEqual(item.get_attribute("innerHTML"), item_value)
 
 
-@then("I will not see any additional Set listed")
-def step_impl(context):
-    weight_list_item = context.browser.find_elements(By.ID, "weight_list_item")
-    reps_list_item = context.browser.find_elements(By.ID, "reps_list_item")
+@then('I will see "{item_count}" "{item_id}" items listed')
+def step_impl(context, item_count, item_id):
+    items = context.browser.find_elements(By.ID, item_id)
     context.test.assertEqual(
-        len(weight_list_item),
-        1,
-    )
-    context.test.assertEqual(
-        len(reps_list_item),
-        1,
+        len(items),
+        int(item_count),
     )
 
 
@@ -83,12 +76,6 @@ def step_impl(context):
     context.test.assertEqual(len(list_items), 0)
 
 
-@then("the WorkoutExerciseSet will not show on the WorkoutExercise page")
-def step_impl(context):
-    list_items = context.browser.find_elements(By.ID, "workout_exercise_set_list_item")
-    context.test.assertEqual(len(list_items), 0)
-
-
 @then("the WorkoutExercise will not show on the Workout page")
 def step_impl(context):
     workout_exercise_list_items = context.browser.find_elements(
@@ -119,29 +106,6 @@ def step_impl(context):
     context.test.assertIn(
         str(WorkoutExerciseSetFactory().reps),
         context.browser.find_element(By.ID, "id_reps").get_attribute("value"),
-    )
-
-
-@then("I will still only see 1 WorkoutExerciseSet listed")
-def step_impl(context):
-    context.test.assertEqual(
-        len(context.browser.find_elements(By.ID, "weight_list_item")), 1
-    )
-
-
-@then("I will see the updated WorkoutExerciseSet listed")
-def step_impl(context):
-    context.test.assertIn(
-        "90.0",
-        context.browser.find_element(By.ID, "weight_list_item").get_attribute(
-            "innerHTML"
-        ),
-    )
-    context.test.assertIn(
-        "8",
-        context.browser.find_element(By.ID, "reps_list_item").get_attribute(
-            "innerHTML"
-        ),
     )
 
 

@@ -154,7 +154,7 @@ class WorkoutExerciseSetCreateTest(TestCase):
     def test_POST_redirects(self):
         response = self.client.post(
             self.url,
-            data={"workout_exercise_id": 1, "weight": 20, "reps": 10},
+            data={"workout_exercise_id": 1, "weight": 20, "reps": 10, "rir": 3},
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["location"], "/workout_exercise/1/sets/")
@@ -162,12 +162,13 @@ class WorkoutExerciseSetCreateTest(TestCase):
     def test_POST_creates_object(self):
         self.client.post(
             self.url,
-            data={"workout_exercise_id": 1, "weight": 20, "reps": 10},
+            data={"workout_exercise_id": 1, "weight": 20, "reps": 10, "rir": 3},
         )
         self.assertEqual(WorkoutExerciseSet.objects.count(), 1)
         set_ = WorkoutExerciseSet.objects.first()
         self.assertEqual(set_.weight, 20)
         self.assertEqual(set_.reps, 10)
+        self.assertEqual(set_.rir, 3)
 
 
 class WorkoutExerciseSetUpdateTest(TestCase):
@@ -175,7 +176,7 @@ class WorkoutExerciseSetUpdateTest(TestCase):
         self.wes = WorkoutExerciseSetFactory()
         self.response = self.client.post(
             reverse("workout_exercise_set_update", args=[self.wes.id]),
-            data={"weight": 20, "reps": 10},
+            data={"weight": 20, "reps": 10, "rir": 3},
         )
 
     def test_POST_redirects_to_WorkoutExercise(self):

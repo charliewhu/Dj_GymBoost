@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 from exercises.models import Exercise
 
 # Create your models here.
@@ -24,5 +26,8 @@ class WorkoutExerciseSet(models.Model):
     workout_exercise = models.ForeignKey(
         WorkoutExercise, related_name="sets", on_delete=models.CASCADE
     )
-    weight = models.FloatField()
-    reps = models.IntegerField()
+    weight = models.FloatField(validators=[MinValueValidator(0)])
+    reps = models.PositiveSmallIntegerField()
+    rir = models.PositiveSmallIntegerField(
+        null=True, validators=[MinValueValidator(0), MaxValueValidator(5)]
+    )
