@@ -14,4 +14,4 @@ Feature: Delete Workout Exercise Sets
         When I click button with id "delete_workout_exercise_set_btn"
 
         Then I will be on the "Workout Exercise" page
-        And the WorkoutExerciseSet will not show on the WorkoutExercise page
+        And I will see "0" "workout_exercise_set_list_item" items listed
