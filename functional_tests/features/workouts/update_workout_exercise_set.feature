@@ -19,6 +19,6 @@ Feature: Update WorkoutExerciseSet
         And I click button with id "workout_exercise_set_submit_btn"
 
         Then I will see "1" "workout_exercise_set_list_item" items listed
-        And "weight_list_item" has value "50"
+        And "weight_list_item" has value "50.0"
         And "reps_list_item" has value "10"
         And "rir_list_item" has value "2"

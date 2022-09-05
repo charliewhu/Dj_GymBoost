@@ -24,3 +24,4 @@ class WorkoutExerciseSetFactory(DjangoModelFactory):
     workout_exercise = SubFactory(WorkoutExerciseFactory)
     weight = 100
     reps = 10
+    rir = 2
