@@ -8,16 +8,33 @@ Feature: Add Workout Exercise Set
         Given there is a Workout
         And there is an Exercise
         And the Workout has a WorkoutExercise
-        And I am on the Workout page
+        And I am on the WorkoutExercise page
         
-        When I click url with id "workout_exercise_list_item"
-        Then I will be on the "Workout Exercise" page
-
-        When I fill in the Weight and Reps fields
+        When I fill the "id_weight" field with "50" 
+        And I fill the "id_reps" field with "10"
+        And I fill the "id_rir" field with "2"
         And I click button with id "workout_exercise_set_submit_btn"
 
-        Then I will see the Set listed
+        Then I will see "1" "workout_exercise_set_list_item" items listed
+        And "weight_list_item" has value "50"
+        And "reps_list_item" has value "10"
+        And "rir_list_item" has value "2"
         
         When I do not fill in the Weight and Reps fields
         And I click button with id "workout_exercise_set_submit_btn"
-        Then I will not see any additional Set listed
+
+        Then I will see "1" "workout_exercise_set_list_item" items listed
+
+
+    Scenario: Add invalid Sets to a WorkoutExercise and do not display them on the WorkoutExercise screen
+
+        Given there is a Workout
+        And there is an Exercise
+        And the Workout has a WorkoutExercise
+        And I am on the WorkoutExercise page
+        
+        When I fill the "id_reps" field with "-1" 
+        And I fill the "id_rir" field with "10"
+        And I click button with id "workout_exercise_set_submit_btn"
+        
+        Then I will see "0" "workout_exercise_set_list_item" items listed

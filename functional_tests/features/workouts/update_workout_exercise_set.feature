@@ -13,8 +13,12 @@ Feature: Update WorkoutExerciseSet
         Then the form will fill with the WorkoutExerciseSet info
 
 
-        When I fill in the Weight and Reps fields
+        When I fill the "id_weight" field with "50" 
+        And I fill the "id_reps" field with "10"
+        And I fill the "id_rir" field with "2"
         And I click button with id "workout_exercise_set_submit_btn"
 
-        Then I will still only see 1 WorkoutExerciseSet listed
-        And I will see the updated WorkoutExerciseSet listed
+        Then I will see "1" "workout_exercise_set_list_item" items listed
+        And "weight_list_item" has value "50"
+        And "reps_list_item" has value "10"
+        And "rir_list_item" has value "2"
