@@ -10,7 +10,8 @@ Feature: Create Routine
 
         When I click button with id "create_routine_btn"
 
-        Then I will see "create_routine_form"
+        Then I will be on the "Create Routine" page 
+        And I will see "create_routine_form"
 
         When I fill the "id_name" field with "Test Routine"
         And I click button with id "routine_submit_btn"

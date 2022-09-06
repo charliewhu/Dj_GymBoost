@@ -43,8 +43,7 @@ def step_impl(context, item_count, item_id):
 
 @then('I will see "{item_id}"')
 def step_impl(context, item_id):
-    item = context.browser.find_elements(By.ID, item_id)
-    context.browser.assertTrue(item)
+    context.browser.find_element(By.ID, item_id)
 
 
 @then("I will see the Exercises listed")
