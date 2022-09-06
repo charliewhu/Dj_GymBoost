@@ -6,7 +6,7 @@ Feature: Create Routine
     Scenario: Create a Routine and redirect to the Routine
 
         Given there is an Exercise
-        And I am on Routines page
+        And I am on the Routines page
 
         When I click button with id "create_routine_btn"
 
