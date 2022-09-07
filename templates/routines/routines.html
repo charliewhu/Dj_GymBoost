@@ -1,0 +1,10 @@
+{% extends "base.html" %} 
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form method="POST" action="{% url 'routine_create' %}">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button id="create_routine_btn" class="btn btn-primary">Create Routine</button>
+</form>
+{% endblock content %}

@@ -37,7 +37,6 @@ class ExerciseCreateTest(TestCase):
         self.assertIsInstance(self.response.context["form"], ExerciseForm)
 
     def test_invalid_POST_doesnt_create_object(self):
-        response = self.client.post("/exercises/create/", data={"name": ""})
         self.assertEqual(Exercise.objects.count(), 0)
 
     def test_POST_redirects(self):

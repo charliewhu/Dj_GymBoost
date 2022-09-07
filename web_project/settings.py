@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "accounts",
     "workouts",
     "exercises",
+    "routines",
 ]
 
 AUTH_USER_MODEL = "accounts.User"

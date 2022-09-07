@@ -77,3 +77,9 @@ def step_impl(context):
 def navigate_to_create_exercise_page(context):
     context.browser.get(context.get_url("exercise_create"))
     context.test.assertEqual("Create Exercise", context.browser.title)
+
+
+@given("I am on the Routines page")
+def step_impl(context):
+    context.browser.get(context.get_url("routines"))
+    context.test.assertEqual("Routines", context.browser.title)

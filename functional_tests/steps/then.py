@@ -8,6 +8,11 @@ from functional_tests.helpers import get_by_text
 from workouts.tests.factory import WorkoutExerciseSetFactory
 
 
+@then('I will see element "{element_id}"')
+def step_impl(context, element_id):
+    exercise = context.browser.find_element(By.ID, element_id)
+
+
 @then('"{new_exercise}" will show on the list')
 def step_impl(context, new_exercise):
     exercise = context.browser.find_element(By.ID, "exercise_list_item")
@@ -39,6 +44,11 @@ def step_impl(context, item_count, item_id):
         len(items),
         int(item_count),
     )
+
+
+@then('I will see "{item_id}"')
+def step_impl(context, item_id):
+    context.browser.find_element(By.ID, item_id)
 
 
 @then("I will see the Exercises listed")
