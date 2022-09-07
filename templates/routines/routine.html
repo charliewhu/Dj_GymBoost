@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<button id="add_routine_exercise_btn">Add Exercise</button>
+<form method="GET" action="{% url 'exercises' %}" class="d-flex justify-content-center mb-3">
+  <input type="hidden" name="routine_id" value="{{ routine.id }}" />
+  <button id="add_routine_exercise_btn" class="btn btn-primary">Add Exercise</button>
+</form>
 {% endblock content %}

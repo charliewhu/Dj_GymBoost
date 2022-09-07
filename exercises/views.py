@@ -11,6 +11,7 @@ def exercises(request):
         "title": "Exercises",
         "exercises": Exercise.objects.all(),
         "workout_id": request.GET.get("workout_id"),
+        "routine_id": request.GET.get("routine_id"),
     }
 
     return render(request, "exercises/exercises.html", context)

@@ -16,7 +16,7 @@ def routines(request):
 
 def routine(request, pk):
     routine = Routine.objects.get(id=pk)
-    context = {"title": routine.name}
+    context = {"title": routine.name, "routine": routine}
     return render(request, "routines/routine.html", context)
 
 
