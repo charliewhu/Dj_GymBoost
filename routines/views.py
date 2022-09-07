@@ -6,9 +6,7 @@ def routines(request):
 
     form = RoutineForm()
 
-    context = {
-        "title": "Routines",
-    }
+    context = {"title": "Routines", "form": form}
     return render(request, "routines/routines.html", context)
 
 
