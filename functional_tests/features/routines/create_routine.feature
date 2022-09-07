@@ -8,12 +8,7 @@ Feature: Create Routine
         Given there is an Exercise
         And I am on the Routines page
 
-        When I click button with id "create_routine_btn"
-
-        Then I will be on the "Create Routine" page 
-        And I will see "create_routine_form"
-
         When I fill the "id_name" field with "Test Routine"
-        And I click button with id "routine_submit_btn"
+        And I click button with id "create_routine_btn"
 
-        Then I will be on the "Test Routine" page
+        Then I will be on the "Test Routine" page 
