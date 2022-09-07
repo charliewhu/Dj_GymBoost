@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.urls import resolve, reverse
 
+from .factory import RoutineFactory
+
 from ..forms import RoutineForm
 from ..models import Routine
 
@@ -20,6 +22,15 @@ class RoutinesListTest(TestCase):
 
     def test_renders_form(self):
         self.assertIsInstance(self.response.context["form"], RoutineForm)
+
+
+class RoutineDetailTest(TestCase):
+    def setUp(self):
+        self.routine = RoutineFactory()
+        self.response = self.client.get(self.routine.get_absolute_url())
+
+    def test_renders_html(self):
+        self.assertTemplateUsed(self.response, "routines/routine.html")
 
 
 class RoutineCreateTest(TestCase):

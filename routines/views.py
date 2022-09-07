@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.http import HttpResponse
 
 from .forms import RoutineForm
 
@@ -12,8 +13,8 @@ def routines(request):
     return render(request, "routines/routines.html", context)
 
 
-def routine(request):
-    pass
+def routine(request, pk):
+    return render(request, "routines/routine.html")
 
 
 def routine_create(request):
