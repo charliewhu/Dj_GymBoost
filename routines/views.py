@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.http import HttpResponse
 
 from .forms import RoutineForm
+from .models import Routine
 
 # Create your views here.
 def routines(request):
@@ -14,7 +15,9 @@ def routines(request):
 
 
 def routine(request, pk):
-    return render(request, "routines/routine.html")
+    routine = Routine.objects.get(id=pk)
+    context = {"title": routine.name}
+    return render(request, "routines/routine.html", context)
 
 
 def routine_create(request):

@@ -32,6 +32,12 @@ class RoutineDetailTest(TestCase):
     def test_renders_html(self):
         self.assertTemplateUsed(self.response, "routines/routine.html")
 
+    def test_context_in_response(self):
+        self.assertEqual(
+            self.response.context["title"],
+            self.routine.name,
+        )
+
 
 class RoutineCreateTest(TestCase):
     def setUp(self):
