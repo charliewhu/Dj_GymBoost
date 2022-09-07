@@ -26,3 +26,7 @@ def routine_create(request):
         if form.is_valid():
             routine = form.save()
             return redirect(routine)
+
+
+def routine_exercise_create(request):
+    pass

@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import resolve, reverse
 
 from .factory import RoutineFactory
+from exercises.tests.factory import ExerciseFactory
 
 from ..forms import RoutineForm
 from ..models import Routine
@@ -61,3 +62,20 @@ class RoutineCreateTest(TestCase):
     def test_post_creates_object(self):
         self.assertEqual(Routine.objects.count(), 1)
         self.assertEqual(Routine.objects.get(id=1).name, "new item")
+
+
+class RoutineExerciseCreateTest(TestCase):
+    def setUp(self):
+        self.exercise = ExerciseFactory()
+        self.routine = RoutineFactory()
+        self.response = self.client.post(
+            reverse("routine_exercise_create"), data={"routine_id": 1, "exercise_id": 1}
+        )
+
+    def test_creates_objects(self):
+        pass
+        ## TODO - POST creates object
+
+    def test_redirects(self):
+        pass
+        ## TODO - redirect to routine
