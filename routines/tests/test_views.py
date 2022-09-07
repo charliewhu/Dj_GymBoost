@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.urls import resolve, reverse
 
+from ..forms import RoutineForm
+
 
 class RoutinesListTest(TestCase):
     def setUp(self):
@@ -14,3 +16,6 @@ class RoutinesListTest(TestCase):
             self.response.context["title"],
             "Routines",
         )
+
+    def test_renders_form(self):
+        self.assertIsInstance(self.response.context["form"], RoutineForm)

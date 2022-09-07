@@ -1,7 +1,11 @@
 from django.shortcuts import render
+from .forms import RoutineForm
 
 # Create your views here.
 def routines(request):
+
+    form = RoutineForm()
+
     context = {
         "title": "Routines",
     }
