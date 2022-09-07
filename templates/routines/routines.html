@@ -7,4 +7,14 @@
   {{ form|crispy }}
   <button id="create_routine_btn" class="btn btn-primary">Create Routine</button>
 </form>
+
+<table id="routine_list" class="table table-borderless">
+  {% for routine in routines %}
+    <tr class="d-flex justify-content-between">
+      <td>
+        <a id="routine_list_item" href="{{ routine.get_absolute_url }}">{{ Routine }}</a>
+      </td>
+    </tr>
+  {% endfor routine %}
+</table>
 {% endblock content %}
