@@ -9,8 +9,8 @@ from .models import Routine
 def routines(request):
 
     form = RoutineForm()
-
-    context = {"title": "Routines", "form": form}
+    routines = Routine.objects.all()
+    context = {"title": "Routines", "form": form, "routines": routines}
     return render(request, "routines/routines.html", context)
 
 

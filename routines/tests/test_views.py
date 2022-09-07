@@ -23,6 +23,12 @@ class RoutinesListTest(TestCase):
     def test_renders_form(self):
         self.assertIsInstance(self.response.context["form"], RoutineForm)
 
+    def test_routines_list_in_context(self):
+        routines = Routine.objects.all()
+        self.assertQuerysetEqual(
+            self.response.context["routines"], routines, ordered=False
+        )
+
 
 class RoutineDetailTest(TestCase):
     def setUp(self):

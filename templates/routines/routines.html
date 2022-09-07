@@ -12,7 +12,7 @@
   {% for routine in routines %}
     <tr class="d-flex justify-content-between">
       <td>
-        <a id="routine_list_item" href="{{ routine.get_absolute_url }}">{{ Routine }}</a>
+        <a id="routine_list_item" href="{{ routine.get_absolute_url }}">{{ routine.name }}</a>
       </td>
     </tr>
   {% endfor routine %}
