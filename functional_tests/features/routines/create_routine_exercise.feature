@@ -5,8 +5,8 @@ Feature: Add Routine Exercises
 
     Scenario: Add Exercises to a Routine and display them on the Routine screen
 
-        Given there is a Routine
-        And there is an Exercise
+        Given there is a Routine with name "FT Routine"
+        And there is an Exercise with name "FT Exercise"
         And I am on the Routine page
 
         When I click button with id "add_routine_exercise_btn"
@@ -16,4 +16,5 @@ Feature: Add Routine Exercises
         
         When I click button with id "add_exercise_to_routine_btn"
 
-        Then it will show the Exercise on my Routine
+        Then I will be on the "FT Routine" page
+        And I will see element "routine_exercise_list_item"
