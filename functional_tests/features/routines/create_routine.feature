@@ -11,4 +11,5 @@ Feature: Create Routine
         When I fill the "id_name" field with "Test Routine"
         And I click button with id "create_routine_btn"
 
-        Then I will be on the "Test Routine" page 
+        Then I will be on the "Test Routine" page
+        

@@ -6,3 +6,7 @@ def routines(request):
         "title": "Routines",
     }
     return render(request, "routines/routines.html", context)
+
+
+def routine_create(request):
+    pass
