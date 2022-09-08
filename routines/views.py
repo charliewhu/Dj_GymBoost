@@ -3,7 +3,8 @@ from django.urls import reverse
 from django.http import HttpResponse
 
 from .forms import RoutineForm
-from .models import Routine
+from .models import Routine, RoutineExercise
+from exercises.models import Exercise
 
 # Create your views here.
 def routines(request):
@@ -29,4 +30,9 @@ def routine_create(request):
 
 
 def routine_exercise_create(request):
-    pass
+    if request.method == "POST":
+        routine_id = request.POST.get("routine_id")
+        exercise_id = request.POST.get("exercise_id")
+        routine = Routine.objects.get(id=routine_id)
+        exercise = Exercise.objects.get(id=exercise_id)
+        RoutineExercise.objects.create(routine=routine, exercise=exercise)

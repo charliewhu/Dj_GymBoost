@@ -5,7 +5,7 @@ from .factory import RoutineFactory
 from exercises.tests.factory import ExerciseFactory
 
 from ..forms import RoutineForm
-from ..models import Routine
+from ..models import Routine, RoutineExercise
 
 
 class RoutinesListTest(TestCase):
@@ -66,16 +66,15 @@ class RoutineCreateTest(TestCase):
 
 class RoutineExerciseCreateTest(TestCase):
     def setUp(self):
-        self.exercise = ExerciseFactory()
         self.routine = RoutineFactory()
+        self.exercise = ExerciseFactory()
         self.response = self.client.post(
             reverse("routine_exercise_create"), data={"routine_id": 1, "exercise_id": 1}
         )
 
     def test_creates_objects(self):
-        pass
-        ## TODO - POST creates object
+        self.assertEqual(RoutineExercise.objects.all().count(), 1)
 
     def test_redirects(self):
-        pass
-        ## TODO - redirect to routine
+        self.assertEqual(self.response.status_code, 302)
+        self.assertEqual(self.response["location"], "/routines/1/")
