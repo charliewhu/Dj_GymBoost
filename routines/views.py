@@ -17,7 +17,12 @@ def routines(request):
 
 def routine(request, pk):
     routine = Routine.objects.get(id=pk)
-    context = {"title": routine.name, "routine": routine}
+    routine_exercises = RoutineExercise.objects.filter(routine=routine)
+    context = {
+        "title": routine.name,
+        "routine": routine,
+        "routine_exercises": routine_exercises,
+    }
     return render(request, "routines/routine.html", context)
 
 

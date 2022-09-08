@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import resolve, reverse
 
-from .factory import RoutineFactory
+from .factory import RoutineFactory, RoutineExerciseFactory
 from exercises.tests.factory import ExerciseFactory
 
 from ..forms import RoutineForm
@@ -47,6 +47,15 @@ class RoutineDetailTest(TestCase):
 
     def test_object_in_context(self):
         self.assertEqual(self.response.context["routine"], self.routine)
+
+    def test_routine_exercises_in_context(self):
+        routine_exercise = RoutineExerciseFactory(routine=self.routine)
+        self.response = self.client.get(self.routine.get_absolute_url())
+        self.assertQuerysetEqual(
+            self.response.context["routine_exercises"],
+            RoutineExercise.objects.filter(routine=routine_exercise.routine),
+            ordered=False,
+        )
 
 
 class RoutineCreateTest(TestCase):
