@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Routine</h1>
+<form method="GET" action="{% url 'exercises' %}" class="d-flex justify-content-center mb-3">
+  <input type="hidden" name="routine_id" value="{{ routine.id }}" />
+  <button id="add_routine_exercise_btn" class="btn btn-primary">Add Exercise</button>
+</form>
+
+<table id="routine_exercise_list" class="table table-borderless">
+  {% for routine_exercise in routine_exercises %}
+    <tr class="d-flex justify-content-between align-items-center">
+      <td>
+        <h1 id="routine_exercise_list_item">{{ routine_exercise.exercise.name }}</h1>
+      </td>
+    </tr>
+  {% endfor %}
+</table>
 {% endblock content %}

@@ -12,4 +12,12 @@ Feature: Create Routine
         And I click button with id "create_routine_btn"
 
         Then I will be on the "Test Routine" page
-        
+    
+    Scenario: Show created Routine in the list
+
+        Given there is a Routine with name "FT Routine"
+        And there is an Exercise with name "FT Exercise"
+        And I am on the Routines page
+
+        Then I will see element "routine_list"
+        And I will see "1" "routine_list_item" items listed

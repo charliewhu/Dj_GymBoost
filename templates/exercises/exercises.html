@@ -23,6 +23,13 @@
               <input type="hidden" name="exercise_id" value="{{exercise.id}}" />
               <button id="add_exercise_to_workout_btn" class="btn btn-primary">Add Exercise</button>
             </form>
+          {% elif routine_id %}
+            <form method="POST" action="{% url 'routine_exercise_create' %}">
+              {% csrf_token %}
+              <input type="hidden" name="routine_id" value="{{routine_id}}" />
+              <input type="hidden" name="exercise_id" value="{{exercise.id}}" />
+              <button id="add_exercise_to_routine_btn" class="btn btn-primary">Add Exercise</button>
+            </form>
           {% endif %}
         </td>
         <td>

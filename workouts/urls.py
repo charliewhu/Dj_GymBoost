@@ -13,8 +13,8 @@ urlpatterns = [
     ),
     path(
         "workout_exercises/<int:pk>/delete/",
-        views.delete_workout_exercise,
-        name="delete_workout_exercise",
+        views.workout_exercise_delete,
+        name="workout_exercise_delete",
     ),
     path(
         "workout_exercise/<int:pk>/sets/",
