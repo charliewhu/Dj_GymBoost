@@ -6,6 +6,11 @@
   <button id="add_routine_exercise_btn" class="btn btn-primary">Add Exercise</button>
 </form>
 
+<form method="POST" action="{% url 'workout_routine_create' %}" class="d-flex justify-content-center mb-3">
+  <input type="hidden" name="routine_id" value="{{ routine.id }}" />
+  <button id="add_routine_to_workout_btn" class="btn btn-primary">Start Workout</button>
+</form>
+
 <table id="routine_exercise_list" class="table table-borderless">
   {% for routine_exercise in routine_exercises %}
     <tr class="d-flex justify-content-between align-items-center">
