@@ -5,9 +5,7 @@ Feature: Add Routine to Workout
 
     Scenario: Add Routine to Workout and display them as WorkoutExercises
 
-        Given there is a Routine
-        And there is an Exercise
-        And the Routine has a RoutineExercise
+        Given there is a RoutineExercise
         And I am on the Routine page
 
         When I click button with id "add_routine_to_workout_btn"
