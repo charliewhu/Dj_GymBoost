@@ -42,3 +42,7 @@ def routine_exercise_create(request):
         exercise = Exercise.objects.get(id=exercise_id)
         RoutineExercise.objects.create(routine=routine, exercise=exercise)
         return redirect(routine)
+
+
+def routine_workout_create(request):
+    pass
