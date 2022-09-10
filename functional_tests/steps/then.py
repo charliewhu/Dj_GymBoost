@@ -13,22 +13,14 @@ def step_impl(context, element_id):
     exercise = context.browser.find_element(By.ID, element_id)
 
 
-@then('"{new_exercise}" will show on the list')
-def step_impl(context, new_exercise):
-    exercise = context.browser.find_element(By.ID, "exercise_list_item")
-    context.test.assertEqual(exercise.get_attribute("innerHTML"), new_exercise)
+@then('I will see "{text}" on the page')
+def step_impl(context, text):
+    context.test.assertTrue(get_by_text(context, text))
 
 
 @then('I will be on the "{page_title}" page')
 def step_impl(context, page_title):
     context.test.assertEqual(page_title, context.browser.title)
-
-
-@then("no Exercise items are added to the list")
-def step_impl(context):
-    context.browser.get(context.get_url("exercises"))
-    list_items = context.browser.find_elements(By.ID, "exercise_list_item")
-    context.test.assertEqual(len(list_items), 1)
 
 
 @then('"{item_id}" has value "{item_value}"')
@@ -44,6 +36,13 @@ def step_impl(context, item_count, item_id):
         len(items),
         int(item_count),
     )
+
+
+@then("no Exercise items are added to the list")
+def step_impl(context):
+    context.browser.get(context.get_url("exercises"))
+    list_items = context.browser.find_elements(By.ID, "exercise_list_item")
+    context.test.assertEqual(len(list_items), 1)
 
 
 @then("I will see the Exercises listed")
