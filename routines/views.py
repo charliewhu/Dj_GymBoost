@@ -45,7 +45,9 @@ def routine_exercise_create(request):
 
 
 def routine_exercise_delete(request, pk):
-    pass
+    routine_exercise = RoutineExercise.objects.get(id=pk)
+    routine = routine_exercise.routine
+    return redirect(routine)
 
 
 def routine_workout_create(request, pk):
