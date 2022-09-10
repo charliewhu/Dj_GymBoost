@@ -10,4 +10,5 @@ Feature: Delete Routine Exercise
 
         When I click button with id "delete_routine_exercise_btn"
 
-        Then I will see "0" "routine_exercise_list_item" items listed
+        Then I will see element "routine_exercise_list"
+        And I will see "0" "routine_exercise_list_item" items listed
