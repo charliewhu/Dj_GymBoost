@@ -35,7 +35,8 @@ def routine_create(request):
 
 
 def routine_delete(request, pk):
-    pass
+    if request.method == "POST":
+        return redirect(reverse("routines"))
 
 
 def routine_exercise_create(request):
