@@ -27,8 +27,9 @@ class RoutineModelTest(TestCase):
         self.workout = Workout.objects.first()
 
         self.assertEqual(Workout.objects.count(), 1)
-        self.assertQuerysetEqual(
-            self.workout.exercises.all(), self.routine.exercises.all()
+        self.assertEqual(
+            self.workout.exercises.first().exercise,
+            self.routine.exercises.first().exercise,
         )
 
 
