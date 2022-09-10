@@ -11,6 +11,11 @@ urlpatterns = [
         name="routine_exercise_create",
     ),
     path(
+        "routine_exercises/<int:pk>/delete/",
+        views.routine_exercise_delete,
+        name="routine_exercise_delete",
+    ),
+    path(
         "<int:pk>/workout/create/",
         views.routine_workout_create,
         name="routine_workout_create",

@@ -44,6 +44,10 @@ def routine_exercise_create(request):
         return redirect(routine)
 
 
+def routine_exercise_delete(request, pk):
+    pass
+
+
 def routine_workout_create(request, pk):
     routine = Routine.objects.get(id=pk)
     workout = routine.create_workout()
