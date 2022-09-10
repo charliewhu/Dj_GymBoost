@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.urls import resolve, reverse
 
+from workouts.models import WorkoutExercise
+
 from .factory import RoutineFactory, RoutineExerciseFactory
 from exercises.tests.factory import ExerciseFactory
 
@@ -87,3 +89,20 @@ class RoutineExerciseCreateTest(TestCase):
     def test_redirects(self):
         self.assertEqual(self.response.status_code, 302)
         self.assertEqual(self.response["location"], "/routines/1/")
+
+
+class RoutineWorkoutCreateTest(TestCase):
+    def setUp(self):
+        RoutineExerciseFactory()
+        self.response = self.client.post(
+            reverse("routine_workout_create", kwargs={"pk": 1})
+        )
+
+    def test_redirect_to_workout(self):
+        self.assertEqual(self.response.status_code, 302)
+        self.assertEqual(self.response["location"], "/workouts/1/")
+
+    def test_create_workout_with_exercises(self):
+        self.assertEqual(
+            WorkoutExercise.objects.count(), RoutineExercise.objects.count()
+        )

@@ -2,10 +2,10 @@ from behave import given
 
 from workouts.models import Workout, WorkoutExercise, WorkoutExerciseSet
 from exercises.models import Exercise
-from routines.models import Routine
+from routines.models import Routine, RoutineExercise
 
 from workouts.tests.factory import WorkoutExerciseSetFactory
-from routines.tests.factory import RoutineFactory
+from routines.tests.factory import RoutineExerciseFactory, RoutineFactory
 from exercises.tests.factory import ExerciseFactory
 
 ## Object creation
@@ -39,6 +39,11 @@ def step_impl(context):
 @given("there is a WorkoutExerciseSet")
 def step_impl(context):
     WorkoutExerciseSetFactory()
+
+
+@given("there is a RoutineExercise")
+def step_impl(context):
+    RoutineExerciseFactory()
 
 
 @given('there is a Routine with name "{name}"')

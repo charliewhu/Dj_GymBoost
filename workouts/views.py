@@ -21,7 +21,7 @@ def workouts(request):
         workout = Workout.objects.create()
         return redirect(workout)
 
-    workouts = Workout.objects.all()
+    workouts = Workout.objects.all().order_by("-id")
     context = {
         "title": "Workouts",
         "workouts": workouts,
