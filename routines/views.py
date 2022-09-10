@@ -44,5 +44,5 @@ def routine_exercise_create(request):
         return redirect(routine)
 
 
-def routine_workout_create(request):
-    pass
+def routine_workout_create(request, pk):
+    return HttpResponse()

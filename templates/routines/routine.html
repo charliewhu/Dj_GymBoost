@@ -6,7 +6,7 @@
   <button id="add_routine_exercise_btn" class="btn btn-primary">Add Exercise</button>
 </form>
 
-<form method="POST" action="{% url 'routine_workout_create' %}" class="d-flex justify-content-center mb-3">
+<form method="POST" action="{% url 'routine_workout_create' routine.id %}" class="d-flex justify-content-center mb-3">
   {% csrf_token %}
   <input type="hidden" name="routine_id" value="{{ routine.id }}" />
   <button id="add_routine_to_workout_btn" class="btn btn-primary">Start Workout</button>
