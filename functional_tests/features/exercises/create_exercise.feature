@@ -16,7 +16,7 @@ Feature: Create Exercise
         And I click button with id "exercise_submit_btn"
 
         Then I will be on the "Exercises" page 
-        And "My New Exercise" will show on the list
+        And I will see "My New Exercise" on the page
 
         Given I am on the Create Exercise page
 

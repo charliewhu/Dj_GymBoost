@@ -18,6 +18,15 @@
       <td>
         <h1 id="routine_exercise_list_item">{{ routine_exercise.exercise.name }}</h1>
       </td>
+      <td>
+        <form
+          method="POST"
+          action="{% url 'routine_exercise_delete' routine_exercise.id %}"
+        >
+          {% csrf_token %}
+          <button id="delete_routine_exercise_btn" class="btn btn-danger">Delete</button>
+        </form>
+      </td>
     </tr>
   {% endfor %}
 </table>

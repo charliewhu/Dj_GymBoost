@@ -44,6 +44,13 @@ def routine_exercise_create(request):
         return redirect(routine)
 
 
+def routine_exercise_delete(request, pk):
+    if request.method == "POST":
+        routine_exercise = RoutineExercise.objects.get(id=pk)
+        routine_exercise.delete()
+        return redirect(routine_exercise.routine)
+
+
 def routine_workout_create(request, pk):
     routine = Routine.objects.get(id=pk)
     workout = routine.create_workout()
