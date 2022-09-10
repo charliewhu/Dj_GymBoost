@@ -86,6 +86,9 @@ class RoutineDeleteTest(TestCase):
         self.assertEqual(self.response.status_code, 302)
         self.assertEqual(self.response["location"], "/routines/")
 
+    def test_deletes_objects(self):
+        self.assertEqual(Routine.objects.count(), 0)
+
 
 class RoutineExerciseCreateTest(TestCase):
     def setUp(self):

@@ -36,6 +36,7 @@ def routine_create(request):
 
 def routine_delete(request, pk):
     if request.method == "POST":
+        Routine.objects.get(id=pk).delete()
         return redirect(reverse("routines"))
 
 
