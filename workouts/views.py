@@ -58,8 +58,8 @@ def workout_exercise_create(request):
 
 
 def workout_exercise_delete(request, pk):
-    workout_exercise = WorkoutExercise.objects.get(id=pk)
     if request.method == "POST":
+        workout_exercise = WorkoutExercise.objects.get(id=pk)
         workout_exercise.delete()
         return redirect(workout_exercise.workout)
 
