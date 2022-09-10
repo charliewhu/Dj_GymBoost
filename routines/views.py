@@ -34,6 +34,10 @@ def routine_create(request):
             return redirect(routine)
 
 
+def routine_delete(request, pk):
+    pass
+
+
 def routine_exercise_create(request):
     if request.method == "POST":
         routine_id = request.POST.get("routine_id")

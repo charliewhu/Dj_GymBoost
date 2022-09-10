@@ -5,6 +5,7 @@ urlpatterns = [
     path("", views.routines, name="routines"),
     path("<int:pk>/", views.routine, name="routine"),
     path("create/", views.routine_create, name="routine_create"),
+    path("<int:pk>/delete/", views.routine_delete, name="routine_delete"),
     path(
         "exercises/create/",
         views.routine_exercise_create,

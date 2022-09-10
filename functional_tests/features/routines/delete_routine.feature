@@ -6,7 +6,7 @@ Feature: Delete Routine
     Scenario: Delete a Routine and remove them from the screen
 
         Given there is a Routine
-        And I am on the Routine page
+        And I am on the Routines page
 
         When I click button with id "delete_routine_btn"
 
