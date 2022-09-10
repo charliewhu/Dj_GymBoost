@@ -22,15 +22,14 @@ class RoutineModelTest(TestCase):
             routine=self.routine, exercise=self.exercise
         )
 
-        self.routine.create_workout()
-
-        self.workout = Workout.objects.first()
+        self.workout = self.routine.create_workout()
 
         self.assertEqual(Workout.objects.count(), 1)
         self.assertEqual(
             self.workout.exercises.first().exercise,
             self.routine.exercises.first().exercise,
         )
+        self.assertEqual(self.workout, Workout.objects.first())
 
 
 class RoutineExerciseTest(TestCase):

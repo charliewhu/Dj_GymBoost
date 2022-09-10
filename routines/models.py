@@ -17,6 +17,7 @@ class Routine(models.Model):
             WorkoutExercise.objects.create(
                 workout=workout, exercise=routine_exercise.exercise
             )
+        return workout
 
 
 class RoutineExercise(models.Model):
