@@ -41,14 +41,19 @@ def step_impl(context):
     WorkoutExerciseSetFactory()
 
 
-@given("there is a RoutineExercise")
+@given("there is a Routine")
 def step_impl(context):
-    RoutineExerciseFactory()
+    RoutineFactory()
 
 
 @given('there is a Routine with name "{name}"')
 def step_impl(context, name):
     RoutineFactory(name=f"{name}")
+
+
+@given("there is a RoutineExercise")
+def step_impl(context):
+    RoutineExerciseFactory()
 
 
 @given('there is an Exercise with name "{name}"')

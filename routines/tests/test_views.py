@@ -75,6 +75,21 @@ class RoutineCreateTest(TestCase):
         self.assertEqual(Routine.objects.get(id=1).name, "new item")
 
 
+class RoutineDeleteTest(TestCase):
+    def setUp(self):
+        self.routine = RoutineFactory()
+        self.response = self.client.post(
+            reverse("routine_delete", args=[self.routine.id])
+        )
+
+    def test_redirect(self):
+        self.assertEqual(self.response.status_code, 302)
+        self.assertEqual(self.response["location"], "/routines/")
+
+    def test_deletes_objects(self):
+        self.assertEqual(Routine.objects.count(), 0)
+
+
 class RoutineExerciseCreateTest(TestCase):
     def setUp(self):
         self.routine = RoutineFactory()
