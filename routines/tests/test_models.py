@@ -1,8 +1,9 @@
 from django.test import TestCase
 
 from exercises.tests.factory import ExerciseFactory
-from .factory import RoutineFactory
+from .factory import RoutineExerciseFactory, RoutineFactory
 from ..models import Routine, RoutineExercise
+from workouts.models import Workout
 
 
 class RoutineModelTest(TestCase):
@@ -13,6 +14,22 @@ class RoutineModelTest(TestCase):
 
         self.assertEqual(Routine.objects.count(), 1)
         self.assertEqual(Routine.objects.get(id=1).name, "Test Routine")
+
+    def test_create_workout(self):
+        self.routine = RoutineFactory()
+        self.exercise = ExerciseFactory()
+        self.routine_exercise = RoutineExerciseFactory(
+            routine=self.routine, exercise=self.exercise
+        )
+
+        self.routine.create_workout()
+
+        self.workout = Workout.objects.first()
+
+        self.assertEqual(Workout.objects.count(), 1)
+        self.assertQuerysetEqual(
+            self.workout.exercises.all(), self.routine.exercises.all()
+        )
 
 
 class RoutineExerciseTest(TestCase):

@@ -12,5 +12,7 @@ class Routine(models.Model):
 
 
 class RoutineExercise(models.Model):
-    routine = models.ForeignKey(Routine, on_delete=models.CASCADE)
+    routine = models.ForeignKey(
+        Routine, related_name="exercises", on_delete=models.CASCADE
+    )
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)

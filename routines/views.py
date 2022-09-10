@@ -45,4 +45,6 @@ def routine_exercise_create(request):
 
 
 def routine_workout_create(request, pk):
-    return HttpResponse()
+    routine = Routine.objects.get(id=pk)
+    workout = routine.create_workout()
+    return redirect(workout)
