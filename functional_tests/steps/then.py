@@ -26,7 +26,7 @@ def step_impl(context, page_title):
 @then('"{item_id}" has value "{item_value}"')
 def step_impl(context, item_id, item_value):
     item = context.browser.find_element(By.ID, item_id)
-    context.test.assertEqual(item.get_attribute("innerHTML"), item_value)
+    context.test.assertEqual(item.text, item_value)
 
 
 @then('I will see "{item_count}" "{item_id}" items listed')
@@ -61,9 +61,7 @@ def confirm_exercise_in_workout(context):
     )
 
     exercise = Exercise.objects.first()
-    context.test.assertIn(
-        exercise.name, workout_exercise_list_item.get_attribute("innerHTML")
-    )
+    context.test.assertIn(exercise.name, workout_exercise_list_item.text)
 
 
 @then("I will see the Workout screen for that Workout")
@@ -98,7 +96,7 @@ def step_impl(context):
 def step_impl(context):
     context.browser.find_element(By.ID, "workout_list")
     list_item = context.browser.find_element(By.ID, "workout_list_item")
-    context.test.assertIn("Workout on", list_item.get_attribute("innerHTML"))
+    context.test.assertIn("Workout on", list_item.text)
 
 
 @then("the form will fill with the WorkoutExerciseSet info")

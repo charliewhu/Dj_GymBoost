@@ -1,5 +1,5 @@
 Feature: Add Routine to Workout
-    As a user who has created a Rotuine with Exercises
+    As a user who has created a Routine with Exercises
     I want to be able to add those Exercises to a new Workout
     So that I don't have to pick them from a list
 
