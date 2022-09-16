@@ -8,29 +8,36 @@
   <button id="create_routine_btn" class="btn btn-primary">Create Routine</button>
 </form>
 
-<table id="routine_list" class="table table-borderless">
+<div id="routine_list" class="container-fluid">
   {% for routine in routines %}
-    <tr class="d-flex justify-content-between">
-      <td>
+    <div class="row align-items-center my-2">
+      <div class="col">
         <a id="routine_list_item" href="{{ routine.get_absolute_url }}">{{ routine.name }}</a>
-      </td>
-      <td>
-        <form method="POST" action="{% url 'routine_workout_create' routine.id %}" class="d-flex justify-content-center mb-3">
+      </div>
+      <div class="col-5">
+        <form method="POST" action="{% url 'routine_workout_create' routine.id %}">
           {% csrf_token %}
           <input type="hidden" name="routine_id" value="{{ routine.id }}" />
           <button id="add_routine_to_workout_btn" class="btn btn-primary">Start Workout</button>
         </form>
-      </td>
-      <td>
+      </div>
+      <div class="col-2">
         <form
           method="POST"
           action="{% url 'routine_delete' routine.id %}"
         >
           {% csrf_token %}
-          <button id="delete_routine_btn" class="btn btn-danger">Delete</button>
+          <button id="delete_routine_btn" class="btn btn-danger">X</button>
         </form>
-      </td>
-    </tr>
+      </div>
+    </div>
   {% endfor routine %}
-</table>
+</div>
+
+
+
+
+
+
+
 {% endblock content %}

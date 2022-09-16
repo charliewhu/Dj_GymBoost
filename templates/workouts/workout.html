@@ -7,24 +7,24 @@
     <button id="add_workout_exercise_btn" class="btn btn-primary">Add Exercise</button>
   </form>
 
-  <table id="workout_exercise_list" class="table table-borderless">
+  <div id="workout_exercise_list" class="container-fluid">
     {% for workout_exercise in workout_exercises %}
-      <tr class="d-flex justify-content-between align-items-center">
-        <td>
-          <a href="{{ workout_exercise.get_absolute_url }}">
-            <h1 id="workout_exercise_list_item">{{ workout_exercise.exercise.name }}</h1>
+      <div class="row align-items-center my-2">
+        <div class="col">
+          <a id="workout_exercise_list_item" href="{{ workout_exercise.get_absolute_url }}">
+            {{ workout_exercise.exercise.name }}
           </a>
-        </td>
-        <td>
+        </div>
+        <div class="col-2">
           <form
             method="POST"
             action="{% url 'workout_exercise_delete' workout_exercise.id %}"
           >
             {% csrf_token %}
-            <button id="delete_workout_exercise_btn" class="btn btn-danger">Delete Exercise</button>
+            <button id="delete_workout_exercise_btn" class="btn btn-danger">X</button>
           </form>
-        </td>
-      </tr>
+        </div>
+      </div>
     {% endfor %}
-  </table>
+  </div>
 {% endblock content %}

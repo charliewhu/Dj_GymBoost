@@ -11,34 +11,40 @@
     <button id="url_exercise_create" class="btn btn-primary">Create New Exercise</button>
   </form>
 
-  <table id="exercise_list" class="table table-borderless">
+  <div id="exercise_list" class="container-fluid">
     {% for exercise in exercises %}
-      <tr class="d-flex justify-content-between align-items-center">
-        <td id="exercise_list_item">{{ exercise.name }}</td>
-        <td>
+      <div id="exercise_list_item" class="row align-items-center my-2">
+        <div class="col">
+          {{ exercise.name }}
+        </div>
+        <div class="col-2">
           {% if workout_id %}
             <form method="POST" action="{% url 'workout_exercise_create' %}">
               {% csrf_token %}
               <input type="hidden" name="workout_id" value="{{workout_id}}" />
               <input type="hidden" name="exercise_id" value="{{exercise.id}}" />
-              <button id="add_exercise_to_workout_btn" class="btn btn-primary">Add Exercise</button>
+              <button id="add_exercise_to_workout_btn" class="btn btn-primary">Add</button>
             </form>
           {% elif routine_id %}
             <form method="POST" action="{% url 'routine_exercise_create' %}">
               {% csrf_token %}
               <input type="hidden" name="routine_id" value="{{routine_id}}" />
               <input type="hidden" name="exercise_id" value="{{exercise.id}}" />
-              <button id="add_exercise_to_routine_btn" class="btn btn-primary">Add Exercise</button>
+              <button id="add_exercise_to_routine_btn" class="btn btn-primary">Add</button>
             </form>
           {% endif %}
-        </td>
-        <td>
+        </div>
+
+        <div class="col-2">
           <form method="POST" action="{% url 'exercise_delete' exercise.id %}">
             {% csrf_token %}
-            <button id="exercise_delete_btn" class="btn btn-danger">Delete Exercise</button>
+            <button id="exercise_delete_btn" class="btn btn-danger">X</button>
           </form>
-        </td>
-      </tr>
+        </div>
+      </div>
     {% endfor %}
-  </table>
+  </div>
+
+
+
 {% endblock content %}
