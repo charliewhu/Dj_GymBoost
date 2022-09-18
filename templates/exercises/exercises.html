@@ -21,12 +21,6 @@
           {{ exercise.name }}
         </div>
         <div class="col-2">
-          <form method="POST" action="{% url 'workout_exercise_create' %}">
-            {% csrf_token %}
-            <input type="hidden" name="workout_id" value="{{workout_id}}" />
-            <input type="hidden" name="exercise_id" value="{{exercise.id}}" />
-            <button id="add_exercise_to_workout_btn" class="btn btn-primary">Add</button>
-          </form>
           {% if workout_id %}
             <form method="POST" action="{% url 'workout_exercise_create' %}">
               {% csrf_token %}

@@ -1,3 +1,4 @@
+from urllib.parse import urlencode
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
@@ -22,10 +23,15 @@ def exercise_create(request):
     form = ExerciseForm()
 
     if request.method == "POST":
-        print(request.POST)
         form = ExerciseForm(request.POST)
         if form.is_valid():
             form.save()
+            if request.POST.get("workout_id"):
+                return redirect(
+                    reverse("exercises")
+                    + "?"
+                    + urlencode({"workout_id": request.POST.get("workout_id")})
+                )
             return redirect(reverse("exercises"))
 
     try:

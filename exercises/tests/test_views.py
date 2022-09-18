@@ -60,7 +60,7 @@ class ExerciseCreateTest(TestCase):
             "/exercises/create/", data={"name": "new item", "workout_id": 1}
         )
         self.assertEqual(response.status_code, 302)
-        self.assertRegex(response["location"], "/exercises/?workout_id=1/")
+        self.assertIn(response["location"], "/exercises/?workout_id=1/")
 
 
 class ExerciseDeleteTest(TestCase):
