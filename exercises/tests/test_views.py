@@ -49,6 +49,19 @@ class ExerciseCreateTest(TestCase):
         self.assertEqual(Exercise.objects.count(), 1)
         self.assertEqual(Exercise.objects.get(id=1).name, "new item")
 
+    def test_context_contains_workout_id(self):
+        self.response = self.client.get(
+            reverse("exercise_create"), data={"workout_id": 1}
+        )
+        self.assertEqual(self.response.context["workout_id"], "1")
+
+    def test_POST_redirects_if_workout_id_in_data(self):
+        response = self.client.post(
+            "/exercises/create/", data={"name": "new item", "workout_id": 1}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertRegex(response["location"], "/exercises/?workout_id=1/")
+
 
 class ExerciseDeleteTest(TestCase):
     def setUp(self):
