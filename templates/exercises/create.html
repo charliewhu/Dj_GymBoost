@@ -6,7 +6,11 @@
   <form method="POST" action="{% url 'exercise_create' %}">
     {% csrf_token %}
     {{ form|crispy }}
-    <input type="hidden" name="workout_id" value="{{workout_id}}" />
+    {% if workout_id %}
+      <input type="hidden" name="workout_id" value="{{workout_id}}" />
+    {% elif routine_id %}
+      <input type="hidden" name="routine_id" value="{{routine_id}}" />
+    {% endif %}
     <button id="exercise_submit_btn" class="btn btn-primary mt-2">Create Exercise</button>
   </form>
 

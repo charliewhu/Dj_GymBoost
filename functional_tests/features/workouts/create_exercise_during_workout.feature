@@ -1,4 +1,4 @@
-Feature: Add Workout Exercises
+Feature: Create exercise during workout
     As a user who has created a Workout
     I want to be able to add Exercises during the Workout
     So that I can add add it to the Workout later on
