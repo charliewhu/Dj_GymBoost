@@ -62,6 +62,12 @@ class ExerciseCreateTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertIn(response["location"], "/exercises/?workout_id=1/")
 
+    def test_context_contains_routine_id(self):
+        self.response = self.client.get(
+            reverse("exercise_create"), data={"routine_id": 1}
+        )
+        self.assertEqual(self.response.context["routine_id"], "1")
+
 
 class ExerciseDeleteTest(TestCase):
     def setUp(self):

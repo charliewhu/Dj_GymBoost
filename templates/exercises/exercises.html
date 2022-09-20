@@ -10,6 +10,8 @@
   <form action="{% url 'exercise_create' %}" class="d-flex justify-content-center mb-2">
     {% if workout_id %}
       <input type="hidden" name="workout_id" value="{{workout_id}}" />
+    {% elif routine_id %}
+    <input type="hidden" name="routine_id" value="{{routine_id}}" />
     {% endif %}
     <button id="url_exercise_create" class="btn btn-primary">Create New Exercise</button>
   </form>
