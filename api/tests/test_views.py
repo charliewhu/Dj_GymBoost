@@ -1,11 +1,11 @@
 import json
-from django.test import TestCase
+from rest_framework.test import APITestCase
 
 from exercises.models import Exercise
 from exercises.tests.factory import ExerciseFactory
 
 
-class ExerciseTest(TestCase):
+class ExerciseTest(APITestCase):
     def setUp(self):
         self.url = "/api/exercises/"
 
@@ -25,7 +25,7 @@ class ExerciseTest(TestCase):
         exercise_name = "new exercise"
         response = self.client.post(
             self.url,
-            {"name": "new exercise"},
+            {"name": exercise_name},
         )
         exercise = Exercise.objects.first()
 
@@ -41,3 +41,15 @@ class ExerciseTest(TestCase):
             json.loads(res.content.decode("utf8")),
             {"id": self.exercise.id, "name": self.exercise.name},
         )
+
+    def test_PUT_updates_object(self):
+        self.exercise = ExerciseFactory()
+        new_name = "newName"
+        res = self.client.put(
+            self.url + "1/",
+            {"name": new_name},
+        )
+        exercise = Exercise.objects.first()
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(exercise.name, new_name)
