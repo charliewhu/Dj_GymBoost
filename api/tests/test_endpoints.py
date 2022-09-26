@@ -58,3 +58,15 @@ class RoutineExerciseTest(APITestCase):
                 },
             ],
         )
+
+
+class WorkoutTest(APITestCase):
+    pass
+
+
+class WorkoutExerciseTest(APITestCase):
+    pass
+
+
+class WorkoutExerciseSetTest(APITestCase):
+    pass
