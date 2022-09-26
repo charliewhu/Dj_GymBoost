@@ -18,6 +18,5 @@ class ExerciseTest(TestCase):
             json.loads(res.content.decode("utf8")),
             [
                 {"id": self.exercise.id, "name": self.exercise.name},
-                {"id": self.exercise.id, "name": self.exercise.name},
             ],
         )
