@@ -31,3 +31,13 @@ class ExerciseTest(TestCase):
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(exercise.name, exercise_name)
+
+    def test_GET_single_object(self):
+        self.exercise = ExerciseFactory()
+        res = self.client.get(self.url + "1/")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res["content-type"], "application/json")
+        self.assertEqual(
+            json.loads(res.content.decode("utf8")),
+            {"id": self.exercise.id, "name": self.exercise.name},
+        )
