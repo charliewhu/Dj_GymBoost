@@ -42,7 +42,7 @@ class ExerciseTest(APITestCase):
             {"id": self.exercise.id, "name": self.exercise.name},
         )
 
-    def test_PUT_updates_object(self):
+    def test_PUT_object(self):
         self.exercise = ExerciseFactory()
         new_name = "newName"
         res = self.client.put(
@@ -53,3 +53,11 @@ class ExerciseTest(APITestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(exercise.name, new_name)
+
+    def test_DELETE_object(self):
+        self.exercise = ExerciseFactory()
+        res = self.client.delete(self.url + "1/")
+        exercises = Exercise.objects.count()
+
+        self.assertEqual(res.status_code, 204)
+        self.assertEqual(exercises, 0)
