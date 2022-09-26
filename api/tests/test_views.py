@@ -20,3 +20,14 @@ class ExerciseTest(TestCase):
                 {"id": self.exercise.id, "name": self.exercise.name},
             ],
         )
+
+    def test_POSTing_a_new_item(self):
+        exercise_name = "new exercise"
+        response = self.client.post(
+            self.url,
+            {"name": "new exercise"},
+        )
+        exercise = Exercise.objects.first()
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(exercise.name, exercise_name)
