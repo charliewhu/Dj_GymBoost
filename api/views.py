@@ -3,7 +3,7 @@ from rest_framework import viewsets
 
 from exercises.models import Exercise
 from routines.models import Routine, RoutineExercise
-from workouts.models import Workout, WorkoutExercise
+from workouts.models import Workout, WorkoutExercise, WorkoutExerciseSet
 
 from .serializers import (
     ExerciseSerializer,
@@ -11,6 +11,7 @@ from .serializers import (
     RoutineExerciseSerializer,
     WorkoutSerializer,
     WorkoutExerciseSerializer,
+    WorkoutExerciseSetSerializer,
 )
 
 
@@ -37,3 +38,8 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 class WorkoutExerciseViewSet(viewsets.ModelViewSet):
     serializer_class = WorkoutExerciseSerializer
     queryset = WorkoutExercise.objects.all()
+
+
+class WorkoutExerciseSetViewSet(viewsets.ModelViewSet):
+    serializer_class = WorkoutExerciseSetSerializer
+    queryset = WorkoutExerciseSet.objects.all()

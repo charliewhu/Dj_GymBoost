@@ -13,5 +13,10 @@ router.register("workouts", views.WorkoutViewSet, basename="workouts")
 router.register(
     "workoutexercises", views.WorkoutExerciseViewSet, basename="workoutexercises"
 )
+router.register(
+    "workoutexercisesets",
+    views.WorkoutExerciseSetViewSet,
+    basename="workoutexercisesets",
+)
 
 urlpatterns += router.urls
