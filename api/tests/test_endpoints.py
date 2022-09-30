@@ -92,6 +92,7 @@ class WorkoutExerciseTest(APITestCase):
                     "id": self.workout_exercise.id,
                     "workout": self.workout_exercise.workout.id,
                     "exercise": self.workout_exercise.exercise.id,
+                    "name": self.workout_exercise.exercise.name,
                 },
             ],
         )

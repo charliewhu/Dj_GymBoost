@@ -49,7 +49,14 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
             "id",
             "workout",
             "exercise",
+            "name",
         ]
+
+        read_only_fields = [
+            "name",
+        ]
+
+    name = serializers.StringRelatedField(source="exercise")
 
 
 class WorkoutExerciseSetSerializer(serializers.ModelSerializer):
