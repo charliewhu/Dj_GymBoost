@@ -3,6 +3,7 @@ from rest_framework.test import APITestCase
 
 from exercises.tests.factory import ExerciseFactory
 from routines.tests.factory import RoutineFactory, RoutineExerciseFactory
+from workouts.tests.factory import WorkoutFactory
 
 
 class ExerciseTest(APITestCase):
@@ -61,7 +62,14 @@ class RoutineExerciseTest(APITestCase):
 
 
 class WorkoutTest(APITestCase):
-    pass
+    def setUp(self):
+        self.url = "/api/workouts/"
+        self.workout = WorkoutFactory()
+
+    def test_GET(self):
+        res = self.client.get(self.url)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res["content-type"], "application/json")
 
 
 class WorkoutExerciseTest(APITestCase):
