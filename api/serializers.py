@@ -26,11 +26,13 @@ class RoutineSerializer(serializers.ModelSerializer):
 class RoutineExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoutineExercise
-        fields = [
-            "id",
-            "routine",
-            "exercise",
+        fields = ["id", "routine", "exercise", "name"]
+
+        read_only_fields = [
+            "name",
         ]
+
+    name = serializers.StringRelatedField(source="exercise")
 
 
 class WorkoutSerializer(serializers.ModelSerializer):

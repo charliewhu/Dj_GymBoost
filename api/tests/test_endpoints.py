@@ -60,6 +60,7 @@ class RoutineExerciseTest(APITestCase):
                     "id": self.routine_exercise.id,
                     "routine": self.routine_exercise.routine.id,
                     "exercise": self.routine_exercise.exercise.id,
+                    "name": self.routine_exercise.exercise.name,
                 },
             ],
         )
