@@ -11,8 +11,11 @@ class Routine(models.Model):
     def get_absolute_url(self):
         return reverse("routine", kwargs={"pk": self.pk})
 
+    def __str__(self):
+        return self.name
+
     def create_workout(self):
-        workout = Workout.objects.create()
+        workout = Workout.objects.create(routine=self)
         for routine_exercise in self.exercises.all():
             WorkoutExercise.objects.create(
                 workout=workout, exercise=routine_exercise.exercise
