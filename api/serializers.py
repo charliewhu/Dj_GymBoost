@@ -41,7 +41,15 @@ class WorkoutSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "created_on",
+            "routine",
+            "name",
         ]
+
+        read_only_fields = [
+            "name",
+        ]
+
+    name = serializers.StringRelatedField(source="routine")
 
 
 class WorkoutExerciseSerializer(serializers.ModelSerializer):
