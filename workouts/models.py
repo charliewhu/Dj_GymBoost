@@ -8,7 +8,7 @@ from exercises.models import Exercise
 class Workout(models.Model):
     created_on = models.DateTimeField(auto_now_add=True, null=True)
     routine = models.ForeignKey(
-        "routines.Routine", related_name="workouts", on_delete=models.CASCADE
+        "routines.Routine", related_name="workouts", on_delete=models.CASCADE, null=True
     )
 
     def get_absolute_url(self):
