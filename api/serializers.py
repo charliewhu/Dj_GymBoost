@@ -60,6 +60,7 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
             "workout",
             "exercise",
             "name",
+            "set_count",
         ]
 
         read_only_fields = [
@@ -67,6 +68,9 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
         ]
 
     name = serializers.StringRelatedField(source="exercise")
+
+    def get_set_count(self, instance):
+        instance.get_set_count()
 
 
 class WorkoutExerciseSetSerializer(serializers.ModelSerializer):
