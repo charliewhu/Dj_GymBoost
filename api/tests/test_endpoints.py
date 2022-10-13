@@ -98,7 +98,7 @@ class WorkoutExerciseTest(APITestCase):
                     "workout": self.workout_exercise.workout.id,
                     "exercise": self.workout_exercise.exercise.id,
                     "name": self.workout_exercise.exercise.name,
-                    "sets": self.workout_exercise.sets.count(),
+                    "set_count": self.workout_exercise.sets.count(),
                 },
             ],
         )
