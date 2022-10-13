@@ -40,7 +40,7 @@ class WorkoutExerciseTest(TestCase):
         workout_exercise = WorkoutExerciseFactory()
         set_ = WorkoutExerciseSetFactory(workout_exercise=workout_exercise)
 
-        self.assertEqual(workout_exercise.get_set_count(), 1)
+        self.assertEqual(workout_exercise.set_count(), 1)
 
 
 class WorkoutExerciseSetTest(TestCase):

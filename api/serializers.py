@@ -70,7 +70,7 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
     name = serializers.StringRelatedField(source="exercise")
 
     def get_set_count(self, instance):
-        instance.get_set_count()
+        instance.set_count()
 
 
 class WorkoutExerciseSetSerializer(serializers.ModelSerializer):

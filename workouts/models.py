@@ -24,7 +24,7 @@ class WorkoutExercise(models.Model):
     def get_absolute_url(self):
         return reverse("workout_exercise", kwargs={"pk": self.pk})
 
-    def get_set_count(self):
+    def set_count(self):
         return WorkoutExerciseSet.objects.filter(workout_exercise=self).count()
 
 
