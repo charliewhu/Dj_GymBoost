@@ -1,6 +1,7 @@
 from django.test import TestCase
 
 from exercises.models import Exercise
+from workouts.tests.factory import WorkoutExerciseFactory, WorkoutExerciseSetFactory
 from ..models import Workout, WorkoutExercise, WorkoutExerciseSet
 
 
@@ -34,6 +35,12 @@ class WorkoutExerciseTest(TestCase):
             workout_exercise.get_absolute_url(),
             f"/workout_exercise/{workout_exercise.id}/sets/",
         )
+
+    def test_get_set_count(self):
+        workout_exercise = WorkoutExerciseFactory()
+        set_ = WorkoutExerciseSetFactory(workout_exercise=workout_exercise)
+
+        self.assertEqual(workout_exercise.get_set_count(), 1)
 
 
 class WorkoutExerciseSetTest(TestCase):
