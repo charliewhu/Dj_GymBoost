@@ -82,6 +82,9 @@ class WorkoutExerciseTest(APITestCase):
     def setUp(self):
         self.url = "/api/workoutexercises/"
         self.workout_exercise = WorkoutExerciseFactory()
+        self.workout_exercise_set = WorkoutExerciseSetFactory(
+            workout_exercise=self.workout_exercise
+        )
 
     def test_GET(self):
         res = self.client.get(self.url)
@@ -95,6 +98,7 @@ class WorkoutExerciseTest(APITestCase):
                     "workout": self.workout_exercise.workout.id,
                     "exercise": self.workout_exercise.exercise.id,
                     "name": self.workout_exercise.exercise.name,
+                    "sets": self.workout_exercise.sets.count(),
                 },
             ],
         )
