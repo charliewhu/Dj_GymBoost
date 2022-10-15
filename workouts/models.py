@@ -14,6 +14,12 @@ class Workout(models.Model):
     def get_absolute_url(self):
         return reverse("workout", kwargs={"pk": self.pk})
 
+    def set_count(self):
+        count = 0
+        for exercise in self.exercises.all():
+            count += exercise.set_count()
+        return count
+
 
 class WorkoutExercise(models.Model):
     workout = models.ForeignKey(
