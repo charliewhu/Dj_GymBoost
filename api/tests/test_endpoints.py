@@ -100,6 +100,7 @@ class WorkoutExerciseTest(APITestCase):
                     "exercise": self.workout_exercise.exercise.id,
                     "name": self.workout_exercise.exercise.name,
                     "set_count": self.workout_exercise.sets.count(),
+                    "total_volume": self.workout_exercise.total_volume(),
                 },
             ],
         )
