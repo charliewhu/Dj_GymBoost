@@ -33,6 +33,9 @@ class WorkoutExercise(models.Model):
     def set_count(self):
         return WorkoutExerciseSet.objects.filter(workout_exercise=self).count()
 
+    def total_volume(self):
+        return sum([set_.get_volume() for set_ in self.sets.all()])
+
 
 class WorkoutExerciseSet(models.Model):
     workout_exercise = models.ForeignKey(
