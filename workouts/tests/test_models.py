@@ -90,5 +90,5 @@ class WorkoutExerciseSetTest(TestCase):
         workout_exercise_set = WorkoutExerciseSetFactory()
         self.assertEqual(
             workout_exercise_set.get_volume(),
-            workout_exercise_set.reps() * workout_exercise_set.weight(),
+            workout_exercise_set.reps * workout_exercise_set.weight,
         )
