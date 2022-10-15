@@ -51,8 +51,16 @@ class WorkoutExerciseTest(TestCase):
     def test_get_set_count(self):
         workout_exercise = WorkoutExerciseFactory()
         set_ = WorkoutExerciseSetFactory(workout_exercise=workout_exercise)
-
         self.assertEqual(workout_exercise.set_count(), 1)
+
+    def test_total_volume(self):
+        workout_exercise = WorkoutExerciseFactory()
+        set_ = WorkoutExerciseSetFactory(workout_exercise=workout_exercise)
+        set2 = WorkoutExerciseSetFactory(workout_exercise=workout_exercise)
+        self.assertEqual(
+            workout_exercise.total_volume(),
+            (set_.weight * set_.reps) + (set2.weight * set2.reps),
+        )
 
 
 class WorkoutExerciseSetTest(TestCase):
