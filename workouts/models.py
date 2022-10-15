@@ -46,3 +46,6 @@ class WorkoutExerciseSet(models.Model):
     rir = models.PositiveSmallIntegerField(
         null=True, validators=[MinValueValidator(0), MaxValueValidator(5)]
     )
+
+    def get_volume(self):
+        return self.weight * self.reps
