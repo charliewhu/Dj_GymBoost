@@ -70,12 +70,13 @@ class RoutineExerciseTest(APITestCase):
 class WorkoutTest(APITestCase):
     def setUp(self):
         self.url = "/api/workouts/"
-        self.workout = WorkoutFactory()
+        self.workout_exercise_set = WorkoutExerciseSetFactory()
 
     def test_GET(self):
         res = self.client.get(self.url)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res["content-type"], "application/json")
+        self.assertIn("'set_count': 1", json.loads(res.content.decode("utf8")))
 
 
 class WorkoutExerciseTest(APITestCase):
