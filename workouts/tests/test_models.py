@@ -1,14 +1,26 @@
 from django.test import TestCase
 
 from exercises.models import Exercise
-from workouts.tests.factory import WorkoutExerciseFactory, WorkoutExerciseSetFactory
+from workouts.tests.factory import (
+    WorkoutExerciseFactory,
+    WorkoutExerciseSetFactory,
+    WorkoutFactory,
+)
 from ..models import Workout, WorkoutExercise, WorkoutExerciseSet
 
 
 class WorkoutTest(TestCase):
+    def setUp(self):
+        self.workout = WorkoutFactory()
+
     def test_get_absolute_url(self):
         workout = Workout.objects.create()
         self.assertEqual(workout.get_absolute_url(), f"/workouts/{workout.id}/")
+
+    def test_set_count(self):
+        ex = WorkoutExerciseFactory(workout=self.workout)
+        WorkoutExerciseSetFactory(workout_exercise=ex)
+        self.assertEqual(self.workout.set_count(), 1)
 
 
 class WorkoutExerciseTest(TestCase):
