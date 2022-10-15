@@ -20,6 +20,9 @@ class Workout(models.Model):
             count += exercise.set_count()
         return count
 
+    def total_volume(self):
+        return sum([ex.total_volume() for ex in self.exercises.all()])
+
 
 class WorkoutExercise(models.Model):
     workout = models.ForeignKey(
