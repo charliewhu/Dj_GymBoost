@@ -22,6 +22,11 @@ class WorkoutTest(TestCase):
         WorkoutExerciseSetFactory(workout_exercise=ex)
         self.assertEqual(self.workout.set_count(), 1)
 
+    def test_total_volume(self):
+        ex = WorkoutExerciseFactory(workout=self.workout)
+        set_ = WorkoutExerciseSetFactory(workout_exercise=ex)
+        self.assertEqual(self.workout.total_volume(), set_.weight * set_.reps)
+
 
 class WorkoutExerciseTest(TestCase):
     def setUp(self):
