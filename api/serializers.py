@@ -44,6 +44,7 @@ class WorkoutSerializer(serializers.ModelSerializer):
             "routine",
             "name",
             "set_count",
+            "total_volume",
         ]
 
         read_only_fields = [
@@ -54,6 +55,9 @@ class WorkoutSerializer(serializers.ModelSerializer):
 
     def get_set_count(self, instance):
         instance.set_count()
+
+    def get_total_volume(self, instance):
+        instance.total_volume()
 
 
 class WorkoutExerciseSerializer(serializers.ModelSerializer):
