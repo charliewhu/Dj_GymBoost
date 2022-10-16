@@ -13,14 +13,14 @@ class WorkoutTest(TestCase):
     def setUp(self):
         self.workout = WorkoutFactory()
 
-    def test_get_absolute_url(self):
+    def test_get_abstotal_sets(self):
         workout = Workout.objects.create()
         self.assertEqual(workout.get_absolute_url(), f"/workouts/{workout.id}/")
 
-    def test_set_count(self):
+    def test_ttotal_sets(self):
         ex = WorkoutExerciseFactory(workout=self.workout)
         WorkoutExerciseSetFactory(workout_exercise=ex)
-        self.assertEqual(self.workout.set_count(), 1)
+        self.assertEqual(self.workout.total_sets(), 1)
 
     def test_total_volume(self):
         ex = WorkoutExerciseFactory(workout=self.workout)
@@ -53,10 +53,10 @@ class WorkoutExerciseTest(TestCase):
             f"/workout_exercise/{workout_exercise.id}/sets/",
         )
 
-    def test_get_set_count(self):
+    def test_get_total_sets(self):
         workout_exercise = WorkoutExerciseFactory()
         set_ = WorkoutExerciseSetFactory(workout_exercise=workout_exercise)
-        self.assertEqual(workout_exercise.set_count(), 1)
+        self.assertEqual(workout_exercise.total_sets(), 1)
 
     def test_total_volume(self):
         workout_exercise = WorkoutExerciseFactory()

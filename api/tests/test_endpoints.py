@@ -76,7 +76,7 @@ class WorkoutTest(APITestCase):
         res = self.client.get(self.url)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res["content-type"], "application/json")
-        self.assertIn('"set_count":', res.content.decode("utf8"))
+        self.assertIn('"total_sets":', res.content.decode("utf8"))
         self.assertIn('"total_volume":', res.content.decode("utf8"))
 
 
@@ -100,7 +100,7 @@ class WorkoutExerciseTest(APITestCase):
                     "workout": self.workout_exercise.workout.id,
                     "exercise": self.workout_exercise.exercise.id,
                     "name": self.workout_exercise.exercise.name,
-                    "set_count": self.workout_exercise.sets.count(),
+                    "total_sets": self.workout_exercise.sets.count(),
                     "total_volume": self.workout_exercise.total_volume(),
                 },
             ],

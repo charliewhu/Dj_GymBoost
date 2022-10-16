@@ -14,10 +14,10 @@ class Workout(models.Model):
     def get_absolute_url(self):
         return reverse("workout", kwargs={"pk": self.pk})
 
-    def set_count(self):
+    def total_sets(self):
         count = 0
         for exercise in self.exercises.all():
-            count += exercise.set_count()
+            count += exercise.total_sets()
         return count
 
     def total_volume(self):
@@ -33,7 +33,7 @@ class WorkoutExercise(models.Model):
     def get_absolute_url(self):
         return reverse("workout_exercise", kwargs={"pk": self.pk})
 
-    def set_count(self):
+    def total_sets(self):
         return WorkoutExerciseSet.objects.filter(workout_exercise=self).count()
 
     def total_volume(self):

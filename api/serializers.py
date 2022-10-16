@@ -43,7 +43,7 @@ class WorkoutSerializer(serializers.ModelSerializer):
             "created_on",
             "routine",
             "name",
-            "set_count",
+            "total_sets",
             "total_volume",
         ]
 
@@ -53,8 +53,8 @@ class WorkoutSerializer(serializers.ModelSerializer):
 
     name = serializers.StringRelatedField(source="routine")
 
-    def get_set_count(self, instance):
-        instance.set_count()
+    def get_total_sets(self, instance):
+        instance.total_sets()
 
     def get_total_volume(self, instance):
         instance.total_volume()
@@ -68,7 +68,7 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
             "workout",
             "exercise",
             "name",
-            "set_count",
+            "total_sets",
             "total_volume",
         ]
 
@@ -78,8 +78,8 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
 
     name = serializers.StringRelatedField(source="exercise")
 
-    def get_set_count(self, instance):
-        instance.set_count()
+    def get_total_sets(self, instance):
+        instance.total_sets()
 
     def get_total_volume(self, instance):
         instance.total_volume()
