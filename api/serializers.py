@@ -65,6 +65,7 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
         model = WorkoutExercise
         fields = [
             "id",
+            "created_on",
             "workout",
             "exercise",
             "name",
