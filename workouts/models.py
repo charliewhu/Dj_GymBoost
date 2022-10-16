@@ -29,6 +29,7 @@ class WorkoutExercise(models.Model):
         Workout, related_name="exercises", on_delete=models.CASCADE
     )
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
 
     def get_absolute_url(self):
         return reverse("workout_exercise", kwargs={"pk": self.pk})
