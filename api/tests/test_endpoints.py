@@ -93,11 +93,13 @@ class WorkoutExerciseTest(APITestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res["content-type"], "application/json")
         self.assertEqual(
-            json.loads(res.content.decode("utf8")),
+            json.loads(res.content),
             [
                 {
                     "id": self.workout_exercise.id,
-                    "created_on": self.workout_exercise.created_on,
+                    "created_on": self.workout_exercise.created_on.isoformat().replace(
+                        "+00:00", "Z"
+                    ),
                     "workout": self.workout_exercise.workout.id,
                     "exercise": self.workout_exercise.exercise.id,
                     "name": self.workout_exercise.exercise.name,
@@ -118,7 +120,7 @@ class WorkoutExerciseSetTest(APITestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res["content-type"], "application/json")
         self.assertEqual(
-            json.loads(res.content.decode("utf8")),
+            json.loads(res.content),
             [
                 {
                     "id": self.workout_exercise_set.id,
