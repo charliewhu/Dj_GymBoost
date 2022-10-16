@@ -97,6 +97,7 @@ class WorkoutExerciseTest(APITestCase):
             [
                 {
                     "id": self.workout_exercise.id,
+                    "created_on": self.workout_exercise.created_on,
                     "workout": self.workout_exercise.workout.id,
                     "exercise": self.workout_exercise.exercise.id,
                     "name": self.workout_exercise.exercise.name,
