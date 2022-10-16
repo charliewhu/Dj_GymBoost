@@ -42,16 +42,16 @@ class WorkoutSerializer(serializers.ModelSerializer):
             "id",
             "created_on",
             "routine",
-            "name",
+            "routine_name",
             "total_sets",
             "total_volume",
         ]
 
         read_only_fields = [
-            "name",
+            "routine_name",
         ]
 
-    name = serializers.StringRelatedField(source="routine")
+    routine_name = serializers.StringRelatedField(source="routine")
 
     def get_total_sets(self, instance):
         instance.total_sets()

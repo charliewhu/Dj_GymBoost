@@ -143,5 +143,5 @@ class RoutineWorkoutTest(APITestCase):
         self.workout = Workout.objects.first()
         self.assertEqual(json.loads(res.content.decode("utf8"))["id"], 1)
         self.assertEqual(
-            json.loads(res.content.decode("utf8"))["name"], self.routine.name
+            json.loads(res.content.decode("utf8"))["routine_name"], self.routine.name
         )
