@@ -37,7 +37,7 @@ class WorkoutExercise(models.Model):
         return WorkoutExerciseSet.objects.filter(workout_exercise=self).count()
 
     def total_volume(self):
-        return sum([set_.get_volume() for set_ in self.sets.all()])
+        return sum([set_.total_volume() for set_ in self.sets.all()])
 
 
 class WorkoutExerciseSet(models.Model):
@@ -50,5 +50,5 @@ class WorkoutExerciseSet(models.Model):
         null=True, validators=[MinValueValidator(0), MaxValueValidator(5)]
     )
 
-    def get_volume(self):
+    def total_volume(self):
         return self.weight * self.reps

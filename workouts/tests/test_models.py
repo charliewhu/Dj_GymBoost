@@ -91,9 +91,9 @@ class WorkoutExerciseSetTest(TestCase):
         self.assertEqual(set_.weight, 100)
         self.assertEqual(set_.reps, 10)
 
-    def test_get_volume(self):
+    def test_total_volume(self):
         workout_exercise_set = WorkoutExerciseSetFactory()
         self.assertEqual(
-            workout_exercise_set.get_volume(),
+            workout_exercise_set.total_volume(),
             workout_exercise_set.reps * workout_exercise_set.weight,
         )
