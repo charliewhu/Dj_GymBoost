@@ -70,7 +70,7 @@ class RoutineExerciseTest(APITestCase):
 class WorkoutTest(APITestCase):
     def setUp(self):
         self.url = "/api/workouts/"
-        self.workout = WorkoutFactory()
+        self.workout_exercise_set = WorkoutExerciseSetFactory()
 
     def test_GET(self):
         res = self.client.get(self.url)
@@ -82,16 +82,22 @@ class WorkoutExerciseTest(APITestCase):
     def setUp(self):
         self.url = "/api/workoutexercises/"
         self.workout_exercise = WorkoutExerciseFactory()
+        self.workout_exercise_set = WorkoutExerciseSetFactory(
+            workout_exercise=self.workout_exercise
+        )
 
     def test_GET(self):
         res = self.client.get(self.url)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res["content-type"], "application/json")
         self.assertEqual(
-            json.loads(res.content.decode("utf8")),
+            json.loads(res.content),
             [
                 {
                     "id": self.workout_exercise.id,
+                    "created_on": self.workout_exercise.created_on.isoformat().replace(
+                        "+00:00", "Z"
+                    ),
                     "workout": self.workout_exercise.workout.id,
                     "exercise": self.workout_exercise.exercise.id,
                     "name": self.workout_exercise.exercise.name,
@@ -110,7 +116,7 @@ class WorkoutExerciseSetTest(APITestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res["content-type"], "application/json")
         self.assertEqual(
-            json.loads(res.content.decode("utf8")),
+            json.loads(res.content),
             [
                 {
                     "id": self.workout_exercise_set.id,
@@ -136,5 +142,5 @@ class RoutineWorkoutTest(APITestCase):
         self.workout = Workout.objects.first()
         self.assertEqual(json.loads(res.content.decode("utf8"))["id"], 1)
         self.assertEqual(
-            json.loads(res.content.decode("utf8"))["name"], self.routine.name
+            json.loads(res.content.decode("utf8"))["routine_name"], self.routine.name
         )
