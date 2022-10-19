@@ -43,8 +43,6 @@ class WorkoutSerializer(serializers.ModelSerializer):
             "created_on",
             "routine",
             "routine_name",
-            "total_sets",
-            "total_volume",
         ]
 
         read_only_fields = [
@@ -52,12 +50,6 @@ class WorkoutSerializer(serializers.ModelSerializer):
         ]
 
     routine_name = serializers.StringRelatedField(source="routine")
-
-    def get_total_sets(self, instance):
-        instance.total_sets()
-
-    def get_total_volume(self, instance):
-        instance.total_volume()
 
 
 class WorkoutExerciseSerializer(serializers.ModelSerializer):
@@ -69,8 +61,6 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
             "workout",
             "exercise",
             "name",
-            "total_sets",
-            "total_volume",
         ]
 
         read_only_fields = [
@@ -78,12 +68,6 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
         ]
 
     name = serializers.StringRelatedField(source="exercise")
-
-    def get_total_sets(self, instance):
-        instance.total_sets()
-
-    def get_total_volume(self, instance):
-        instance.total_volume()
 
 
 class WorkoutExerciseSetSerializer(serializers.ModelSerializer):
