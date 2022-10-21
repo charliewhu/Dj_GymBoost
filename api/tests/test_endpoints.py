@@ -3,7 +3,7 @@ from rest_framework.test import APITestCase
 
 from exercises.tests.factory import ExerciseFactory
 from routines.tests.factory import RoutineFactory, RoutineExerciseFactory
-from workouts.models import Workout
+from workouts.models import Workout, WorkoutExercise, WorkoutExerciseSet
 from workouts.tests.factory import (
     WorkoutExerciseFactory,
     WorkoutExerciseSetFactory,
@@ -144,3 +144,19 @@ class RoutineWorkoutTest(APITestCase):
         self.assertEqual(
             json.loads(res.content.decode("utf8"))["routine_name"], self.routine.name
         )
+
+
+class WorkoutExerciseDeleteRelatedSetsTest(APITestCase):
+    def setUp(self):
+        self.workout_exercise = WorkoutExerciseFactory()
+        self.set1 = WorkoutExerciseSetFactory(workout_exercise=self.workout_exercise)
+        self.set2 = WorkoutExerciseSetFactory(workout_exercise=self.workout_exercise)
+        self.url = f"/api/workoutexercises/{self.workout_exercise.id}/delete_sets/"
+
+    def test_DELETE(self):
+        self.assertEqual(WorkoutExerciseSet.objects.count(), 2)
+        res = self.client.delete(self.url)
+
+        self.assertEqual(res.status_code, 204)
+        self.assertEqual(WorkoutExerciseSet.objects.count(), 0)
+        self.assertEqual(WorkoutExercise.objects.count(), 1)
