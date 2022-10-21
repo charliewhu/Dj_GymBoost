@@ -55,3 +55,11 @@ def routine_workout(request, pk):
         workout = routine.create_workout()
         serializer = WorkoutSerializer(workout)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(["DELETE"])
+def workout_exercise_delete_related_sets(request, pk):
+    if request.method == "DELETE":
+        workout_exercise_sets = WorkoutExerciseSet.objects.filter(workout_exercise=pk)
+        workout_exercise_sets.delete()
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
