@@ -4,6 +4,11 @@ from . import views
 
 urlpatterns = [
     path("routines/<int:pk>/workout/", views.routine_workout, name="routine_workout"),
+    path(
+        "workoutexercises/<int:pk>/delete_sets/",
+        views.workout_exercise_delete_related_sets,
+        name="workout_exercise_delete_related_sets",
+    ),
 ]
 
 router = SimpleRouter()
